@@ -1,7 +1,5 @@
 package lumien.randomthings.asm;
 
-import java.net.URLClassLoader;
-
 import org.objectweb.asm.ClassWriter;
 
 import net.minecraft.launchwrapper.Launch;
@@ -9,8 +7,6 @@ import net.minecraftforge.fml.common.asm.transformers.deobf.FMLDeobfuscatingRema
 
 public class CustomClassWriter extends ClassWriter
 {
-	public static URLClassLoader customClassLoader = new URLClassLoader(((URLClassLoader) Launch.classLoader.getClass().getClassLoader()).getURLs());
-
 	public CustomClassWriter(int flags)
 	{
 		super(flags);
@@ -28,15 +24,14 @@ public class CustomClassWriter extends ClassWriter
 		}
 
 		Class<?> c, d;
-		ClassLoader classLoader = customClassLoader;
 		try
 		{
-			c = Class.forName(type1.replace('/', '.'), false, classLoader);
-			d = Class.forName(type2.replace('/', '.'), false, classLoader);
+			c = Class.forName(type1.replace('/', '.'), false, Launch.classLoader);
+			d = Class.forName(type2.replace('/', '.'), false, Launch.classLoader);
 		}
 		catch (Exception e)
 		{
-			throw new RuntimeException(e.toString());
+			return "java/lang/Object";
 		}
 		if (c.isAssignableFrom(d))
 		{

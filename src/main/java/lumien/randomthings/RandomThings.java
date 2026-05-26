@@ -5,7 +5,6 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 import lumien.randomthings.asm.ClassTransformer;
-import lumien.randomthings.asm.CustomClassWriter;
 import lumien.randomthings.asm.confirmer.ServerConfirmer;
 import lumien.randomthings.biomes.ModBiomes;
 import lumien.randomthings.block.ModBlocks;
@@ -172,8 +171,6 @@ public class RandomThings implements LoadingCallback
 		asmConfirmer.confirm();
 
 		logger.log(Level.DEBUG, ClassTransformer.transformations + "/17 ASM Transformations were applied.");
-
-		CustomClassWriter.customClassLoader = null;
 
 		ModRecipes.addGlowingMushroomRecipes();
 
