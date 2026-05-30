@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 
 import lumien.randomthings.client.notifications.NotificationToast;
 import lumien.randomthings.network.ClientboundMessage;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class MessageNotification implements ClientboundMessage
 {
@@ -43,6 +45,7 @@ public class MessageNotification implements ClientboundMessage
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void handleOnClient(@Nonnull EntityPlayer player)
     {
         Minecraft.getMinecraft().getToastGui().add(new NotificationToast(title, body, icon));
