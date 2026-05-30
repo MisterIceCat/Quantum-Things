@@ -131,6 +131,8 @@ The goal of Quantum Things is to provide continued support for Random Things, su
 - Fixed crashes and duplication issues when pistons moved tile-entity blocks with Quark movable tile entities enabled. Affected blocks: Advanced Item Collector, Advanced Redstone Interface, Biome Radar, Diaphanous Block, Entity Detector, Filtered Super Lubricent Platform, Iron Dropper, Light Redirector, Sound Box, and Block Breaker.
 - Fixed Diaphanous Block dropping its item when broken in Creative Mode.
 - Fixed not all Custom Workbench variants being visible in the Creative Tab and JEI.
+- Fixed a crash from CustomClassWriter on newer java versions. ([courtesy of Leclowndu93150](https://github.com/MagicJinn/Quantum-Things/pull/55))
+- Fixed a crash when the Notification Interface was used in Multiplayer. ([courtesy of Alternis](https://github.com/MagicJinn/Quantum-Things/pull/57))
 
 ### Reporting Issues
 
