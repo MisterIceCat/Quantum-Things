@@ -24,8 +24,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
-{
+public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator> {
 	// Pre-calculated constants
 	private static final float PROGRESS_MULTIPLIER = 2.0F;
 	private static final float RADIUS_BASE = 0.15F;
@@ -67,16 +66,13 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 	// Cached constant function for inner count
 	private static final Function<Integer, Integer> INNER_COUNT_FUNCTION = (i) -> 3;
 
-	public RenderSpectreIlluminator(RenderManager renderManager)
-	{
+	public RenderSpectreIlluminator(RenderManager renderManager) {
 		super(renderManager);
 	}
 
 	@Override
-	@SuppressWarnings("null")
 	public void doRender(@Nullable EntitySpectreIlluminator entity, double x, double y, double z, float entityYaw,
-	                     float partialTicks)
-	{
+                         float partialTicks) {
 		GlStateManager.disableTexture2D();
 
 		RenderUtils.enableDefaultBlending();
@@ -106,32 +102,33 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 
 		// Calculate loop count based on distance to player
 		int loopCount = MAX_LOOP_COUNT; // Default
-        EntityPlayer player = mc.player;
-        if (player != null) {
-            double dx = entity.posX - player.posX;
-            double dy = entity.posY - player.posY;
-            double dz = entity.posZ - player.posZ;
-            // Compare squared distance instead of calculating sqrt
-            double distanceSquared = dx * dx + dy * dy + dz * dz;
+		if (entity != null) {
+			EntityPlayer player = mc.player;
+			if (player != null) {
+				double dx = entity.posX - player.posX;
+				double dy = entity.posY - player.posY;
+				double dz = entity.posZ - player.posZ;
+				// Compare squared distance instead of calculating sqrt
+				double distanceSquared = dx * dx + dy * dy + dz * dz;
 
-            // Reduce by 1 for every 16 blocks, minimum of 1
-            // Using squared distance thresholds: 16^2=256, 32^2=1024, 48^2=2304, 64^2=4096
-            if (distanceSquared > 4096.0) { // > 64 blocks
-                loopCount = MIN_LOOP_COUNT;
-            } else if (distanceSquared > 2304.0) { // > 48 blocks
-                loopCount = 2;
-            } else if (distanceSquared > 1024.0) { // > 32 blocks
-                loopCount = 3;
-            } else if (distanceSquared > 256.0) { // > 16 blocks
-                loopCount = 4;
-            }
-        }
+				// Reduce by 1 for every 16 blocks, minimum of 1
+				// Using squared distance thresholds: 16^2=256, 32^2=1024, 48^2=2304, 64^2=4096
+				if (distanceSquared > 4096.0) { // > 64 blocks
+					loopCount = MIN_LOOP_COUNT;
+				} else if (distanceSquared > 2304.0) { // > 48 blocks
+					loopCount = 2;
+				} else if (distanceSquared > 1024.0) { // > 32 blocks
+					loopCount = 3;
+				} else if (distanceSquared > 256.0) { // > 16 blocks
+					loopCount = 4;
+				}
+			}
+		}
 
-        // Pre-calculate before loop
+		// Pre-calculate before loop
 		float progressY = progress;
 
-		for (int c = 0; c < loopCount; c++)
-		{
+		for (int c = 0; c < loopCount; c++) {
 			// Pre-calculate base rotations (modulo can be optimized with bitwise for
 			// power-of-2, but 360 isn't)
 			float cTimes72 = c * ROTATION_BASE_X;
@@ -188,8 +185,7 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(@Nonnull EntitySpectreIlluminator entity)
-	{
+	protected ResourceLocation getEntityTexture(@Nonnull EntitySpectreIlluminator entity) {
 		return null;
 	}
 }
