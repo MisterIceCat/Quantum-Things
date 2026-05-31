@@ -13,6 +13,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemSoundRecorder extends ItemBase
 {
 	public ItemSoundRecorder()
@@ -23,7 +25,7 @@ public class ItemSoundRecorder extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)

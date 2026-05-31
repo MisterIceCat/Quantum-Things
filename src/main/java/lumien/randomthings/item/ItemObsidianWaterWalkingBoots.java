@@ -6,6 +6,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class ItemObsidianWaterWalkingBoots extends ItemArmor
 {
 	public ItemObsidianWaterWalkingBoots()
@@ -15,13 +17,13 @@ public class ItemObsidianWaterWalkingBoots extends ItemArmor
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
+	public EnumRarity getRarity(@Nonnull ItemStack stack)
 	{
 		return EnumRarity.RARE;
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
+	public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type)
 	{
 		return "randomthings:textures/models/armor/obsidianWaterWalkingBoots.png";
 	}

@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemBlockSpectreCoil extends ItemBlock implements IRTItemColor
 {
 	public ItemBlockSpectreCoil(Block block)
@@ -23,7 +25,7 @@ public class ItemBlockSpectreCoil extends ItemBlock implements IRTItemColor
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
+	public String getItemStackDisplayName(@Nonnull ItemStack stack)
 	{
 		if (this.block == ModBlocks.spectreCoilNumber)
 		{

@@ -78,8 +78,9 @@ public class ItemEscapeRope extends ItemBase
 			{
 				for (int c = 0; c < 20; c += 10)
 				{
-					double x = Math.sin((count + i * 20) / (10F + c));
-					double z = Math.cos((count + i * 20) / (10F + c));
+					float number = (count + i * 20) / (10F + c);
+					double x = Math.sin(number);
+					double z = Math.cos(number);
 					double y = Math.sin((count + i * 20) / (15f + c));
 
 					EntityColoredSmokeFX smoke = new EntityColoredSmokeFX(player.world, player.posX + x, player.posY + 1 + y, player.posZ + z, 0, 0, 0);

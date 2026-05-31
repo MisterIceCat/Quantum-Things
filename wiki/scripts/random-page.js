@@ -1,8 +1,8 @@
-var wikiPages = null;
+let wikiPages = null;
 
 function getBasePath() {
-    var path = window.location.pathname;
-    
+    const path = window.location.pathname;
+
     // Check if we're on a page inside a category (e.g., /blocks/pagename/)
     if (path.match(/\/(blocks|items|about|other)\/[^/]+\/?/)) {
         return '../../';
@@ -13,9 +13,9 @@ function getBasePath() {
 
 function loadPages() {
     if (wikiPages !== null) return Promise.resolve(wikiPages);
-    
-    var basePath = getBasePath();
-    
+
+    const basePath = getBasePath();
+
     return fetch(basePath + 'assets/pages.json')
         .then(function(response) { return response.json(); })
         .then(function(data) {
@@ -26,10 +26,10 @@ function loadPages() {
 
 function goToRandomPage() {
     loadPages().then(function(pages) {
-        var randomIndex = Math.floor(Math.random() * pages.length);
-        var randomPage = pages[randomIndex];
-        var basePath = getBasePath();
-        
+        const randomIndex = Math.floor(Math.random() * pages.length);
+        const randomPage = pages[randomIndex];
+        const basePath = getBasePath();
+
         window.location.href = basePath + randomPage.category + '/' + randomPage.slug + '/';
     });
 }

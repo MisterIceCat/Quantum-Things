@@ -46,13 +46,10 @@ public class TileEntityNotificationInterface extends TileEntityBase implements I
 		{
 			EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(owner);
 
-			if (player != null)
-			{
-				MessageNotification message = new MessageNotification(title, description, getItemHandler().getStackInSlot(0));
+            MessageNotification message = new MessageNotification(title, description, getItemHandler().getStackInSlot(0));
 
-				PacketHandler.instance().sendTo(message, player);
-			}
-		}
+            PacketHandler.instance().sendTo(message, player);
+        }
 	}
 
 	@Override

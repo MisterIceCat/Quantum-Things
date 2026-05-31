@@ -8,7 +8,6 @@ import lumien.randomthings.worldgen.WorldGenSpectreTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +22,8 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
 
 public class BlockSpectreSapling extends BlockBush
 {
@@ -42,13 +43,13 @@ public class BlockSpectreSapling extends BlockBush
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return SAPLING_AABB;
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -88,36 +89,16 @@ public class BlockSpectreSapling extends BlockBush
 
 		IBlockState iblockstate2 = Blocks.AIR.getDefaultState();
 
-		if (flag)
-		{
-			worldIn.setBlockState(pos.add(i, 0, j), iblockstate2, 4);
-			worldIn.setBlockState(pos.add(i + 1, 0, j), iblockstate2, 4);
-			worldIn.setBlockState(pos.add(i, 0, j + 1), iblockstate2, 4);
-			worldIn.setBlockState(pos.add(i + 1, 0, j + 1), iblockstate2, 4);
-		}
-		else
-		{
-			worldIn.setBlockState(pos, iblockstate2, 4);
-		}
+        worldIn.setBlockState(pos, iblockstate2, 4);
 
-		if (!worldgenerator.generate(worldIn, rand, pos.add(i, 0, j)))
+        if (!worldgenerator.generate(worldIn, rand, pos.add(i, 0, j)))
 		{
-			if (flag)
-			{
-				worldIn.setBlockState(pos.add(i, 0, j), state, 4);
-				worldIn.setBlockState(pos.add(i + 1, 0, j), state, 4);
-				worldIn.setBlockState(pos.add(i, 0, j + 1), state, 4);
-				worldIn.setBlockState(pos.add(i + 1, 0, j + 1), state, 4);
-			}
-			else
-			{
-				worldIn.setBlockState(pos, state, 4);
-			}
-		}
+            worldIn.setBlockState(pos, state, 4);
+        }
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(@Nonnull IBlockState state)
 	{
 		return 0;
 	}
@@ -145,12 +126,12 @@ public class BlockSpectreSapling extends BlockBush
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { STAGE });
+		return new BlockStateContainer(this, STAGE);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -169,7 +150,7 @@ public class BlockSpectreSapling extends BlockBush
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}

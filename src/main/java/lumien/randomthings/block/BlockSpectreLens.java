@@ -2,7 +2,6 @@ package lumien.randomthings.block;
 
 import com.mojang.authlib.GameProfile;
 
-import lumien.randomthings.tileentity.TileEntityRainShield;
 import lumien.randomthings.tileentity.TileEntitySpectreLens;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -14,13 +13,14 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class BlockSpectreLens extends BlockContainerBase
 {
@@ -35,7 +35,7 @@ public class BlockSpectreLens extends BlockContainerBase
 	}
 	
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return AABB;
 	}
@@ -48,7 +48,7 @@ public class BlockSpectreLens extends BlockContainerBase
 	}
 	
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	public boolean canPlaceBlockAt(@Nonnull World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}
@@ -92,21 +92,18 @@ public class BlockSpectreLens extends BlockContainerBase
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		if (!worldIn.isRemote && placer instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) placer;
 			
 			GameProfile profile = player.getGameProfile();
-			
-			if (profile != null)
-			{
-				TileEntitySpectreLens lens = (TileEntitySpectreLens) worldIn.getTileEntity(pos);
-				
-				lens.setOwner(profile.getId());
-			}
-		}
+
+            TileEntitySpectreLens lens = (TileEntitySpectreLens) worldIn.getTileEntity(pos);
+
+            lens.setOwner(profile.getId());
+        }
 	}
 
 	@Override
@@ -116,13 +113,13 @@ public class BlockSpectreLens extends BlockContainerBase
 	}
 	
 	@Override
-    public boolean isFullCube(IBlockState state)
+    public boolean isFullCube(@Nonnull IBlockState state)
     {
         return false;
     }
 	
 	@Override
-    public boolean isOpaqueCube(IBlockState state)
+    public boolean isOpaqueCube(@Nonnull IBlockState state)
     {
         return false;
     }

@@ -22,6 +22,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 {
 	public static PropertyBool POWERED = PropertyBool.create("powered");
@@ -37,7 +39,7 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState stateIn, World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
@@ -78,13 +80,13 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return AABB;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return AABB;
 	}
@@ -115,13 +117,13 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(@Nonnull IBlockState state)
 	{
 		return 0;
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
@@ -136,13 +138,13 @@ public class BlockSlimeCube extends BlockContainerBase implements ILuminousBlock
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}

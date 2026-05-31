@@ -13,6 +13,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiItemFilter extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/itemFilter.png");
@@ -62,7 +64,7 @@ public class GuiItemFilter extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton pressedButton)
+	protected void actionPerformed(@Nonnull GuiButton pressedButton)
 	{
 		if (pressedButton instanceof GuiCustomButton)
 		{
@@ -96,7 +98,7 @@ public class GuiItemFilter extends GuiContainerBase
 			}
 		}
 
-		fontRenderer.drawString(I18n.format("item.itemFilter.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.itemFilter.name"), 8, 6, 4210752);
 	}
 
 }

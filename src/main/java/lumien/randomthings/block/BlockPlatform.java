@@ -4,7 +4,6 @@ import java.util.List;
 
 import lumien.randomthings.item.block.ItemBlockPlatform;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +21,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockPlatform extends BlockBase
 {
 	public static final PropertyEnum VARIANT = PropertyEnum.create("variant", BlockPlatform.EnumType.class);
@@ -36,38 +37,38 @@ public class BlockPlatform extends BlockBase
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(@Nonnull IBlockState state)
 	{
 		return getMetaFromState(state);
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return PLATFORM_AABB;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(@Nonnull IBlockState base_state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return side == EnumFacing.UP;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList list)
 	{
 		BlockPlatform.EnumType[] aenumtype = BlockPlatform.EnumType.values();
 		int i = aenumtype.length;
@@ -94,11 +95,11 @@ public class BlockPlatform extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { VARIANT });
+		return new BlockStateContainer(this, VARIANT);
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB mask, List list, Entity collidingEntity, boolean isActualState)
+	public void addCollisionBoxToList(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB mask, @Nonnull List list, Entity collidingEntity, boolean isActualState)
 	{
 		if (collidingEntity != null)
 		{

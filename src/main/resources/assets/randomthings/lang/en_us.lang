@@ -162,7 +162,6 @@ tile.coloredGrass.gray.name=Gray Grass
 tile.coloredGrass.pink.name=Pink Grass
 tile.coloredGrass.lime.name=Lime Grass
 tile.coloredGrass.yellow.name=Yellow Grass
-tile.coloredGrass.lightBlue.name=Light Grass
 tile.coloredGrass.lightBlue.name=Light Blue Grass
 tile.coloredGrass.magenta.name=Magenta Grass
 tile.coloredGrass.orange.name=Orange Grass
@@ -574,6 +573,7 @@ tile.plate_itemsealer.info=Item entities that move over this plate can't be pick
 tile.plate_bouncy.info=Entities that move over this plate are propelled upwards.
 tile.plate_collection.info=Item entities moving over this plate are collected into adjacent inventories.
 tile.plate_redstone.info=Entities moving over this plate are redirected towards a different direction. Powered by redstone they will keep going straight instead.
+gui.extractionPlate.facing=Extraction Facing
 tile.plate_extraction.info=Extracts Items and pushes them towards the output side. It extracts from the Inventory below and the Inventory on the opposite side of the output. You can change the output side by shift right clicking with an empty hand. You can change the side it extracts from in the gui.
 tile.plate_processing.info=Combines an Extraction and Collection Plate. It will attempt to insert items going over it into the inventory below it. It will also extract items and push them towards the output (White) side. You can change the output side by shift right clicking it with an empty hand. The Sides it extracts from / inserts into can be changed in the gui.
 

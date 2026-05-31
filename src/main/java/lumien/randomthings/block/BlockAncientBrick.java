@@ -1,7 +1,6 @@
 package lumien.randomthings.block;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +28,8 @@ import java.util.Random;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.item.block.ItemBlockAncientBrick;
 import lumien.randomthings.tileentity.TileEntityAncientFurnace;
+
+import javax.annotation.Nonnull;
 
 public class BlockAncientBrick extends BlockBase
 {
@@ -63,7 +64,7 @@ public class BlockAncientBrick extends BlockBase
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote && rand.nextInt(3) == 0)
 		{
@@ -77,7 +78,7 @@ public class BlockAncientBrick extends BlockBase
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 		if (Features.ANCIENT_BRICK_DROP_ITEMS) {
 			List<ItemStack> drops = new ArrayList<>();
@@ -90,24 +91,24 @@ public class BlockAncientBrick extends BlockBase
 	}
 
 	@Override
-	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+	public float getBlockHardness(@Nonnull IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos) {
 		return Features.ANCIENT_BRICK_DROP_ITEMS ? 2.0F : -1.0F;
 	}
 
 	// Not great, but we want it to update immediately when the config is changed,
 	// and setResistance() doesn't work for this
 	@Override
-	public float getExplosionResistance(Entity exploder) {
+	public float getExplosionResistance(@Nonnull Entity exploder) {
 		return Features.ANCIENT_BRICK_DROP_ITEMS ? 2.0F : (this.blockResistance / 5.0F);
 	}
 
 	@Override
-	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
+	public float getExplosionResistance(@Nonnull World world, @Nonnull BlockPos pos, Entity exploder, @Nonnull Explosion explosion) {
 		return Features.ANCIENT_BRICK_DROP_ITEMS ? 2.0F : 6000000.0F;
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+	public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items)
 	{
 		for (VARIANT variant : VARIANT.values()) {
 			items.add(new ItemStack(this, 1, variant.ordinal()));
@@ -117,11 +118,11 @@ public class BlockAncientBrick extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { TYPE });
+		return new BlockStateContainer(this, TYPE);
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack held = playerIn.getHeldItem(hand);
 
@@ -164,7 +165,7 @@ public class BlockAncientBrick extends BlockBase
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public int getLightValue(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
 		// When filled, emit light
 		return state.getValue(TYPE) == VARIANT.STAR_FULL ? 15 : 0;
 	}

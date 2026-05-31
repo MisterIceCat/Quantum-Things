@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import lumien.randomthings.lib.ILuminousBlock;
@@ -36,13 +37,13 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return NULL_AABB;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return MUSHROOM_AABB;
 	}
@@ -67,7 +68,7 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face)
 	{
 		return BlockFaceShape.UNDEFINED;
 	}
@@ -79,13 +80,13 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -98,14 +99,14 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos)
 	{
 		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, Random rand)
 	{
 		if (rand.nextInt(20) == 0)
 		{

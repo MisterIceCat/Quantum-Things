@@ -66,7 +66,7 @@ public class GuiIronDropper extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRenderer.drawString(I18n.format("tile.ironDropper.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.ironDropper.name"), 8, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

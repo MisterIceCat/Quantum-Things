@@ -68,7 +68,7 @@ public class WorldGenOceanChest
 
 				TileEntity te = worldIn.getTileEntity(blockpos);
 
-				if (te != null && te instanceof TileEntitySpecialChest)
+				if (te instanceof TileEntitySpecialChest)
 				{
 					TileEntitySpecialChest chestTE = (TileEntitySpecialChest) te;
 					chestTE.setChestType(1);

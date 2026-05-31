@@ -8,6 +8,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemHoe;
 
+import javax.annotation.Nonnull;
+
 public class ItemSpectreHoe extends ItemHoe {
     public ItemSpectreHoe() {
         super(ItemSpectreSword.spectreToolMaterial);
@@ -17,7 +19,7 @@ public class ItemSpectreHoe extends ItemHoe {
 
     @Override
     public Multimap<String, AttributeModifier> getItemAttributeModifiers(
-            EntityEquipmentSlot equipmentSlot) {
+            @Nonnull EntityEquipmentSlot equipmentSlot) {
         Multimap<String, AttributeModifier> multimap =
                 super.getItemAttributeModifiers(equipmentSlot);
 

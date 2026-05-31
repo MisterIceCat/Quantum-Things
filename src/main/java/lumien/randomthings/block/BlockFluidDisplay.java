@@ -27,6 +27,8 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
+import javax.annotation.Nonnull;
+
 public class BlockFluidDisplay extends BlockContainerBase implements IRTBlockColor
 {
 	public static final FluidProperty FLUID = new FluidProperty();
@@ -42,7 +44,7 @@ public class BlockFluidDisplay extends BlockContainerBase implements IRTBlockCol
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) worldIn.getTileEntity(pos);
 
@@ -89,7 +91,7 @@ public class BlockFluidDisplay extends BlockContainerBase implements IRTBlockCol
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}
@@ -101,7 +103,7 @@ public class BlockFluidDisplay extends BlockContainerBase implements IRTBlockCol
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getExtendedState(@Nonnull IBlockState state, IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		TileEntityFluidDisplay te = (TileEntityFluidDisplay) worldIn.getTileEntity(pos);
 

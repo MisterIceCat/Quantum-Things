@@ -25,6 +25,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.property.IExtendedBlockState;
 
+import javax.annotation.Nonnull;
+
 public class ModelCustomWorkbench implements IBakedModel
 {
 	ModelCubeOverlay defaultModel;
@@ -131,7 +133,7 @@ public class ModelCustomWorkbench implements IBakedModel
 		return new ItemOverrideList(new ArrayList<ItemOverride>())
 		{
 			@Override
-			public IBakedModel handleItemState(IBakedModel originalModel, ItemStack stack, World world, EntityLivingBase entity)
+			public IBakedModel handleItemState(@Nonnull IBakedModel originalModel, @Nonnull ItemStack stack, World world, EntityLivingBase entity)
 			{
 				checkDefault();
 				NBTTagCompound compound;
@@ -160,12 +162,7 @@ public class ModelCustomWorkbench implements IBakedModel
 
 				IBlockState woodState = woodBlock.getStateFromMeta(meta);
 
-				if (woodState == null)
-				{
-					return defaultModel;
-				}
-
-				if (modelCache.containsKey(woodState))
+                if (modelCache.containsKey(woodState))
 				{
 					return modelCache.get(woodState);
 				}

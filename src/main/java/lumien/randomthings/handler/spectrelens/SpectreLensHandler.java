@@ -1,11 +1,8 @@
 package lumien.randomthings.handler.spectrelens;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
-import lumien.randomthings.asm.MCPNames;
 
 import java.util.UUID;
 
@@ -14,11 +11,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tileentity.TileEntityBeacon;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+
+import javax.annotation.Nonnull;
 
 public class SpectreLensHandler extends WorldSavedData
 {
@@ -80,7 +77,7 @@ public class SpectreLensHandler extends WorldSavedData
 			{
 				EntityPlayer player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
 
-				if (player != null && player.world == worldObj)
+				if (player.world == worldObj)
 				{
 					LensEntry entry = lensEntries.get(uuid);
 					
@@ -131,7 +128,7 @@ public class SpectreLensHandler extends WorldSavedData
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
 	{
 		NBTTagList list = new NBTTagList();
 

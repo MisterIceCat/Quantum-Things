@@ -19,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockLightRedirector extends BlockContainerBase
 {
 	public static PropertyBool[] enabledProperties;
@@ -41,7 +43,7 @@ public class BlockLightRedirector extends BlockContainerBase
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(@Nonnull IBlockState state)
 	{
 		return 0;
 	}
@@ -53,7 +55,7 @@ public class BlockLightRedirector extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -69,7 +71,7 @@ public class BlockLightRedirector extends BlockContainerBase
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
@@ -91,7 +93,7 @@ public class BlockLightRedirector extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState state, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return true;
 	}

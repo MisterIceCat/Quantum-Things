@@ -73,7 +73,7 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 
 	@Override
 	@SuppressWarnings("null")
-	public void doRender(EntitySpectreIlluminator entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(@Nonnull EntitySpectreIlluminator entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		GlStateManager.disableTexture2D();
 
@@ -92,8 +92,7 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 
 		// Shift rendering up by half the entity height to align visual with hitbox
 		// Only apply offset when rendering as entity (not as item in hand)
-		if (entity != null)
-			y += Y_OFFSET;
+        y += Y_OFFSET;
 
 		GlStateManager.translate(x, y, z);
 
@@ -104,30 +103,28 @@ public class RenderSpectreIlluminator extends Render<EntitySpectreIlluminator>
 
 		// Calculate loop count based on distance to player
 		int loopCount = MAX_LOOP_COUNT; // Default
-		if (entity != null) {
-			EntityPlayer player = mc.player;
-			if (player != null) {
-				double dx = entity.posX - player.posX;
-				double dy = entity.posY - player.posY;
-				double dz = entity.posZ - player.posZ;
-				// Compare squared distance instead of calculating sqrt
-				double distanceSquared = dx * dx + dy * dy + dz * dz;
+        EntityPlayer player = mc.player;
+        if (player != null) {
+            double dx = entity.posX - player.posX;
+            double dy = entity.posY - player.posY;
+            double dz = entity.posZ - player.posZ;
+            // Compare squared distance instead of calculating sqrt
+            double distanceSquared = dx * dx + dy * dy + dz * dz;
 
-				// Reduce by 1 for every 16 blocks, minimum of 1
-				// Using squared distance thresholds: 16^2=256, 32^2=1024, 48^2=2304, 64^2=4096
-				if (distanceSquared > 4096.0) { // > 64 blocks
-					loopCount = MIN_LOOP_COUNT;
-				} else if (distanceSquared > 2304.0) { // > 48 blocks
-					loopCount = 2;
-				} else if (distanceSquared > 1024.0) { // > 32 blocks
-					loopCount = 3;
-				} else if (distanceSquared > 256.0) { // > 16 blocks
-					loopCount = 4;
-				}
-			}
-		}
+            // Reduce by 1 for every 16 blocks, minimum of 1
+            // Using squared distance thresholds: 16^2=256, 32^2=1024, 48^2=2304, 64^2=4096
+            if (distanceSquared > 4096.0) { // > 64 blocks
+                loopCount = MIN_LOOP_COUNT;
+            } else if (distanceSquared > 2304.0) { // > 48 blocks
+                loopCount = 2;
+            } else if (distanceSquared > 1024.0) { // > 32 blocks
+                loopCount = 3;
+            } else if (distanceSquared > 256.0) { // > 16 blocks
+                loopCount = 4;
+            }
+        }
 
-		// Pre-calculate before loop
+        // Pre-calculate before loop
 		float progressY = progress;
 
 		for (int c = 0; c < loopCount; c++)

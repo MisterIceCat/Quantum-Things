@@ -7,7 +7,6 @@ import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -30,6 +29,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 {
 	protected static final AxisAlignedBB AABB_1 = new AxisAlignedBB(0.30000001192092896D, 0.0D, 0.30000001192092896D, 0.699999988079071D, 0.3000000238418579D, 0.699999988079071D);
@@ -48,7 +49,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		int age = state.getValue(AGE);
 
@@ -78,7 +79,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		if (state.getValue(AGE) == 7)
 		{
@@ -92,7 +93,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList list)
 	{
 
 	}
@@ -112,11 +113,11 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { AGE });
+		return new BlockStateContainer(this, AGE);
 	}
 
 	@Override
-	public java.util.List<ItemStack> getDrops(net.minecraft.world.IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public java.util.List<ItemStack> getDrops(@Nonnull net.minecraft.world.IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 		java.util.List<ItemStack> ret = super.getDrops(world, pos, state, fortune);
 
@@ -131,7 +132,7 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		super.updateTick(worldIn, pos, state, rand);
 
@@ -153,37 +154,37 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return ModItems.beans;
 	}
 
 	@Override
-	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
+	public boolean canBlockStay(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		return (worldIn.getLight(pos) >= 8 || worldIn.canSeeSky(pos)) && worldIn.getBlockState(pos.down()).getBlock().canSustainPlant(worldIn.getBlockState(pos.down()), worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 	}
 
 	@Override
-	public net.minecraftforge.common.EnumPlantType getPlantType(net.minecraft.world.IBlockAccess world, BlockPos pos)
+	public net.minecraftforge.common.EnumPlantType getPlantType(@Nonnull net.minecraft.world.IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return EnumPlantType.Plains;
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state, boolean isClient)
 	{
 		return state.getValue(AGE).intValue() < 7;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public void grow(World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, IBlockState state)
 	{
 		int i = state.getValue(AGE).intValue() + MathHelper.getInt(worldIn.rand, 2, 5);
 

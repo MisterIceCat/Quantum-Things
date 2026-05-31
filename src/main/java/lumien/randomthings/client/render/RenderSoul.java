@@ -14,6 +14,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class RenderSoul extends Render
 {
@@ -73,13 +75,13 @@ public class RenderSoul extends Render
 	}
 
 	@Override
-	public void doRender(Entity entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
+	public void doRender(@Nonnull Entity entity, double posX, double posY, double posZ, float entityYaw, float partialTicks)
 	{
 		doRender((EntitySoul) entity, posX, posY, posZ, entityYaw, partialTicks);
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(@Nonnull Entity entity)
 	{
 		switch (((EntitySoul) entity).type)
 		{

@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemLavaWader extends ItemArmor
 {
 	public ItemLavaWader()
@@ -18,13 +20,13 @@ public class ItemLavaWader extends ItemArmor
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
+	public EnumRarity getRarity(@Nonnull ItemStack stack)
 	{
 		return EnumRarity.RARE;
 	}
 
 	@Override
-	public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot, String type)
+	public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot, @Nonnull String type)
 	{
 		return "randomthings:textures/models/armor/lavaWader.png";
 	}
@@ -36,7 +38,7 @@ public class ItemLavaWader extends ItemArmor
 	}
 
 	@Override
-	public void onArmorTick(World world, EntityPlayer player, ItemStack itemStack)
+	public void onArmorTick(@Nonnull World world, EntityPlayer player, @Nonnull ItemStack itemStack)
 	{
 		if (!player.world.isRemote)
 		{

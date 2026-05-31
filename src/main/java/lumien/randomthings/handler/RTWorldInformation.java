@@ -26,11 +26,9 @@ public class RTWorldInformation
 			return true;
 
 		WorldServer world = FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0);
-		if (world == null)
-			return false;
 
-		NBTTagCompound endData = world.getWorldInfo().getDimensionData(DimensionType.THE_END.getId());
-		if (endData == null || !endData.hasKey("DragonFight"))
+        NBTTagCompound endData = world.getWorldInfo().getDimensionData(DimensionType.THE_END.getId());
+		if (!endData.hasKey("DragonFight"))
 			return false;
 
 		// get the dragon fight data

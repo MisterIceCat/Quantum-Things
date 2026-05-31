@@ -9,6 +9,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemChunkAnalyzer extends ItemBase
 {
 
@@ -20,7 +22,7 @@ public class ItemChunkAnalyzer extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)

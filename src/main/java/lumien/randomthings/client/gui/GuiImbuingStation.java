@@ -75,7 +75,7 @@ public class GuiImbuingStation extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRenderer.drawString(I18n.format("tile.imbuingStation.name", new Object[0]), 3, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.imbuingStation.name"), 3, 6, 4210752);
 	}
 
 	@Override

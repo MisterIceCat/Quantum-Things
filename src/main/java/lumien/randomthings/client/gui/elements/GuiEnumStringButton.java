@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
+import javax.annotation.Nonnull;
+
 public class GuiEnumStringButton<E extends Enum> extends GuiButton
 {
 	Field field;
@@ -49,7 +51,7 @@ public class GuiEnumStringButton<E extends Enum> extends GuiButton
 	}
 
 	@Override
-	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
+	public boolean mousePressed(@Nonnull Minecraft mc, int mouseX, int mouseY)
 	{
 		if (super.mousePressed(mc, mouseX, mouseY))
 		{
@@ -65,7 +67,7 @@ public class GuiEnumStringButton<E extends Enum> extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
@@ -116,7 +118,7 @@ public class GuiEnumStringButton<E extends Enum> extends GuiButton
 				FontRenderer fontrenderer = mc.fontRenderer;
 
 				toolTip = I18n.format(toolTip);
-				GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { toolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
+				GuiUtils.drawHoveringText(Arrays.asList(toolTip), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
 			}
 			catch (Exception e)
 			{

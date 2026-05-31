@@ -9,6 +9,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockBlockLuminousTranslucent extends BlockBlockLuminousBase {
 	protected BlockBlockLuminousTranslucent() {
 		super("translucentLuminousBlock");
@@ -16,7 +18,7 @@ public class BlockBlockLuminousTranslucent extends BlockBlockLuminousBase {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
+	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, @Nonnull EnumFacing side) {
 		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
@@ -27,7 +29,7 @@ public class BlockBlockLuminousTranslucent extends BlockBlockLuminousBase {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@Nonnull IBlockState state) {
 		return false;
 	}
 

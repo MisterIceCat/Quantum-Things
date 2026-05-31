@@ -1,11 +1,11 @@
 // Mobile menu toggle functionality
-var menuToggle = document.getElementById('mobile-menu-toggle');
-var navigation = document.getElementById('container_navigation');
-var overlay = document.getElementById('mobile-overlay');
+const menuToggle = document.getElementById('mobile-menu-toggle');
+const navigation = document.getElementById('container_navigation');
+const overlay = document.getElementById('mobile-overlay');
 
 if (menuToggle && navigation && overlay) {
     function toggleMenu() {
-        var isOpen = navigation.classList.toggle('mobile-open');
+        const isOpen = navigation.classList.toggle('mobile-open');
         overlay.classList.toggle('mobile-open');
         document.body.classList.toggle('menu-open', isOpen);
     }

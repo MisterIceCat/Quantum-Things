@@ -1,15 +1,15 @@
 package lumien.randomthings.recipes;
 
 import lumien.randomthings.block.ModBlocks;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.ShapedOreRecipe;
+
+import javax.annotation.Nonnull;
 
 public class RecipeWorkbench extends ShapedOreRecipe
 {
@@ -23,7 +23,7 @@ public class RecipeWorkbench extends ShapedOreRecipe
 	}
 
 	@Override
-	public boolean matches(InventoryCrafting inv, World world)
+	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World world)
 	{
 		boolean recipeMatches = super.matches(inv, world);
 

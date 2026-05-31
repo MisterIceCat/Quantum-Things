@@ -398,7 +398,7 @@ public class RenderUtils
 
 		BlockModelRenderer bmr = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
 
-		if (bmr != null && stateIn != null && modelIn != null)
+		if (stateIn != null && modelIn != null)
 		{
 			try
 			{
@@ -417,7 +417,7 @@ public class RenderUtils
 						}
 					}
 
-					List<BakedQuad> list1 = modelIn.getQuads(stateIn, (EnumFacing) null, rand);
+					List<BakedQuad> list1 = modelIn.getQuads(stateIn, null, rand);
 
 					if (!list1.isEmpty()) {
 						renderQuadsSmooth(worldIn, stateIn, posIn, buffer, list1, afloat, bitset,
@@ -440,7 +440,7 @@ public class RenderUtils
 						}
 					}
 
-					List<BakedQuad> list1 = modelIn.getQuads(stateIn, (EnumFacing) null, rand);
+					List<BakedQuad> list1 = modelIn.getQuads(stateIn, null, rand);
 
 					if (!list1.isEmpty())
 					{
@@ -628,7 +628,7 @@ public class RenderUtils
 
 			if (ownBrightness)
 			{
-				fillQuadBounds(stateIn, bakedquad.getVertexData(), bakedquad.getFace(), (float[]) null, bitSet);
+				fillQuadBounds(stateIn, bakedquad.getVertexData(), bakedquad.getFace(), null, bitSet);
 				BlockPos blockpos = bitSet.get(0) ? posIn.offset(bakedquad.getFace()) : posIn;
 				brightnessIn = stateIn.getPackedLightmapCoords(blockAccessIn, blockpos);
 			}

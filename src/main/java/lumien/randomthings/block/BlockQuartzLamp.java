@@ -11,6 +11,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import javax.annotation.Nonnull;
+
 public class BlockQuartzLamp extends BlockBase
 {
 	protected BlockQuartzLamp()
@@ -22,7 +24,7 @@ public class BlockQuartzLamp extends BlockBase
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+	public int getLightValue(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		if (state.getBlock() != this)
 		{
@@ -40,7 +42,7 @@ public class BlockQuartzLamp extends BlockBase
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
 		if (worldIn.isRemote && worldIn.getLight(pos) == 15)
 		{

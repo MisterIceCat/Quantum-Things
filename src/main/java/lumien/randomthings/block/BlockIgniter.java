@@ -1,28 +1,22 @@
 package lumien.randomthings.block;
 
-import java.util.Random;
-
 import lumien.randomthings.RandomThings;
 import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityIgniter;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockIgniter extends BlockContainerBase
 {
@@ -37,7 +31,7 @@ public class BlockIgniter extends BlockContainerBase
 	}
 	
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -47,7 +41,7 @@ public class BlockIgniter extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isFireSource(World world, BlockPos pos, EnumFacing side)
+	public boolean isFireSource(World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		EnumFacing facing = world.getBlockState(pos).getValue(FACING);
 
@@ -55,7 +49,7 @@ public class BlockIgniter extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
 
@@ -94,13 +88,13 @@ public class BlockIgniter extends BlockContainerBase
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer)), 2);
 	}
@@ -129,7 +123,7 @@ public class BlockIgniter extends BlockContainerBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Override

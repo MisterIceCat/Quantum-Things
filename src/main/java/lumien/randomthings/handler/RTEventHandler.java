@@ -777,7 +777,7 @@ public class RTEventHandler {
 			return;
 		}
 
-		if (!(player instanceof FakePlayer) && player.getGameProfile() != null) {
+		if (!(player instanceof FakePlayer)) {
 
 			Iterator<TileEntityChatDetector> iterator = TileEntityChatDetector.detectors.iterator();
 

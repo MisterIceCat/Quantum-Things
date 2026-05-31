@@ -9,6 +9,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public abstract class ParticleBase extends Particle
 {
 	public ParticleBase(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
@@ -22,7 +24,7 @@ public abstract class ParticleBase extends Particle
 	static TextureAtlasSprite particleSprite;
 
 	@Override
-	public void renderParticle(BufferBuilder buffer, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
+	public void renderParticle(@Nonnull BufferBuilder buffer, @Nonnull Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
 	{
 		float texSizeU = this.particleTexture.getMaxU() - this.particleTexture.getMinU();
 		float texSizeV = this.particleTexture.getMaxV() - this.particleTexture.getMinV();

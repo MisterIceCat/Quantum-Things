@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
@@ -21,7 +20,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
@@ -36,7 +34,6 @@ import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
-import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStackSimple;
 
 public class ItemReinforcedEnderBucket extends ItemBase
 {
@@ -48,13 +45,13 @@ public class ItemReinforcedEnderBucket extends ItemBase
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
+	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, NBTTagCompound nbt)
 	{
 		return new FluidHandlerItemStack(stack, 1000 * 10);
 	}
 
 	@Override
-	public boolean showDurabilityBar(ItemStack stack)
+	public boolean showDurabilityBar(@Nonnull ItemStack stack)
 	{
 		return true;
 	}

@@ -23,6 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiSlider;
 
+import javax.annotation.Nonnull;
+
 public class GuiVoxelProjector extends GuiContainerBase implements IStringCallback
 {
 	TileEntityVoxelProjector te;
@@ -122,7 +124,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 		this.buttonList.add(toggleAmbientLight);
 		this.buttonList.add(toggleRandomizer);
 
-		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, this.guiTop + 150, width, height, Lists.<String>newArrayList());
+		availableModels = new GuiStringList(this, Minecraft.getMinecraft(), 120, 50, this.guiLeft + 5, this.guiTop + 150, width, height, Lists.newArrayList());
 	}
 
 	@Override
@@ -139,7 +141,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		fontRenderer.drawString(I18n.format("tile.voxelProjector.name", new Object[0]), 3, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.voxelProjector.name"), 3, 6, 4210752);
 	}
 
 	@Override
@@ -159,7 +161,7 @@ public class GuiVoxelProjector extends GuiContainerBase implements IStringCallba
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 

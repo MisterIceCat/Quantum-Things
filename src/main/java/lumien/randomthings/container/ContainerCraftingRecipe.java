@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerCraftingRecipe extends Container
 {
 	ItemStack openedWith;
@@ -63,13 +65,13 @@ public class ContainerCraftingRecipe extends Container
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)
 	{
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public void onCraftMatrixChanged(IInventory inventoryIn)
+	public void onCraftMatrixChanged(@Nonnull IInventory inventoryIn)
 	{
 		this.craftResult.setInventorySlotContents(0, CraftingManager.findMatchingRecipe(this.craftMatrix, this.worldObj).getCraftingResult(craftMatrix));
 	}
@@ -82,7 +84,7 @@ public class ContainerCraftingRecipe extends Container
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn)
+	public void onContainerClosed(@Nonnull EntityPlayer playerIn)
 	{
 		super.onContainerClosed(playerIn);
 

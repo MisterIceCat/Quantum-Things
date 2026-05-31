@@ -36,6 +36,8 @@ import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockBlockDiaphanous extends BlockContainerBase
 {
 	static final AxisAlignedBB EMPTY = new AxisAlignedBB(0, 0, 0, 0, 0, 0);
@@ -49,7 +51,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 	
 	@Override
-	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+	public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items)
 	{
 		
 	}
@@ -84,7 +86,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
 		if (!player.capabilities.isCreativeMode && !world.isRemote && willHarvest)
 		{
@@ -95,25 +97,25 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 
 	@Override
-	public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 	}
 	
 	@Override
-	public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles)
+	public boolean addLandingEffects(@Nonnull IBlockState state, WorldServer worldObj, @Nonnull BlockPos blockPosition, @Nonnull IBlockState iblockstate, @Nonnull EntityLivingBase entity, int numberOfParticles)
 	{
 		TileEntityBlockDiaphanous te = (TileEntityBlockDiaphanous) worldObj.getTileEntity(blockPosition);
 
 		IBlockState display = te.getDisplayState();
 		Block b = display.getBlock();
 
-		((WorldServer)worldObj).spawnParticle(EnumParticleTypes.BLOCK_DUST, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), numberOfParticles, 0.0D, 0.0D, 0.0D, 0.15000000596046448D, Block.getStateId(display));
+		worldObj.spawnParticle(EnumParticleTypes.BLOCK_DUST, blockPosition.getX(), blockPosition.getY(), blockPosition.getZ(), numberOfParticles, 0.0D, 0.0D, 0.0D, 0.15000000596046448D, Block.getStateId(display));
 
 		return true;
 	}
 
 	@Override
-	public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager)
+	public boolean addDestroyEffects(World world, @Nonnull BlockPos pos, @Nonnull ParticleManager manager)
 	{
 		TileEntityBlockDiaphanous te = (TileEntityBlockDiaphanous) world.getTileEntity(pos);
 
@@ -135,7 +137,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	static final Random rand = new Random();
 
 	@Override
-	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager)
+	public boolean addHitEffects(@Nonnull IBlockState state, @Nonnull World worldObj, RayTraceResult target, @Nonnull ParticleManager manager)
 	{
 		if (target.typeOfHit == RayTraceResult.Type.BLOCK)
 		{
@@ -203,25 +205,25 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state)
+	public boolean isNormalCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		TileEntity te =  worldIn.getTileEntity(pos);
 
@@ -230,7 +232,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+	public AxisAlignedBB getSelectedBoundingBox(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos)
 	{
 		EntityPlayerSP thePlayer = Minecraft.getMinecraft().player;
 
@@ -251,7 +253,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 
@@ -285,7 +287,7 @@ public class BlockBlockDiaphanous extends BlockContainerBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}

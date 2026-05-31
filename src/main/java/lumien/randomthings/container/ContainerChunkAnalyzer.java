@@ -22,6 +22,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ContainerChunkAnalyzer extends Container
 {
 	EntityPlayer player;
@@ -80,124 +82,110 @@ public class ContainerChunkAnalyzer extends Container
 
 		for (int q = 0; q < 10 && scanning; q++)
 		{
-			if (scanning)
-			{
-				Chunk c = player.world.getChunk(chunkX, chunkZ);
+            Chunk c = player.world.getChunk(chunkX, chunkZ);
 
-				for (int y = 0; y < c.getHeightValue(nextX, nextZ); y++)
-				{
-					IBlockState state = c.getBlockState(nextX, y, nextZ);
+            for (int y = 0; y < c.getHeightValue(nextX, nextZ); y++)
+            {
+                IBlockState state = c.getBlockState(nextX, y, nextZ);
 
-					if (!state.getBlock().isAir(state, player.world, new BlockPos(c.x + nextX, y, c.z + nextZ)))
-					{
-						if (countMap.containsKey(state))
-						{
-							countMap.put(state, countMap.get(state) + 1);
-						}
-						else
-						{
-							countMap.put(state, 1);
-						}
-					}
-				}
+                if (!state.getBlock().isAir(state, player.world, new BlockPos(c.x + nextX, y, c.z + nextZ)))
+                {
+                    if (countMap.containsKey(state))
+                    {
+                        countMap.put(state, countMap.get(state) + 1);
+                    }
+                    else
+                    {
+                        countMap.put(state, 1);
+                    }
+                }
+            }
 
-				if (nextX == 15)
-				{
-					nextZ++;
+            if (nextX == 15)
+            {
+                nextZ++;
 
-					nextX = 0;
+                nextX = 0;
 
-					if (nextZ == 16)
-					{
-						// Finished;
-						nextX = nextZ = 0;
+                if (nextZ == 16)
+                {
+                    // Finished;
+                    nextX = nextZ = 0;
 
-						List<BlockResult> resultList = new ArrayList<>();
+                    List<BlockResult> resultList = new ArrayList<>();
 
-						Map<String, BlockResult> nameMap = new HashMap<String, BlockResult>();
+                    Map<String, BlockResult> nameMap = new HashMap<String, BlockResult>();
 
-						for (Entry<IBlockState, Integer> entry : countMap.entrySet())
-						{
-							IBlockState state = entry.getKey();
+                    for (Entry<IBlockState, Integer> entry : countMap.entrySet())
+                    {
+                        IBlockState state = entry.getKey();
 
-							BlockResult br = new BlockResult();
-							br.state = state;
-							br.count = entry.getValue();
+                        BlockResult br = new BlockResult();
+                        br.state = state;
+                        br.count = entry.getValue();
 
-							int meta = state.getBlock().getMetaFromState(state);
-							Item i = Item.getItemFromBlock(br.state.getBlock());
+                        int meta = state.getBlock().getMetaFromState(state);
+                        Item i = Item.getItemFromBlock(br.state.getBlock());
 
-							String name;
+                        String name;
 
-							if (i == null)
-							{
-								name = state.getBlock().getLocalizedName();
-								br.stack = ItemStack.EMPTY;
-							}
-							else
-							{
-								br.stack = new ItemStack(i, 1, meta);
-								try {
-									name = br.stack.getDisplayName();
-									if (name.equals("Air"))
-									{
-										name = state.getBlock().getLocalizedName();
-									}
-								} catch (RuntimeException e) {
-									// Some mods throw exceptions for invalid metadata
-									name = state.getBlock().getLocalizedName();
-								}
-							}
+br.stack = new ItemStack(i, 1, meta);
+try {
+name = br.stack.getDisplayName();
+if (name.equals("Air"))
+{
+name = state.getBlock().getLocalizedName();
+}
+} catch (RuntimeException e) {
+// Some mods throw exceptions for invalid metadata
+name = state.getBlock().getLocalizedName();
+}
 
-							if (name != null)
-							{
-								br.name = name;
-								if (nameMap.containsKey(name))
-								{
-									nameMap.get(name).count += br.count;
-								}
-								else
-								{
-									nameMap.put(name, br);
-									resultList.add(br);
-								}
-							}
-						}
+br.name = name;
+if (nameMap.containsKey(name))
+{
+nameMap.get(name).count += br.count;
+}
+else
+{
+nameMap.put(name, br);
+resultList.add(br);
+}
+}
 
-						resultList.sort((a, b) -> {
-							return b.count - a.count;
-						});
+                    resultList.sort((a, b) -> {
+                        return b.count - a.count;
+                    });
 
-						ChunkAnalyzerResult result = new ChunkAnalyzerResult();
+                    ChunkAnalyzerResult result = new ChunkAnalyzerResult();
 
-						for (BlockResult br : resultList)
-						{
-							result.addBlock(br.stack, br.name, br.count);
-						}
+                    for (BlockResult br : resultList)
+                    {
+                        result.addBlock(br.stack, br.name, br.count);
+                    }
 
-						ItemStack analyzer = player.getHeldItemMainhand();
+                    ItemStack analyzer = player.getHeldItemMainhand();
 
-						if (!analyzer.isEmpty() && analyzer.getItem() == ModItems.chunkAnalyzer)
-						{
-							NBTTagCompound cmp = analyzer.getOrCreateSubCompound("result");
+                    if (!analyzer.isEmpty() && analyzer.getItem() == ModItems.chunkAnalyzer)
+                    {
+                        NBTTagCompound cmp = analyzer.getOrCreateSubCompound("result");
 
-							result.writeToNBT(cmp);
+                        result.writeToNBT(cmp);
 
-							player.inventoryContainer.detectAndSendChanges();
+                        player.inventoryContainer.detectAndSendChanges();
 
-							scanning = false;
-							countMap = null;
+                        scanning = false;
+                        countMap = null;
 
-							sendScanning();
-						}
-					}
-				}
-				else
-				{
-					nextX++;
-				}
-			}
-		}
+                        sendScanning();
+                    }
+                }
+            }
+            else
+            {
+                nextX++;
+            }
+        }
 	}
 
 	private void sendScanning()
@@ -225,7 +213,7 @@ public class ContainerChunkAnalyzer extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return true;
 	}

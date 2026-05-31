@@ -7,7 +7,6 @@ import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,6 +18,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 {
@@ -42,7 +43,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList list)
 	{
 		BlockBiomeStone.EnumType[] aenumtype = BlockBiomeStone.EnumType.values();
 		int i = aenumtype.length;
@@ -69,7 +70,7 @@ public class BlockBiomeStone extends BlockBase implements IRTBlockColor
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { VARIANT });
+		return new BlockStateContainer(this, VARIANT);
 	}
 
 	@Override

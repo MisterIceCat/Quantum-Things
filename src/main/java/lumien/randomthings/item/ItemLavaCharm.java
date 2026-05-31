@@ -11,6 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
+import javax.annotation.Nonnull;
+
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemLavaCharm extends ItemBase implements IBauble
 {
@@ -22,7 +24,7 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
+	public EnumRarity getRarity(@Nonnull ItemStack stack)
 	{
 		return EnumRarity.RARE;
 	}
@@ -34,9 +36,9 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 	}
 
 	@Override
-	public void onUpdate(ItemStack itemstack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void onUpdate(@Nonnull ItemStack itemstack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if (entityIn != null && entityIn instanceof EntityPlayer)
+		if (entityIn instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entityIn;
 			if (!player.world.isRemote)

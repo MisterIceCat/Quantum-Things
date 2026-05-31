@@ -23,6 +23,8 @@ import lumien.randomthings.handler.redstone.signal.TemporarySignal;
 import lumien.randomthings.handler.redstone.source.IDynamicRedstoneSource;
 import lumien.randomthings.handler.redstone.source.RedstoneSource;
 
+import javax.annotation.Nonnull;
+
 import static lumien.randomthings.handler.redstone.source.RedstoneSource.Type.ITEM;
 
 public class ItemRedstoneActivator extends ItemBase
@@ -37,7 +39,7 @@ public class ItemRedstoneActivator extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
+	public void addInformation(@Nonnull ItemStack stack, World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced)
 	{
 		super.addInformation(stack, world, tooltip, advanced);
 
@@ -45,13 +47,13 @@ public class ItemRedstoneActivator extends ItemBase
 	}
 
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	public boolean shouldCauseReequipAnimation(@Nonnull ItemStack oldStack, @Nonnull ItemStack newStack, boolean slotChanged)
 	{
 		return !ItemStack.areItemStacksEqual(oldStack, newStack);
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		ItemStack me = playerIn.getHeldItem(handIn);
 
@@ -75,7 +77,7 @@ public class ItemRedstoneActivator extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
+	public EnumActionResult onItemUseFirst(EntityPlayer playerIn, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull EnumHand hand)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)

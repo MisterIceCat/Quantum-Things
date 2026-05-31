@@ -8,6 +8,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class EntityColoredSmokeFX extends Particle
 {
@@ -39,7 +41,7 @@ public class EntityColoredSmokeFX extends Particle
 	 * Renders the particle
 	 */
 	@Override
-	public void renderParticle(BufferBuilder worldRendererIn, Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
+	public void renderParticle(@Nonnull BufferBuilder worldRendererIn, @Nonnull Entity entityIn, float partialTicks, float rotationX, float rotationZ, float rotationYZ, float rotationXY, float rotationXZ)
 	{
 		float f = (this.particleAge + partialTicks) / this.particleMaxAge * 32.0F;
 		f = MathHelper.clamp(f, 0.0F, 1.0F);

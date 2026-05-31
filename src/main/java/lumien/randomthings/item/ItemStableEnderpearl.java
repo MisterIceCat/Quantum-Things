@@ -115,7 +115,7 @@ public class ItemStableEnderpearl extends ItemBase
 				{
 					for (int i = 0; i < 2; ++i)
 					{
-						entityItem.world.spawnParticle(EnumParticleTypes.PORTAL, entityItem.posX + (this.rand.nextDouble() - 0.5D) * 1, entityItem.posY + this.rand.nextDouble() * 2 - 0.25D, entityItem.posZ + (this.rand.nextDouble() - 0.5D) * 1, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D, new int[0]);
+						entityItem.world.spawnParticle(EnumParticleTypes.PORTAL, entityItem.posX + (this.rand.nextDouble() - 0.5D) * 1, entityItem.posY + this.rand.nextDouble() * 2 - 0.25D, entityItem.posZ + (this.rand.nextDouble() - 0.5D) * 1, (this.rand.nextDouble() - 0.5D) * 2.0D, -this.rand.nextDouble(), (this.rand.nextDouble() - 0.5D) * 2.0D);
 					}
 				}
 			}
@@ -125,7 +125,7 @@ public class ItemStableEnderpearl extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)

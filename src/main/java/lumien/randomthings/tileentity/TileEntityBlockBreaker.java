@@ -39,6 +39,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 
+import javax.annotation.Nonnull;
+
 public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 {
 	public static final GameProfile breakerProfile = new GameProfile(UUID.nameUUIDFromBytes("RTBlockBreaker".getBytes(Charsets.UTF_8)), "RTBlockBreaker");
@@ -86,7 +88,7 @@ public class TileEntityBlockBreaker extends TileEntityBase implements ITickable
 		fakePlayer.get().connection = new NetHandlerPlayServer(FMLCommonHandler.instance().getMinecraftServerInstance(), new NetworkManager(EnumPacketDirection.SERVERBOUND), fakePlayer.get())
 		{
 			@Override
-			public void sendPacket(Packet packetIn)
+			public void sendPacket(@Nonnull Packet packetIn)
 			{
 
 			}

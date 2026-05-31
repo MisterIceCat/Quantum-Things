@@ -5,13 +5,14 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockRainbowLamp extends BlockBase
 {
@@ -29,7 +30,7 @@ public class BlockRainbowLamp extends BlockBase
 	}
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -45,7 +46,7 @@ public class BlockRainbowLamp extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
+	public void neighborChanged(@Nonnull IBlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull Block neighborBlock, @Nonnull BlockPos changedPos)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -61,7 +62,7 @@ public class BlockRainbowLamp extends BlockBase
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -91,6 +92,6 @@ public class BlockRainbowLamp extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { COLOR });
+		return new BlockStateContainer(this, COLOR);
 	}
 }

@@ -7,11 +7,12 @@ import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderThrownItem<T extends Entity> extends Render<T>
@@ -29,7 +30,7 @@ public class RenderThrownItem<T extends Entity> extends Render<T>
     /**
      * Renders the desired {@code T} type Entity.
      */
-    public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nonnull T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)x, (float)y, (float)z);
@@ -66,7 +67,7 @@ public class RenderThrownItem<T extends Entity> extends Render<T>
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity entity)
+    protected ResourceLocation getEntityTexture(@Nonnull Entity entity)
     {
         return TextureMap.LOCATION_BLOCKS_TEXTURE;
     }

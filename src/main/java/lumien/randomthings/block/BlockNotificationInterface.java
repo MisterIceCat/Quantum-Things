@@ -15,6 +15,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockNotificationInterface extends BlockContainerBase
 {
 
@@ -32,7 +34,7 @@ public class BlockNotificationInterface extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -42,11 +44,11 @@ public class BlockNotificationInterface extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 
-		if (!worldIn.isRemote && placer != null && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) instanceof TileEntityNotificationInterface)
+		if (!worldIn.isRemote && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) instanceof TileEntityNotificationInterface)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) placer;
 			((TileEntityNotificationInterface) worldIn.getTileEntity(pos)).setPlayerUUID(player.getGameProfile().getId());

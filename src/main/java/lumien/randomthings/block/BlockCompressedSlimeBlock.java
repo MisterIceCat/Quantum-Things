@@ -7,7 +7,6 @@ import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.lib.ISuperLubricent;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,6 +20,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubricent, IRTBlockColor
 {
@@ -42,7 +43,7 @@ public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubric
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { COMPRESSION });
+		return new BlockStateContainer(this, COMPRESSION);
 	}
 
 	@Override
@@ -58,31 +59,31 @@ public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubric
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(Blocks.SLIME_BLOCK);
 	}
 
 	@Override
-	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+	public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		return new ItemStack(Blocks.SLIME_BLOCK);
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		int compression = state.getValue(COMPRESSION);
 
@@ -102,7 +103,7 @@ public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubric
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos)
 	{
 		int compression = state.getValue(COMPRESSION);
 
@@ -121,7 +122,7 @@ public class BlockCompressedSlimeBlock extends BlockBase implements ISuperLubric
 	}
 
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	public void onEntityCollision(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Entity entityIn)
 	{
 		super.onEntityCollision(worldIn, pos, state, entityIn);
 

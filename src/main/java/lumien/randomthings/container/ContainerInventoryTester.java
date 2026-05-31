@@ -12,6 +12,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerInventoryTester extends ContainerTE<TileEntityInventoryTester>
 {
 
@@ -49,13 +51,13 @@ public class ContainerInventoryTester extends ContainerTE<TileEntityInventoryTes
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer playerIn, int index)
 	{
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public ItemStack slotClick(int slotId, int dragType, ClickType clickTypeIn, EntityPlayer player)
+	public ItemStack slotClick(int slotId, int dragType, @Nonnull ClickType clickTypeIn, @Nonnull EntityPlayer player)
 	{
 		if (slotId >= 0 && slotId < this.inventorySlots.size() && clickTypeIn == ClickType.PICKUP)
 		{

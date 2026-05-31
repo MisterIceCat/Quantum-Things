@@ -15,6 +15,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 public class RenderArtificialEndPortal extends Render
 {
 	private static final ResourceLocation END_SKY_TEXTURE = new ResourceLocation("textures/environment/end_sky.png");
@@ -30,7 +32,7 @@ public class RenderArtificialEndPortal extends Render
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(@Nonnull Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		EntityArtificialEndPortal portal = (EntityArtificialEndPortal) entity;
 		double size = Math.min(3, 3f / 115 * (portal.actionTimer + partialTicks - 85));
@@ -184,7 +186,7 @@ public class RenderArtificialEndPortal extends Render
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(@Nonnull Entity entity)
 	{
 		return null;
 	}

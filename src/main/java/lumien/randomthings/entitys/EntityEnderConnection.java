@@ -11,6 +11,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class EntityEnderConnection extends Entity
 {
 	BlockPos target;
@@ -35,7 +37,7 @@ public class EntityEnderConnection extends Entity
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer entityIn)
+	public void onCollideWithPlayer(@Nonnull EntityPlayer entityIn)
 	{
 		super.onCollideWithPlayer(entityIn);
 
@@ -57,7 +59,7 @@ public class EntityEnderConnection extends Entity
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound)
+	protected void writeEntityToNBT(@Nonnull NBTTagCompound compound)
 	{
 		if (target != null)
 		{

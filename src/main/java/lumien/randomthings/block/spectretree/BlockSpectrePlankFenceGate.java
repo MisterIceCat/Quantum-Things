@@ -14,6 +14,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockSpectrePlankFenceGate extends BlockFenceGate {
 	public BlockSpectrePlankFenceGate() {
 		super(BlockPlanks.EnumType.OAK);
@@ -29,8 +31,8 @@ public class BlockSpectrePlankFenceGate extends BlockFenceGate {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+                                        @Nonnull EnumFacing side) {
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
 
@@ -42,7 +44,7 @@ public class BlockSpectrePlankFenceGate extends BlockFenceGate {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@Nonnull IBlockState state) {
 		return false;
 	}
 
@@ -53,7 +55,7 @@ public class BlockSpectrePlankFenceGate extends BlockFenceGate {
 	}
 
 	@Override
-	public EnumPushReaction getPushReaction(IBlockState state) {
+	public EnumPushReaction getPushReaction(@Nonnull IBlockState state) {
 		return EnumPushReaction.NORMAL;
 	}
 }

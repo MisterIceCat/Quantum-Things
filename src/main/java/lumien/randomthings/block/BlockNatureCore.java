@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockNatureCore extends BlockContainerBase implements ILuminousBlock
 {
 
@@ -32,13 +34,13 @@ public class BlockNatureCore extends BlockContainerBase implements ILuminousBloc
 	}
 
 	@Override
-	public int getHarvestLevel(IBlockState state)
+	public int getHarvestLevel(@Nonnull IBlockState state)
 	{
 		return super.getHarvestLevel(state);
 	}
 
 	@Override
-	public int quantityDropped(IBlockState state, int fortune, Random random)
+	public int quantityDropped(@Nonnull IBlockState state, int fortune, @Nonnull Random random)
 	{
 		return 1;
 	}
@@ -57,13 +59,13 @@ public class BlockNatureCore extends BlockContainerBase implements ILuminousBloc
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	public boolean canEntityDestroy(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Entity entity)
 	{
 		return true;
 	}

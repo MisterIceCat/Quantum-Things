@@ -23,6 +23,8 @@ import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.magicavoxel.MessageModelRequest;
 import net.minecraft.client.Minecraft;
 
+import javax.annotation.Nonnull;
+
 public class ClientModelLibrary
 {
 	Timer cleanUpTimer;
@@ -41,7 +43,7 @@ public class ClientModelLibrary
 		cacheBuilder.removalListener(new RemovalListener<String, MagicaVoxelModel>()
 		{
 			@Override
-			public void onRemoval(RemovalNotification<String, MagicaVoxelModel> notification)
+			public void onRemoval(@Nonnull RemovalNotification<String, MagicaVoxelModel> notification)
 			{
 				MagicaVoxelModel model = notification.getValue();
 
@@ -186,10 +188,7 @@ public class ClientModelLibrary
 			{
 				if ((model = loadModelFromFile(modelName)) != null)
 				{
-					if (modelRequests.containsKey(modelName))
-					{
-						modelRequests.remove(modelName);
-					}
+                    modelRequests.remove(modelName);
 
 					RandomThings.logger.log(Level.DEBUG, "Loaded " + modelName + " from File");
 

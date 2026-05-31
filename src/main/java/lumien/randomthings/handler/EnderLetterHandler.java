@@ -17,6 +17,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 
+import javax.annotation.Nonnull;
+
 public class EnderLetterHandler extends WorldSavedData
 {
 	public static String ID = "RTEnderLetters";
@@ -218,7 +220,7 @@ public class EnderLetterHandler extends WorldSavedData
 		}
 
 		@Override
-		public void setInventorySlotContents(int index, ItemStack stack)
+		public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
 		{
 			this.enderLetters.set(index, stack);
 
@@ -246,18 +248,18 @@ public class EnderLetterHandler extends WorldSavedData
 		}
 
 		@Override
-		public boolean isUsableByPlayer(EntityPlayer player)
+		public boolean isUsableByPlayer(@Nonnull EntityPlayer player)
 		{
 			return true;
 		}
 
 		@Override
-		public void openInventory(EntityPlayer player)
+		public void openInventory(@Nonnull EntityPlayer player)
 		{
 		}
 
 		@Override
-		public void closeInventory(EntityPlayer player)
+		public void closeInventory(@Nonnull EntityPlayer player)
 		{
 		}
 

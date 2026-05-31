@@ -7,7 +7,6 @@ import lumien.randomthings.lib.IRTBlockColor;
 import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +28,8 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 {
 	public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumDyeColor.class);
@@ -44,20 +45,20 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	}
 
 	@Override
-	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
+	public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing direction, @Nonnull IPlantable plantable)
 	{
 		return Blocks.GRASS.canSustainPlant(Blocks.GRASS.getDefaultState(), world, pos, direction, plantable);
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player)
 	{
 		Item item = Item.getItemFromBlock(this);
-		return item == null ? null : new ItemStack(item, 1, ((EnumDyeColor) state.getValue(COLOR)).getMetadata());
+		return new ItemStack(item, 1, ((EnumDyeColor) state.getValue(COLOR)).getMetadata());
 	}
 
 	@Override
-	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
+	public boolean canSilkHarvest(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer player)
 	{
 		return true;
 	}
@@ -71,13 +72,13 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return Blocks.DIRT.getItemDropped(Blocks.DIRT.getDefaultState().withProperty(BlockDirt.VARIANT, BlockDirt.DirtType.DIRT), rand, fortune);
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -113,14 +114,14 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	}
 
 	@Override
-	public int damageDropped(IBlockState state)
+	public int damageDropped(@Nonnull IBlockState state)
 	{
 		return 0;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList list)
 	{
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;
@@ -147,7 +148,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { COLOR });
+		return new BlockStateContainer(this, COLOR);
 	}
 
 	@Override

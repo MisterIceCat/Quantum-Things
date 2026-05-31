@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerAdvancedItemCollector extends Container
 {
 	World worldObj;
@@ -54,7 +56,7 @@ public class ContainerAdvancedItemCollector extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return advancedItemCollector != null
 				&& !advancedItemCollector.isInvalid()
@@ -63,7 +65,7 @@ public class ContainerAdvancedItemCollector extends Container
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -106,7 +108,7 @@ public class ContainerAdvancedItemCollector extends Container
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;

@@ -1,5 +1,6 @@
 package lumien.randomthings.item;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
@@ -35,7 +36,7 @@ public class ItemGoldenCompass extends ItemBase
 
 			@Override
 			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
 				if (entityIn == null && !stack.isOnItemFrame())
 				{

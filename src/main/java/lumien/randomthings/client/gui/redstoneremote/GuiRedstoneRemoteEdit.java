@@ -40,7 +40,7 @@ public class GuiRedstoneRemoteEdit extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRenderer.drawString(I18n.format("item.redstoneRemote.name", new Object[0]), 8, 6, 4210752);
-		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 95 + 2, 4210752);
+		fontRenderer.drawString(I18n.format("item.redstoneRemote.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 95 + 2, 4210752);
 	}
 }

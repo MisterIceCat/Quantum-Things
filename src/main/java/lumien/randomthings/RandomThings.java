@@ -200,7 +200,7 @@ public class RandomThings implements LoadingCallback
 		{
 			NBTTagCompound compound = t.getModData();
 			TileEntity te = world.getTileEntity(new BlockPos(compound.getInteger("posX"), compound.getInteger("posY"), compound.getInteger("posZ")));
-			if (te != null && te instanceof TileEntityEnderAnchor && Features.ENDER_ANCHOR_CHUNKLOADING)
+			if (te instanceof TileEntityEnderAnchor && Features.ENDER_ANCHOR_CHUNKLOADING)
 			{
 				TileEntityEnderAnchor anchor = (TileEntityEnderAnchor) te;
 				anchor.setTicket(t);

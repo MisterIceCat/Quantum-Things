@@ -1,7 +1,6 @@
 package lumien.randomthings.item;
 
 import lumien.randomthings.config.Internals;
-import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.handler.spectre.SpectreWorldProvider;
 import net.minecraft.client.Minecraft;
@@ -19,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemSpectreKey extends ItemBase
 {
 
@@ -30,19 +31,19 @@ public class ItemSpectreKey extends ItemBase
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack par1ItemStack)
+	public int getMaxItemUseDuration(@Nonnull ItemStack par1ItemStack)
 	{
 		return 100;
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack par1ItemStack)
+	public EnumAction getItemUseAction(@Nonnull ItemStack par1ItemStack)
 	{
 		return EnumAction.BOW;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World par2World, EntityPlayer par3EntityPlayer, @Nonnull EnumHand hand)
 	{
 		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		par3EntityPlayer.setActiveHand(hand);
@@ -51,13 +52,13 @@ public class ItemSpectreKey extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
+	public boolean hasEffect(@Nonnull ItemStack stack)
 	{
 		return Minecraft.getMinecraft().player.world.provider instanceof SpectreWorldProvider;
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack par1ItemStack, World par2World, EntityLivingBase livingEntity)
+	public ItemStack onItemUseFinish(@Nonnull ItemStack par1ItemStack, World par2World, @Nonnull EntityLivingBase livingEntity)
 	{
 		if (!par2World.isRemote)
 		{
@@ -80,7 +81,7 @@ public class ItemSpectreKey extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void onUsingTick(ItemStack stack, EntityLivingBase livingEntity, int count)
+	public void onUsingTick(@Nonnull ItemStack stack, EntityLivingBase livingEntity, int count)
 	{
 		if (livingEntity.world.isRemote && count < 60)
 		{

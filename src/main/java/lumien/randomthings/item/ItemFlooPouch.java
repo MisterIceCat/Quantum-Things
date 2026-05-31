@@ -12,6 +12,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemFlooPouch extends ItemBase
 {
 
@@ -23,19 +25,19 @@ public class ItemFlooPouch extends ItemBase
 	}
 	
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	public void addInformation(@Nonnull ItemStack stack, World worldIn, List<String> tooltip, @Nonnull ITooltipFlag flagIn)
 	{
 		tooltip.add(getFlooCount(stack) + " / " + 128);
 	}
 
 	@Override
-	public boolean showDurabilityBar(ItemStack stack)
+	public boolean showDurabilityBar(@Nonnull ItemStack stack)
 	{
 		return true;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		if (playerIn.isSneaking())
 		{
@@ -96,13 +98,13 @@ public class ItemFlooPouch extends ItemBase
 	}
 
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack)
+	public double getDurabilityForDisplay(@Nonnull ItemStack stack)
 	{
 		return 1 - (double) getFlooCount(stack) / 128;
 	}
 
 	@Override
-	public int getRGBDurabilityForDisplay(ItemStack stack)
+	public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack)
 	{
 		return Color.GREEN.getRGB();
 	}

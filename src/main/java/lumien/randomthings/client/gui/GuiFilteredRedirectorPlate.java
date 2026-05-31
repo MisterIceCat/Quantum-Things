@@ -35,7 +35,7 @@ public class GuiFilteredRedirectorPlate extends GuiContainerBase
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, 37, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, 37, 4210752);
 	}
 
 	@Override

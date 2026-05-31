@@ -34,7 +34,7 @@ public class NotificationToast implements IToast
 		toastGui.getMinecraft().fontRenderer.drawString(title, 30, 7, -11534256);
 		toastGui.getMinecraft().fontRenderer.drawString(body, 30, 18, -16777216);
 		RenderHelper.enableGUIStandardItemLighting();
-		toastGui.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI((EntityLivingBase) null, icon, 8, 8);
+		toastGui.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(null, icon, 8, 8);
 		return delta - this.firstDrawTime >= 5000L ? IToast.Visibility.HIDE : IToast.Visibility.SHOW;
 	}
 }

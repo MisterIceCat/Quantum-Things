@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import java.util.Random;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -16,6 +15,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockContactButton extends BlockBase
 {
@@ -32,13 +33,13 @@ public class BlockContactButton extends BlockBase
 	}
 
 	@Override
-	public int tickRate(World worldIn)
+	public int tickRate(@Nonnull World worldIn)
 	{
 		return 20;
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	public void breakBlock(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state)
 	{
 		if (state.getValue(POWERED).booleanValue())
 		{
@@ -49,31 +50,31 @@ public class BlockContactButton extends BlockBase
 	}
 
 	@Override
-	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getWeakPower(IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return blockState.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
 	@Override
-	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getStrongPower(IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return blockState.getValue(POWERED).booleanValue() ? 15 : 0;
 	}
 
 	@Override
-	public boolean canProvidePower(IBlockState state)
+	public boolean canProvidePower(@Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(@Nonnull IBlockState base_state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return true;
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -133,7 +134,7 @@ public class BlockContactButton extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING, POWERED });
+		return new BlockStateContainer(this, FACING, POWERED);
 	}
 
 	private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
@@ -168,19 +169,19 @@ public class BlockContactButton extends BlockBase
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer));
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		worldIn.setBlockState(pos, state.withProperty(FACING, EnumFacing.getDirectionFromEntityLiving(pos, placer)), 2);
 	}
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		this.setDefaultFacing(worldIn, pos, state);
@@ -189,8 +190,8 @@ public class BlockContactButton extends BlockBase
 	public void activate(World world, BlockPos pos, EnumFacing fromFacing)
 	{
 		IBlockState state = world.getBlockState(pos);
-		if (state.getValue(POWERED).booleanValue())
-			return;
+		if (state.getValue(POWERED).booleanValue()) {
+        }
 		else
 		{
 			world.setBlockState(pos, state.withProperty(POWERED, Boolean.valueOf(true)), 3);
@@ -198,7 +199,6 @@ public class BlockContactButton extends BlockBase
 			world.playSound(null, pos.offset(fromFacing).add(0.5, 0.5, 0.5), SoundEvents.UI_BUTTON_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6F);
 			this.notifyNeighbors(world, pos, state.getValue(FACING));
 			world.scheduleUpdate(pos, this, this.tickRate(world));
-			return;
-		}
+        }
 	}
 }

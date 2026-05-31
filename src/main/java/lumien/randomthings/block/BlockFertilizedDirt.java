@@ -22,6 +22,8 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
+
 public class BlockFertilizedDirt extends BlockBase
 {
 	boolean tilled;
@@ -50,13 +52,13 @@ public class BlockFertilizedDirt extends BlockBase
 	}
 
 	@Override
-	protected ItemStack getSilkTouchDrop(IBlockState state)
+	protected ItemStack getSilkTouchDrop(@Nonnull IBlockState state)
 	{
 		return new ItemStack(ModBlocks.fertilizedDirt);
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list)
 	{
 		if (!tilled)
 		{
@@ -65,7 +67,7 @@ public class BlockFertilizedDirt extends BlockBase
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		if (tilled)
 		{
@@ -78,7 +80,7 @@ public class BlockFertilizedDirt extends BlockBase
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player)
 	{
 		return new ItemStack(ModBlocks.fertilizedDirt, 1, 0);
 	}
@@ -90,67 +92,64 @@ public class BlockFertilizedDirt extends BlockBase
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return FULL_BLOCK_AABB;
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(ModBlocks.fertilizedDirt);
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return !tilled;
 	}
 
 	@Override
-	public boolean isFertile(World world, BlockPos pos)
+	public boolean isFertile(@Nonnull World world, @Nonnull BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable)
+	public boolean canSustainPlant(@Nonnull IBlockState state, @Nonnull IBlockAccess world, BlockPos pos, @Nonnull EnumFacing direction, IPlantable plantable)
 	{
 		EnumPlantType plantType = plantable.getPlantType(world, pos.up());
 
 		switch (plantType)
 		{
-		case Desert:
-			return !tilled;
-		case Nether:
-			return false;
-		case Crop:
-			return tilled;
-		case Cave:
-			return !tilled;
-		case Plains:
-			return !tilled || tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS;
-		case Water:
-			return false;
-		case Beach:
-			return !tilled;
+			case Desert:
+			case Cave:
+			case Beach:
+				return !tilled;
+			case Nether:
+			case Water:
+				return false;
+			case Crop:
+				return tilled;
+			case Plains:
+				return !tilled || (tilled && world.getBlockState(pos.up()).getBlock() == Blocks.BEETROOTS);
 		}
 
 		return false;
 	}
 
 	@Override
-	public void updateTick(World worldObj, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldObj, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldObj.isRemote)
 		{
-			IBlockState plantState = worldObj.getBlockState(pos.up());
-			Block toBoost = plantState.getBlock();
+			IBlockState plantState;
+			Block toBoost;
 			for (int i = 0; i < 3; i++)
 			{
 				plantState = worldObj.getBlockState(pos.up());
 				toBoost = plantState.getBlock();
-				if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
+				if (toBoost != Blocks.AIR && toBoost instanceof IPlantable)
 				{
 					toBoost.updateTick(worldObj, pos.up(), plantState, rand);
 				}

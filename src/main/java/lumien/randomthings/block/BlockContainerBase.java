@@ -9,6 +9,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public abstract class BlockContainerBase extends BlockBase
 {
 	protected BlockContainerBase(String name, Material materialIn)
@@ -22,7 +24,7 @@ public abstract class BlockContainerBase extends BlockBase
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	public void breakBlock(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
@@ -35,7 +37,7 @@ public abstract class BlockContainerBase extends BlockBase
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
+	public void neighborChanged(@Nonnull IBlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull Block neighborBlock, @Nonnull BlockPos changedPos)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
 
@@ -46,16 +48,16 @@ public abstract class BlockContainerBase extends BlockBase
 	}
 
 	@Override
-	public boolean hasTileEntity(IBlockState state)
+	public boolean hasTileEntity(@Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public abstract TileEntity createTileEntity(World world, IBlockState state);
+	public abstract TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state);
 
 	@Override
-	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
+	public boolean eventReceived(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, int id, int param)
 	{
 		super.eventReceived(state, worldIn, pos, id, param);
 		TileEntity tileentity = worldIn.getTileEntity(pos);

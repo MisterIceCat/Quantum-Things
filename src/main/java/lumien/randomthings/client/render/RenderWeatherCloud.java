@@ -2,25 +2,21 @@ package lumien.randomthings.client.render;
 
 import java.util.Random;
 
-import lumien.randomthings.client.ClientProxy;
-import lumien.randomthings.entitys.EntityGoldenChicken;
 import lumien.randomthings.entitys.EntityWeatherCloud;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.item.ItemWeatherEgg;
-import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderWeatherCloud extends Render<EntityWeatherCloud>
@@ -40,7 +36,7 @@ public class RenderWeatherCloud extends Render<EntityWeatherCloud>
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder bufferbuilder = tessellator.getBuffer();
 			RenderHelper.disableStandardItemLighting();
-			float f = ((float) (RTEventHandler.clientAnimationCounter + partialTicks)) / 200.0F;
+			float f = (RTEventHandler.clientAnimationCounter + partialTicks) / 200.0F;
 			
 			float f1 = 0.0F;
 			
@@ -68,10 +64,10 @@ public class RenderWeatherCloud extends Render<EntityWeatherCloud>
 				float f3 = random.nextFloat() * 0.3F + f1 * 2.0F;
 				bufferbuilder.begin(6, DefaultVertexFormats.POSITION_COLOR);
 				bufferbuilder.pos(0.0D, 0.0D, 0.0D).color(255, 255, 255, (int) (255.0F * (1.0F - f1))).endVertex();
-				bufferbuilder.pos(-0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(255, 255, 0, 0).endVertex();
-				bufferbuilder.pos(0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(255, 255, 0, 0).endVertex();
-				bufferbuilder.pos(0.0D, (double) f2, (double) (1.0F * f3)).color(255, 255, 0, 0).endVertex();
-				bufferbuilder.pos(-0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(255, 255, 0, 0).endVertex();
+				bufferbuilder.pos(-0.866D * (double) f3, f2, -0.5F * f3).color(255, 255, 0, 0).endVertex();
+				bufferbuilder.pos(0.866D * (double) f3, f2, -0.5F * f3).color(255, 255, 0, 0).endVertex();
+				bufferbuilder.pos(0.0D, f2, 1.0F * f3).color(255, 255, 0, 0).endVertex();
+				bufferbuilder.pos(-0.866D * (double) f3, f2, -0.5F * f3).color(255, 255, 0, 0).endVertex();
 				tessellator.draw();
 			}
 
@@ -89,7 +85,7 @@ public class RenderWeatherCloud extends Render<EntityWeatherCloud>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityWeatherCloud entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntityWeatherCloud entity)
 	{
 		return null;
 	}

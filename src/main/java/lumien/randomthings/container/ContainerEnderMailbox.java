@@ -11,6 +11,8 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerEnderMailbox extends Container
 {
 	EntityPlayer interactingPlayer;
@@ -55,13 +57,13 @@ public class ContainerEnderMailbox extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return true;
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -104,7 +106,7 @@ public class ContainerEnderMailbox extends Container
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;

@@ -16,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemImbue extends ItemBase
 {
 	final static int FIRE = 0;
@@ -53,7 +55,7 @@ public class ItemImbue extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> subItems)
 	{
 		if (this.isInCreativeTab(tab))
 		{
@@ -65,19 +67,19 @@ public class ItemImbue extends ItemBase
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getMaxItemUseDuration(@Nonnull ItemStack stack)
 	{
 		return 32;
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
+	public EnumAction getItemUseAction(@Nonnull ItemStack stack)
 	{
 		return EnumAction.DRINK;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		playerIn.setActiveHand(hand);
@@ -85,7 +87,7 @@ public class ItemImbue extends ItemBase
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase livingEntity)
+	public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase livingEntity)
 	{
 		if (livingEntity instanceof EntityPlayer)
 		{

@@ -2,6 +2,7 @@ package lumien.randomthings.item;
 
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
@@ -39,7 +40,7 @@ public class ItemEmeraldCompass extends ItemBase
 
 			@Override
 			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
 				if (entityIn == null && !stack.isOnItemFrame())
 				{
@@ -114,13 +115,13 @@ public class ItemEmeraldCompass extends ItemBase
 	}
 
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	public boolean shouldCauseReequipAnimation(@Nonnull ItemStack oldStack, @Nonnull ItemStack newStack, boolean slotChanged)
 	{
 		return !ItemStack.areItemsEqual(oldStack, newStack);
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void onUpdate(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
 
@@ -136,20 +137,12 @@ public class ItemEmeraldCompass extends ItemBase
 
 					EntityPlayerMP targetPlayer = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
 
-					if (targetPlayer != null)
-					{
-						BlockPos targetPos = targetPlayer.getPosition();
-						targetPos = new BlockPos(targetPos.getX(), 0, targetPos.getZ());
+                    BlockPos targetPos = targetPlayer.getPosition();
+                    targetPos = new BlockPos(targetPos.getX(), 0, targetPos.getZ());
 
-						compound.setInteger("targetX", targetPos.getX());
-						compound.setInteger("targetZ", targetPos.getZ());
-					}
-					else
-					{
-						compound.removeTag("targetX");
-						compound.removeTag("targetZ");
-					}
-				}
+                    compound.setInteger("targetX", targetPos.getX());
+                    compound.setInteger("targetZ", targetPos.getZ());
+                }
 			}
 		}
 	}

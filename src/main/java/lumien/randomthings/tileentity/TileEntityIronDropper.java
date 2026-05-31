@@ -96,7 +96,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 			{
 				ItemStack result = ItemHandlerHelper.insertItemStacked(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()), toDrop, false);
 
-				if (result == null || result.getCount() == 0)
+				if (result.getCount() == 0)
 				{
 					itemHandler.extractItem(slot, 1, false);
 				}
@@ -126,10 +126,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 
 				switch (pickupDelay)
 				{
-				case NONE:
-					pickupDelayInteger = 0;
-					break;
-				case TICKS_20:
+                    case TICKS_20:
 					pickupDelayInteger = 20;
 					break;
 				case TICKS_5:

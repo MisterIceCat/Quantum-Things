@@ -45,7 +45,7 @@ public class ItemCraftingRecipe extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)
@@ -72,11 +72,9 @@ public class ItemCraftingRecipe extends ItemBase
 		compound.setTag("matrix", matrix);
 		compound.setTag("result", result);
 
-		if (craftResult.getStackInSlot(0) != null)
-		{
-			compound.setString("display", craftResult.getStackInSlot(0).getDisplayName());
-		}
-	}
+        craftResult.getStackInSlot(0);
+        compound.setString("display", craftResult.getStackInSlot(0).getDisplayName());
+    }
 
 	public static void load(ItemStack openedWith, InventoryCrafting craftMatrix, IInventory craftResult)
 	{

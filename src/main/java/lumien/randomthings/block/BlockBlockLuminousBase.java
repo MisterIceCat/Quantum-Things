@@ -5,7 +5,6 @@ import lumien.randomthings.item.block.ItemBlockClothLuminous;
 import lumien.randomthings.lib.ILuminousBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -17,6 +16,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public abstract class BlockBlockLuminousBase extends BlockBase implements ILuminousBlock {
 	public static final PropertyEnum<EnumDyeColor> COLOR = PropertyEnum.create("color", EnumDyeColor.class);
@@ -35,7 +36,7 @@ public abstract class BlockBlockLuminousBase extends BlockBase implements ILumin
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list) {
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
 		EnumDyeColor[] aenumdyecolor = EnumDyeColor.values();
 		int i = aenumdyecolor.length;
 
@@ -57,7 +58,7 @@ public abstract class BlockBlockLuminousBase extends BlockBase implements ILumin
 
 	@Override
 	protected BlockStateContainer createBlockState() {
-		return new BlockStateContainer(this, new IProperty[] { COLOR });
+		return new BlockStateContainer(this, COLOR);
 	}
 
 	@Override
@@ -66,7 +67,7 @@ public abstract class BlockBlockLuminousBase extends BlockBase implements ILumin
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos) {
+	public int getLightValue(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
 		if (Features.LUMINOUS_BLOCKS_EMIT_LIGHT) {
 			return 15;
 		}

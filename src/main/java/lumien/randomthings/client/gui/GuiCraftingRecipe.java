@@ -33,6 +33,6 @@ public class GuiCraftingRecipe extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRenderer.drawString(I18n.format("item.craftingRecipe.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.craftingRecipe.name"), 8, 6, 4210752);
 	}
 }

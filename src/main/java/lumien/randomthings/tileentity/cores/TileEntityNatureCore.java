@@ -77,7 +77,7 @@ public class TileEntityNatureCore extends TileEntityBase implements ITickable
 						EntityLiving entityliving = null;
 						try
 						{
-							entityliving = entry.entityClass.getConstructor(new Class[] { World.class }).newInstance(new Object[] { world });
+							entityliving = entry.entityClass.getConstructor(new Class[] { World.class }).newInstance(world);
 						}
 						catch (Exception exception)
 						{

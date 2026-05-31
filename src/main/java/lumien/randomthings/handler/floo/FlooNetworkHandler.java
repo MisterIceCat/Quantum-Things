@@ -21,6 +21,8 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.WorldSavedData;
 
+import javax.annotation.Nonnull;
+
 public class FlooNetworkHandler extends WorldSavedData
 {
 	static final String ID = "rtFlooHandler";
@@ -174,7 +176,7 @@ public class FlooNetworkHandler extends WorldSavedData
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
 	{
 		NBTTagList firePlaceTags = new NBTTagList();
 

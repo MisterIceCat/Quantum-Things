@@ -78,7 +78,7 @@ public class GuiDyeingMachine extends GuiContainerBase
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
-		fontRenderer.drawString(I18n.format("tile.dyeingMachine.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.dyeingMachine.name"), 8, 6, 4210752);
 	}
 
 	@Override

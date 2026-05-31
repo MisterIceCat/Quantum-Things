@@ -14,6 +14,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockEntityDetector extends BlockContainerBase
 {
 
@@ -31,13 +33,13 @@ public class BlockEntityDetector extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean isSideSolid(@Nonnull IBlockState base_state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return true;
 	}
 
 	@Override
-	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getWeakPower(@Nonnull IBlockState blockState, IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		TileEntity teRaw = blockAccess.getTileEntity(pos);
 		if (!(teRaw instanceof TileEntityEntityDetector))
@@ -49,7 +51,7 @@ public class BlockEntityDetector extends BlockContainerBase
 	}
 
 	@Override
-	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getStrongPower(@Nonnull IBlockState blockState, IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		TileEntity teRaw = blockAccess.getTileEntity(pos);
 		if (!(teRaw instanceof TileEntityEntityDetector))
@@ -68,25 +70,25 @@ public class BlockEntityDetector extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state)
+	public boolean isNormalCube(@Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean shouldCheckWeakPower(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean shouldCheckWeakPower(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canProvidePower(IBlockState state)
+	public boolean canProvidePower(@Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{

@@ -4,6 +4,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 
+import javax.annotation.Nonnull;
+
 public class FocusStateMapper extends StateMapperBase
 {
 	ModelResourceLocation mrl;
@@ -14,7 +16,7 @@ public class FocusStateMapper extends StateMapperBase
 	}
 
 	@Override
-	protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+	protected ModelResourceLocation getModelResourceLocation(@Nonnull IBlockState state)
 	{
 		return mrl;
 	}

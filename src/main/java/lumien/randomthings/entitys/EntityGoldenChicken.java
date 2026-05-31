@@ -3,22 +3,19 @@ package lumien.randomthings.entitys;
 import java.util.List;
 import java.util.Set;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Sets;
 
-import lumien.randomthings.RandomThings;
 import lumien.randomthings.config.Features;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIFollowParent;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIMate;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAITempt;
@@ -171,7 +168,7 @@ public class EntityGoldenChicken extends EntityAnimal {
         return SoundEvents.ENTITY_CHICKEN_AMBIENT;
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+    protected SoundEvent getHurtSound(@Nonnull DamageSource damageSourceIn) {
         return SoundEvents.ENTITY_CHICKEN_HURT;
     }
 
@@ -179,7 +176,7 @@ public class EntityGoldenChicken extends EntityAnimal {
         return SoundEvents.ENTITY_CHICKEN_DEATH;
     }
 
-    protected void playStepSound(BlockPos pos, Block blockIn) {
+    protected void playStepSound(@Nonnull BlockPos pos, @Nonnull Block blockIn) {
         this.playSound(SoundEvents.ENTITY_CHICKEN_STEP, 0.15F, 1.2F);
     }
 
@@ -188,13 +185,13 @@ public class EntityGoldenChicken extends EntityAnimal {
         return LootTableList.ENTITIES_CHICKEN;
     }
 
-    public EntityGoldenChicken createChild(EntityAgeable ageable) {
+    public EntityGoldenChicken createChild(@Nonnull EntityAgeable ageable) {
         return new EntityGoldenChicken(this.world);
     }
 
 
     // Golden Chicken cannot be bred, so we don't allow it to be fed to breed it
-    public boolean isBreedingItem(ItemStack stack) {
+    public boolean isBreedingItem(@Nonnull ItemStack stack) {
         return false;
     }
 
@@ -205,7 +202,7 @@ public class EntityGoldenChicken extends EntityAnimal {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound compound) {
+    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
         this.chickenJockey = compound.getBoolean("IsChickenJockey");
         this.timeUntilNextIngotEgg = compound.getInteger("timeUntilNextIngotEgg");
@@ -215,7 +212,7 @@ public class EntityGoldenChicken extends EntityAnimal {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound compound) {
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
         compound.setBoolean("IsChickenJockey", this.chickenJockey);
         compound.setInteger("timeUntilNextIngotEgg", this.timeUntilNextIngotEgg);

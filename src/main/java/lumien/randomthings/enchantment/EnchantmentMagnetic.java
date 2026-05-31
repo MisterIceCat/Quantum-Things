@@ -5,6 +5,8 @@ import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.util.ResourceLocation;
 
+import javax.annotation.Nonnull;
+
 public class EnchantmentMagnetic extends Enchantment
 {
 	protected EnchantmentMagnetic(Enchantment.Rarity rarityIn, EntityEquipmentSlot... slots)
@@ -33,7 +35,7 @@ public class EnchantmentMagnetic extends Enchantment
 	}
 
 	@Override
-	public boolean canApplyTogether(Enchantment ench)
+	public boolean canApplyTogether(@Nonnull Enchantment ench)
 	{
 		return super.canApplyTogether(ench);
 	}

@@ -14,6 +14,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
+
 public class BlockSpectrePlank extends BlockBase
 {
 	public BlockSpectrePlank()
@@ -29,7 +31,7 @@ public class BlockSpectrePlank extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -48,7 +50,7 @@ public class BlockSpectrePlank extends BlockBase
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -61,7 +63,7 @@ public class BlockSpectrePlank extends BlockBase
 	}
 
 	@Override
-	public EnumPushReaction getPushReaction(IBlockState state)
+	public EnumPushReaction getPushReaction(@Nonnull IBlockState state)
 	{
 		return EnumPushReaction.NORMAL;
 	}

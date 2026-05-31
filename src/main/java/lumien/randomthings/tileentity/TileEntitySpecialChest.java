@@ -22,9 +22,11 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class TileEntitySpecialChest extends TileEntityLockableLoot implements ITickable
 {
-	private NonNullList<ItemStack> chestContents = NonNullList.<ItemStack>withSize(27, ItemStack.EMPTY);
+	private NonNullList<ItemStack> chestContents = NonNullList.withSize(27, ItemStack.EMPTY);
 
 	/** The current angle of the lid (between 0 and 1) */
 	public float lidAngle;
@@ -55,7 +57,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	}
 
 	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+	public boolean shouldRefresh(@Nonnull World world, @Nonnull BlockPos pos, IBlockState oldState, IBlockState newState)
 	{
 		return (oldState.getBlock() != newState.getBlock());
 	}
@@ -94,14 +96,14 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 
 	public static void registerFixesChest(DataFixer fixer)
 	{
-		fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntitySpecialChest.class, new String[] { "Items" }));
+		fixer.registerWalker(FixTypes.BLOCK_ENTITY, new ItemStackDataLists(TileEntitySpecialChest.class, "Items"));
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
-		this.chestContents = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+		this.chestContents = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
 
 		if (!this.checkLootAndRead(compound))
 		{
@@ -117,7 +119,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
@@ -184,7 +186,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 			double d1 = i + 0.5D;
 			double d2 = k + 0.5D;
 
-			this.world.playSound((EntityPlayer) null, d1, j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+			this.world.playSound(null, d1, j + 0.5D, d2, SoundEvents.BLOCK_CHEST_OPEN, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 		}
 
 		if (this.numPlayersUsing == 0 && this.lidAngle > 0.0F || this.numPlayersUsing > 0 && this.lidAngle < 1.0F)
@@ -212,7 +214,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 				double d3 = i + 0.5D;
 				double d0 = k + 0.5D;
 
-				this.world.playSound((EntityPlayer) null, d3, j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
+				this.world.playSound(null, d3, j + 0.5D, d0, SoundEvents.BLOCK_CHEST_CLOSE, SoundCategory.BLOCKS, 0.5F, this.world.rand.nextFloat() * 0.1F + 0.9F);
 			}
 
 			if (this.lidAngle < 0.0F)
@@ -275,7 +277,7 @@ public class TileEntitySpecialChest extends TileEntityLockableLoot implements IT
 	}
 
 	@Override
-	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+	public Container createContainer(@Nonnull InventoryPlayer playerInventory, @Nonnull EntityPlayer playerIn)
 	{
 		this.fillWithLoot(playerIn);
 		return new ContainerChest(playerInventory, this, playerIn);

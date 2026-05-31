@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import org.lwjgl.opengl.GL11;
 
+import javax.annotation.Nonnull;
+
 public class ItemSpectreArmor extends ItemArmor {
     public static ItemArmor.ArmorMaterial spectreArmorMaterial = EnumHelper.addArmorMaterial("spectre",
             "randomthings:spectre", 35,
@@ -46,23 +48,23 @@ public class ItemSpectreArmor extends ItemArmor {
     }
 
     @Override
-    public EnumRarity getRarity(ItemStack stack) {
+    public EnumRarity getRarity(@Nonnull ItemStack stack) {
         return EnumRarity.RARE;
     }
 
     @Override
-    public String getArmorTexture(ItemStack stack, Entity entity, EntityEquipmentSlot slot,
-            String type) {
+    public String getArmorTexture(@Nonnull ItemStack stack, @Nonnull Entity entity, @Nonnull EntityEquipmentSlot slot,
+                                  @Nonnull String type) {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         int layer = (slot == EntityEquipmentSlot.LEGS) ? 2 : 1;
-        String typeSuffix = (type == null) ? "" : "_" + type;
+        String typeSuffix = "_" + type;
         return String.format("randomthings:textures/models/armor/spectre_layer_%d%s.png", layer,
                 typeSuffix);
     }
 
     @Override
-    public int getColor(ItemStack stack) {
+    public int getColor(@Nonnull ItemStack stack) {
         return 16777215; // White color
     }
 

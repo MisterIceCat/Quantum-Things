@@ -11,6 +11,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerNotificationInterface extends ContainerTE<TileEntityNotificationInterface>
 {
 	IItemHandler itemHandler;
@@ -39,19 +41,19 @@ public class ContainerNotificationInterface extends ContainerTE<TileEntityNotifi
 	}
 
 	@Override
-	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
+	public boolean canMergeSlot(@Nonnull ItemStack stack, @Nonnull Slot slotIn)
 	{
 		return false;
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;

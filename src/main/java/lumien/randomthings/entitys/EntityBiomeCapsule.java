@@ -63,7 +63,7 @@ public class EntityBiomeCapsule extends EntityItem {
     }
 
     @Override
-    public void writeEntityToNBT(NBTTagCompound compound) {
+    public void writeEntityToNBT(@Nonnull NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
 
         compound.setInteger(NBT_HELD_CHARGES, getHeldCharges());
@@ -74,7 +74,7 @@ public class EntityBiomeCapsule extends EntityItem {
     }
 
     @Override
-    public void readEntityFromNBT(NBTTagCompound compound) {
+    public void readEntityFromNBT(@Nonnull NBTTagCompound compound) {
         super.readEntityFromNBT(compound);
 
         setHeldCharges(compound.getInteger(NBT_HELD_CHARGES));

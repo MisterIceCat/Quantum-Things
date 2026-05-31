@@ -3,7 +3,6 @@ package lumien.randomthings.block;
 import com.mojang.authlib.GameProfile;
 
 import lumien.randomthings.tileentity.TileEntitySpectreEnergyInjector;
-import lumien.randomthings.tileentity.TileEntitySpectreLens;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -14,6 +13,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockSpectreEnergyInjector extends BlockContainerBase
 {
@@ -26,18 +27,18 @@ public class BlockSpectreEnergyInjector extends BlockContainerBase
 		this.setSoundType(SoundType.GLASS);
 	}
 	
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
     {
         return false;
     }
 
-    public boolean isFullCube(IBlockState state)
+    public boolean isFullCube(@Nonnull IBlockState state)
     {
         return false;
     }
 	
 	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer)
+	public boolean canRenderInLayer(@Nonnull IBlockState state, @Nonnull BlockRenderLayer layer)
 	{
 		return layer == BlockRenderLayer.CUTOUT || layer == BlockRenderLayer.TRANSLUCENT;
 	}
@@ -49,20 +50,17 @@ public class BlockSpectreEnergyInjector extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		if (!worldIn.isRemote && placer instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) placer;
 			
 			GameProfile profile = player.getGameProfile();
-			
-			if (profile != null)
-			{
-				TileEntitySpectreEnergyInjector injector = (TileEntitySpectreEnergyInjector) worldIn.getTileEntity(pos);
-				
-				injector.setOwner(profile.getId());
-			}
-		}
+
+            TileEntitySpectreEnergyInjector injector = (TileEntitySpectreEnergyInjector) worldIn.getTileEntity(pos);
+
+            injector.setOwner(profile.getId());
+        }
 	}
 }

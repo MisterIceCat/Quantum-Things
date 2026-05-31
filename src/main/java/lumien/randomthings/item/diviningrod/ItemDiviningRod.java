@@ -92,7 +92,7 @@ public class ItemDiviningRod extends ItemBase implements IRTItemColor {
 
 	public static void postInit() {
 		// Check availability for all types
-		types.stream().forEach((t) -> availableTypes.put(t, t.shouldBeAvailable()));
+		types.forEach((t) -> availableTypes.put(t, t.shouldBeAvailable()));
 
 		// Register recipes for all divining rods
 		registerRecipes();
@@ -337,7 +337,7 @@ public class ItemDiviningRod extends ItemBase implements IRTItemColor {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)) {
 			if (rodType != null && availableTypes != null) {
 				Boolean available = availableTypes.get(rodType);
@@ -349,7 +349,7 @@ public class ItemDiviningRod extends ItemBase implements IRTItemColor {
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack stack) {
+	public String getTranslationKey(@Nonnull ItemStack stack) {
 		if (rodType != null && rodType.getName().equals("universal")) {
 			return "item.diviningRodUniversal";
 		}
@@ -357,7 +357,7 @@ public class ItemDiviningRod extends ItemBase implements IRTItemColor {
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
+	public String getItemStackDisplayName(@Nonnull ItemStack stack) {
 		if (rodType == null) {
 			return super.getItemStackDisplayName(stack);
 		}
@@ -399,7 +399,7 @@ public class ItemDiviningRod extends ItemBase implements IRTItemColor {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack) {
+	public boolean hasEffect(@Nonnull ItemStack stack) {
 		EntityPlayer player = Minecraft.getMinecraft().player;
 
 		if (player != null) {

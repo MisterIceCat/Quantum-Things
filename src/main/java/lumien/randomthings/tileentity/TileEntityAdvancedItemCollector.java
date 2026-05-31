@@ -74,11 +74,8 @@ public class TileEntityAdvancedItemCollector extends TileEntityBase implements I
 
 		NBTTagCompound inventoryCompound = compound.getCompoundTag("inventory");
 
-		if (inventoryCompound != null)
-		{
-			InventoryUtil.readInventoryFromCompound(inventoryCompound, filterInventory);
-		}
-	}
+        InventoryUtil.readInventoryFromCompound(inventoryCompound, filterInventory);
+    }
 
 	@Override
 	public void update()

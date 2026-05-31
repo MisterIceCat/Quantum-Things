@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 {
 	public BlockSpectreBlock()
@@ -27,13 +29,13 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion)
+	public float getExplosionResistance(@Nonnull World world, @Nonnull BlockPos pos, Entity exploder, @Nonnull Explosion explosion)
 	{
 		return blockResistance;
 	}
 
 	@Override
-	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	public boolean canEntityDestroy(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Entity entity)
 	{
 		return false;
 	}
@@ -46,26 +48,26 @@ public class BlockSpectreBlock extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean causesSuffocation(IBlockState state)
+	public boolean causesSuffocation(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state)
+	public boolean isNormalCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();

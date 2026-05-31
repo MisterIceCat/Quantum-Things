@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class SlotFilteredItemHandler extends SlotItemHandler
 {
 	Predicate<ItemStack> filterPredicate;
@@ -18,7 +20,7 @@ public class SlotFilteredItemHandler extends SlotItemHandler
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack stack)
+	public boolean isItemValid(@Nonnull ItemStack stack)
 	{
 		return filterPredicate.apply(stack);
 	}

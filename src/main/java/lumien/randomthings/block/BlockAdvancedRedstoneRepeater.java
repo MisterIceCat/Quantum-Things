@@ -9,7 +9,6 @@ import lumien.randomthings.tileentity.TileEntityAdvancedRedstoneRepeater;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRedstoneWire;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockFaceShape;
@@ -34,6 +33,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements INoItem
 {
 	public static final PropertyBool LOCKED = PropertyBool.create("locked");
@@ -57,7 +58,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -67,7 +68,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	}
 
 	@Override
-	public boolean canConnectRedstone(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
+	public boolean canConnectRedstone(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, EnumFacing side)
 	{
 		EnumFacing enumfacing = state.getValue(FACING);
 		return enumfacing == side || enumfacing.getOpposite() == side;
@@ -80,13 +81,13 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return REDSTONE_DIODE_AABB;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -110,12 +111,12 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * grow, etc.)
 	 */
 	@Override
-	public void randomTick(World worldIn, BlockPos pos, IBlockState state, Random random)
+	public void randomTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random random)
 	{
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!this.isLocked(worldIn, pos, state))
 		{
@@ -139,7 +140,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, EnumFacing side)
 	{
 		return side.getAxis() != EnumFacing.Axis.Y;
 	}
@@ -150,13 +151,13 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	}
 
 	@Override
-	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getStrongPower(IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return blockState.getWeakPower(blockAccess, pos, side);
 	}
 
 	@Override
-	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getWeakPower(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		if (!this.isPowered(blockState))
 		{
@@ -274,7 +275,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * based on its state.
 	 */
 	@Override
-	public boolean canProvidePower(IBlockState state)
+	public boolean canProvidePower(@Nonnull IBlockState state)
 	{
 		return true;
 	}
@@ -284,7 +285,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * allow for adjustments to the IBlockstate
 	 */
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
 	}
@@ -294,7 +295,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * logic
 	 */
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		if (this.shouldBePowered(worldIn, pos, state))
 		{
@@ -307,7 +308,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * is set
 	 */
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		this.notifyNeighbors(worldIn, pos, state);
 	}
@@ -327,7 +328,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * hold the state indicated.
 	 */
 	@Override
-	public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state)
+	public void onPlayerDestroy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		if (this.isRepeaterPowered)
 		{
@@ -345,7 +346,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * render
 	 */
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -382,7 +383,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(IBlockState state, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return state.withProperty(LOCKED, Boolean.valueOf(this.isLocked(worldIn, pos, state)));
 	}
@@ -439,13 +440,13 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * Get the Item that this Block should drop when harvested.
 	 */
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 	}
 
 	@Override
-	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
+	public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		return new ItemStack(ModBlocks.unpoweredAdvancedRedstoneRepeater);
 	}
@@ -462,7 +463,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
 		if (this.isRepeaterPowered)
 		{
@@ -488,10 +489,8 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	{
 		IBlockState newState = worldIn.getBlockState(pos);
 
-		if (newState.getBlock() == ModBlocks.poweredAdvancedRedstoneRepeater
-				|| newState.getBlock() == ModBlocks.unpoweredAdvancedRedstoneRepeater)
-			return;
-		else
+		if (newState.getBlock() != ModBlocks.poweredAdvancedRedstoneRepeater
+				&& newState.getBlock() != ModBlocks.unpoweredAdvancedRedstoneRepeater)
 		{
 			super.breakBlock(worldIn, pos, state);
 			this.notifyNeighbors(worldIn, pos, state);
@@ -505,7 +504,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	public IBlockState getStateFromMeta(int meta)
 	{
 		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta)).withProperty(LOCKED,
-				Boolean.valueOf(false));
+                Boolean.FALSE);
 	}
 
 	/**
@@ -522,7 +521,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING, LOCKED });
+		return new BlockStateContainer(this, FACING, LOCKED);
 	}
 
 	@Override
@@ -548,7 +547,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * =====================================
 	 */
 	@Override
-	public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis)
+	public boolean rotateBlock(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EnumFacing axis)
 	{
 		if (super.rotateBlock(world, pos, axis))
 		{
@@ -577,7 +576,7 @@ public class BlockAdvancedRedstoneRepeater extends BlockContainerBase implements
 	 * @return an approximation of the form of the given face
 	 */
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face)
 	{
 		return face == EnumFacing.DOWN ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
 	}

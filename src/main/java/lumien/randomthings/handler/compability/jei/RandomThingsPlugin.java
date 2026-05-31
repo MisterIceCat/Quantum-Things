@@ -25,8 +25,9 @@ import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IStackHelper;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 @JEIPlugin
 public class RandomThingsPlugin implements IModPlugin
@@ -75,18 +76,18 @@ public class RandomThingsPlugin implements IModPlugin
 	}
 
 	@Override
-	public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
+	public void onRuntimeAvailable(@Nonnull IJeiRuntime jeiRuntime)
 	{
 
 	}
 
 	@Override
-	public void registerItemSubtypes(ISubtypeRegistry subtypeRegistry)
+	public void registerItemSubtypes(@Nonnull ISubtypeRegistry subtypeRegistry)
 	{
 	}
 
 	@Override
-	public void registerIngredients(IModIngredientRegistration registry)
+	public void registerIngredients(@Nonnull IModIngredientRegistration registry)
 	{
 	}
 }

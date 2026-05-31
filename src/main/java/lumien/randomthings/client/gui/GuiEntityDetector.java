@@ -135,7 +135,7 @@ public class GuiEntityDetector extends GuiContainerBase
 			}
 		}
 
-		fontRenderer.drawString(I18n.format("tile.entityDetector.name", new Object[0]), 8 + 14, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.entityDetector.name"), 8 + 14, 6, 4210752);
 
 		String radiusX = I18n.format("gui.entityDetector.radiusX", entityDetector.getRangeX());
 		fontRenderer.drawString(radiusX, xSize / 2 - fontRenderer.getStringWidth(radiusX) / 2 - 3, 26, 4210752);

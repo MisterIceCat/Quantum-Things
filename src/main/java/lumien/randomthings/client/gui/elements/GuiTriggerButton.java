@@ -14,6 +14,8 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.config.GuiUtils;
 
+import javax.annotation.Nonnull;
+
 public class GuiTriggerButton extends GuiButton
 {
 	ResourceLocation textureLocation;
@@ -35,7 +37,7 @@ public class GuiTriggerButton extends GuiButton
 	}
 
 	@Override
-	public boolean mousePressed(Minecraft mc, int mouseX, int mouseY)
+	public boolean mousePressed(@Nonnull Minecraft mc, int mouseX, int mouseY)
 	{
 		if (super.mousePressed(mc, mouseX, mouseY))
 		{
@@ -51,7 +53,7 @@ public class GuiTriggerButton extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+	public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
 	{
 		if (this.visible)
 		{
@@ -98,7 +100,7 @@ public class GuiTriggerButton extends GuiButton
 				FontRenderer fontrenderer = mc.fontRenderer;
 
 				String localizedToolTip = I18n.format(tooltip);
-				GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { localizedToolTip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
+				GuiUtils.drawHoveringText(Arrays.asList(localizedToolTip), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, fontrenderer);
 			}
 			catch (Exception e)
 			{

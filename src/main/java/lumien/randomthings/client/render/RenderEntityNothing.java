@@ -7,6 +7,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class RenderEntityNothing extends Render<Entity>
 {
@@ -17,13 +19,13 @@ public class RenderEntityNothing extends Render<Entity>
 	}
 
 	@Override
-	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(@Nonnull Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity)
+	protected ResourceLocation getEntityTexture(@Nonnull Entity entity)
 	{
 		return null;
 	}

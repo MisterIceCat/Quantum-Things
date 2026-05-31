@@ -7,9 +7,6 @@ import net.minecraft.dispenser.BehaviorProjectileDispense;
 import net.minecraft.dispenser.IPosition;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityEgg;
-import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
@@ -19,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ItemWeatherEgg extends ItemBase
 {
@@ -38,7 +37,7 @@ public class ItemWeatherEgg extends ItemBase
 			/**
 			 * Return the projectile entity spawned by this dispense behavior.
 			 */
-			protected IProjectile getProjectileEntity(World worldIn, IPosition position, ItemStack stackIn)
+			protected IProjectile getProjectileEntity(@Nonnull World worldIn, @Nonnull IPosition position, @Nonnull ItemStack stackIn)
 			{
 				return new EntityThrownWeatherEgg(worldIn, position.getX(), position.getY(), position.getZ(), TYPE.values()[stackIn.getItemDamage()]);
 			}
@@ -46,7 +45,7 @@ public class ItemWeatherEgg extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 
@@ -55,7 +54,7 @@ public class ItemWeatherEgg extends ItemBase
 			itemstack.shrink(1);
 		}
 
-		worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		if (!worldIn.isRemote)
 		{
@@ -69,7 +68,7 @@ public class ItemWeatherEgg extends ItemBase
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items)
 	{
 		if (this.isInCreativeTab(tab))
 		{
@@ -81,7 +80,7 @@ public class ItemWeatherEgg extends ItemBase
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack stack)
+	public String getTranslationKey(@Nonnull ItemStack stack)
 	{
 		return super.getTranslationKey(stack) + "_" + TYPE.values()[stack.getItemDamage()].toString().toLowerCase();
 	}

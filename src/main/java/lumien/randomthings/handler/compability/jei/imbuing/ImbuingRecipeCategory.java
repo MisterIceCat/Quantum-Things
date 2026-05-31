@@ -70,13 +70,13 @@ public class ImbuingRecipeCategory implements IRecipeCategory
 	}
 
 	@Override
-	public void drawExtras(Minecraft minecraft)
+	public void drawExtras(@Nonnull Minecraft minecraft)
 	{
 
 	}
 
 	@Override
-	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, IIngredients ingredients)
+	public void setRecipe(@Nonnull IRecipeLayout recipeLayout, @Nonnull IRecipeWrapper recipeWrapper, @Nonnull IIngredients ingredients)
 	{
 		IGuiItemStackGroup itemStacks = recipeLayout.getItemStacks();
 

@@ -4,6 +4,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 
+import javax.annotation.Nonnull;
+
 public class SlotDisplay extends Slot
 {
 	public SlotDisplay(IInventory inventoryIn, int index, int xPosition, int yPosition)
@@ -12,7 +14,7 @@ public class SlotDisplay extends Slot
 	}
 
 	@Override
-	public boolean canTakeStack(EntityPlayer playerIn)
+	public boolean canTakeStack(@Nonnull EntityPlayer playerIn)
 	{
 		return false;
 	}

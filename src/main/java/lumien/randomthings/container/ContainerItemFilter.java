@@ -13,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerItemFilter extends Container
 {
 	EnumHand using;
@@ -50,13 +52,13 @@ public class ContainerItemFilter extends Container
 	}
 
 	@Override
-	public boolean canMergeSlot(ItemStack stack, Slot slotIn)
+	public boolean canMergeSlot(@Nonnull ItemStack stack, @Nonnull Slot slotIn)
 	{
 		return false;
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -92,13 +94,13 @@ public class ContainerItemFilter extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return !filterStack.isEmpty() && playerIn.getHeldItem(using) == filterStack;
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer playerIn)
+	public void onContainerClosed(@Nonnull EntityPlayer playerIn)
 	{
 		repres.writeToItemStack();
 	}

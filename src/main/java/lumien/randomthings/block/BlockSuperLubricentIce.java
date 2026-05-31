@@ -12,6 +12,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockSuperLubricentIce extends BlockBase implements ISuperLubricent
 {
 	protected BlockSuperLubricentIce()
@@ -23,7 +25,7 @@ public class BlockSuperLubricentIce extends BlockBase implements ISuperLubricent
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -42,13 +44,13 @@ public class BlockSuperLubricentIce extends BlockBase implements ISuperLubricent
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos)
+	public boolean isNormalCube(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return true;
 	}
@@ -61,7 +63,7 @@ public class BlockSuperLubricentIce extends BlockBase implements ISuperLubricent
 	}
 
 	@Override
-	public EnumPushReaction getPushReaction(IBlockState state)
+	public EnumPushReaction getPushReaction(@Nonnull IBlockState state)
 	{
 		return EnumPushReaction.NORMAL;
 	}

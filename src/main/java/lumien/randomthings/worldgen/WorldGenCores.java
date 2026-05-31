@@ -90,8 +90,7 @@ public class WorldGenCores implements IWorldGenerator
 				int z = chunkZ * 16 + 8 + random.nextInt(16);
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && target.getY() >= 0
-						&& world.getBlockState(target).getMaterial() != Material.WATER)
+				if (target.getY() >= 0 && world.getBlockState(target).getMaterial() != Material.WATER)
 				{
 					int natureMult = 30;
 					Biome biome = world.getBiome(target);

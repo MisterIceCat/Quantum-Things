@@ -18,6 +18,8 @@ import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 {
 	public ItemBiomeCrystal()
@@ -28,7 +30,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
+	public String getItemStackDisplayName(@Nonnull ItemStack stack)
 	{
 		String myName = super.getItemStackDisplayName(stack);
 
@@ -44,7 +46,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
+	public void addInformation(@Nonnull ItemStack stack, World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced)
 	{
 		super.addInformation(stack, world, tooltip, advanced);
 
@@ -72,7 +74,7 @@ public class ItemBiomeCrystal extends ItemBase implements IRTItemColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack)
+	public boolean hasEffect(@Nonnull ItemStack stack)
 	{
 		Biome biome;
 

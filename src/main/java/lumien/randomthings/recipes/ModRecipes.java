@@ -787,12 +787,9 @@ public class ModRecipes
 										{
 											IBlockState state = targetBlock.getStateFromMeta(targetItemBlock.getMetadata(is));
 
-											if (state != null)
-											{
-												target = state;
-												continue;
-											}
-										}
+                                            target = state;
+                                            continue;
+                                        }
 										catch (Exception e)
 										{
 

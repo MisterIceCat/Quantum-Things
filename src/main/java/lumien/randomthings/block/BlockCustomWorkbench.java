@@ -8,7 +8,6 @@ import lumien.randomthings.container.ContainerCustomWorkbench;
 import lumien.randomthings.tileentity.TileEntityCustomWorkbench;
 import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -43,6 +42,8 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
 
 public class BlockCustomWorkbench extends BlockContainerBase
 {
@@ -95,20 +96,20 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos,
-			EntityPlayer player) {
+	public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos,
+                                  @Nonnull EntityPlayer player) {
 		return createWorkbenchStack(world, pos);
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 		return new ArrayList<>();
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player,
-			boolean willHarvest) {
+	public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player,
+                                   boolean willHarvest) {
 		// If the player is not in creative mode and the block is being harvested, spawn
 		// the workbench item
 		if (!player.capabilities.isCreativeMode && !world.isRemote && willHarvest) {
@@ -120,7 +121,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list)
 	{
 		Set<String> addedVariants = new HashSet<>();
 		for (ItemStack orePlank : OreDictionary.getOres("plankWood")) {
@@ -147,7 +148,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 			return;
 
 		Block woodBlock = Block.getBlockFromItem(woodStack.getItem());
-		if (woodBlock == null || woodBlock == Blocks.AIR)
+		if (woodBlock == Blocks.AIR)
 			return;
 
 		ResourceLocation registryName = woodBlock.getRegistryName();
@@ -168,7 +169,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer)
+	public boolean canRenderInLayer(@Nonnull IBlockState state, @Nonnull BlockRenderLayer layer)
 	{
 		return layer == BlockRenderLayer.SOLID || layer == BlockRenderLayer.TRANSLUCENT;
 	}
@@ -180,7 +181,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}
@@ -192,7 +193,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getExtendedState(@Nonnull IBlockState state, IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		TileEntityCustomWorkbench te = (TileEntityCustomWorkbench) worldIn.getTileEntity(pos);
 		IExtendedBlockState actualState = (IExtendedBlockState) state;
@@ -208,7 +209,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, ItemStack stack)
 	{
 		NBTTagCompound compound;
 
@@ -268,7 +269,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
@@ -317,11 +318,11 @@ public class BlockCustomWorkbench extends BlockContainerBase
 		@Override
 		public ITextComponent getDisplayName()
 		{
-			return new TextComponentTranslation(ModBlocks.customWorkbench.getTranslationKey() + ".name", new Object[0]);
+			return new TextComponentTranslation(ModBlocks.customWorkbench.getTranslationKey() + ".name");
 		}
 
 		@Override
-		public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+		public Container createContainer(@Nonnull InventoryPlayer playerInventory, @Nonnull EntityPlayer playerIn)
 		{
 			return new ContainerCustomWorkbench(playerInventory, this.world, this.position);
 		}

@@ -16,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemPositionFilter extends ItemBase
 {
 	public ItemPositionFilter()
@@ -24,7 +26,7 @@ public class ItemPositionFilter extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack par1ItemStack, World world, List par3List, ITooltipFlag par4)
+	public void addInformation(@Nonnull ItemStack par1ItemStack, World world, @Nonnull List par3List, @Nonnull ITooltipFlag par4)
 	{
 		if (!Visual.HIDE_CORDS)
 		{
@@ -52,7 +54,7 @@ public class ItemPositionFilter extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote)

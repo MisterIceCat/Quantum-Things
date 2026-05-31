@@ -18,6 +18,8 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemBiomeCapsule extends ItemBase implements IRTItemColor {
     public ItemBiomeCapsule() {
         super("biomeCapsule");
@@ -25,12 +27,12 @@ public class ItemBiomeCapsule extends ItemBase implements IRTItemColor {
     }
 
     @Override
-    public boolean hasCustomEntity(ItemStack stack) {
+    public boolean hasCustomEntity(@Nonnull ItemStack stack) {
         return true;
     }
 
     @Override
-    public Entity createEntity(World world, Entity location, ItemStack itemstack) {
+    public Entity createEntity(@Nonnull World world, Entity location, @Nonnull ItemStack itemstack) {
         EntityBiomeCapsule item = new EntityBiomeCapsule(world, location.posX, location.posY,
                 location.posZ, itemstack);
         item.setPickupDelay(40);
@@ -41,22 +43,22 @@ public class ItemBiomeCapsule extends ItemBase implements IRTItemColor {
     }
 
     @Override
-    public boolean showDurabilityBar(ItemStack stack) {
+    public boolean showDurabilityBar(@Nonnull ItemStack stack) {
         return true;
     }
 
     @Override
-    public double getDurabilityForDisplay(ItemStack stack) {
+    public double getDurabilityForDisplay(@Nonnull ItemStack stack) {
         return 1 - (double) getHeldCharges(stack) / Numbers.MAX_BIOME_CAPSULE_CAPACITY;
     }
 
     @Override
-    public int getRGBDurabilityForDisplay(ItemStack stack) {
+    public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack) {
         return Color.GREEN.getRGB();
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack stack) {
+    public String getItemStackDisplayName(@Nonnull ItemStack stack) {
         Biome biome = getBiome(stack);
         String biomeString = "";
         if (biome != null) {
@@ -91,8 +93,8 @@ public class ItemBiomeCapsule extends ItemBase implements IRTItemColor {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, World worldIn, List<String> tooltip,
-            ITooltipFlag flagIn) {
+    public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip,
+                               @Nonnull ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
 
         tooltip.add(
@@ -107,7 +109,7 @@ public class ItemBiomeCapsule extends ItemBase implements IRTItemColor {
     }
 
     @Override
-    public int getEntityLifespan(ItemStack stack, World world) {
+    public int getEntityLifespan(@Nonnull ItemStack stack, @Nonnull World world) {
         return Integer.MAX_VALUE;
     }
 

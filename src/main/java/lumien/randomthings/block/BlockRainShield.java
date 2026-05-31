@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockRainShield extends BlockContainerBase
 {
 	protected static final AxisAlignedBB RAINSHIELD_AABB = new AxisAlignedBB(6F / 16F, 0.0F, 6F / 16F, 10F / 16F, 1.0F, 10F / 16F);
@@ -30,13 +32,13 @@ public class BlockRainShield extends BlockContainerBase
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return RAINSHIELD_AABB;
 	}
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		TileEntityRainShield te = (TileEntityRainShield) worldIn.getTileEntity(pos);
 		te.onBlockAdded(worldIn, pos, state);
@@ -57,33 +59,33 @@ public class BlockRainShield extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos,
-			EnumFacing side) {
+	public boolean isSideSolid(@Nonnull IBlockState base_state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos,
+                               @Nonnull EnumFacing side) {
 		// Rain shield is a thin pole, no sides are solid
 		return false;
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos,
-			EnumFacing face) {
+	public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos,
+                                            @Nonnull EnumFacing face) {
 		// Return UNDEFINED for all faces to prevent torches and other blocks from attaching
 		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
 		super.randomDisplayTick(state, worldIn, pos, rand);
 

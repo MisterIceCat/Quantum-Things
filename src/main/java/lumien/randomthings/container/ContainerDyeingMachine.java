@@ -17,6 +17,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerDyeingMachine extends Container
 {
 	InventoryCrafting ingredients = new InventoryCrafting(this, 2, 1);
@@ -113,7 +115,7 @@ public class ContainerDyeingMachine extends Container
 	}
 
 	@Override
-	public void onContainerClosed(EntityPlayer par1EntityPlayer)
+	public void onContainerClosed(@Nonnull EntityPlayer par1EntityPlayer)
 	{
 		super.onContainerClosed(par1EntityPlayer);
 
@@ -148,13 +150,13 @@ public class ContainerDyeingMachine extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer par1EntityPlayer)
+	public boolean canInteractWith(@Nonnull EntityPlayer par1EntityPlayer)
 	{
 		return this.worldObj.getBlockState(new BlockPos(posX, posY, posZ)).getBlock() != ModBlocks.dyeingMachine ? false : par1EntityPlayer.getDistanceSq(this.posX + 0.5D, this.posY + 0.5D, this.posZ + 0.5D) <= 64.0D;
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -197,7 +199,7 @@ public class ContainerDyeingMachine extends Container
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;

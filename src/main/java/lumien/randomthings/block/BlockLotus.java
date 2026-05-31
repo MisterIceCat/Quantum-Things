@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import lumien.randomthings.config.Lotus;
@@ -11,7 +12,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
@@ -51,19 +51,19 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player)
 	{
 		return new ItemStack(ModItems.lotusSeeds);
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return ModItems.lotusSeeds;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return CROPS_AABB[state.getValue(AGE)];
 	}
@@ -71,7 +71,7 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { AGE });
+		return new BlockStateContainer(this, AGE);
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		if (state.getValue(AGE) == 3)
 		{
@@ -128,14 +128,14 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+	public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state, @Nonnull BlockPos pos, @Nonnull EnumFacing face)
 	{
 		return BlockFaceShape.UNDEFINED;
 	}
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return NULL_AABB;
 	}
@@ -145,13 +145,13 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	 * render
 	 */
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -172,14 +172,14 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos)
 	{
 		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
 		this.checkAndDropBlock(worldIn, pos, state);
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state, @Nonnull Random rand)
 	{
 		int i = state.getValue(AGE);
 
@@ -214,20 +214,20 @@ public class BlockLotus extends BlockBase implements IPlantable, IGrowable
 	}
 
 	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient)
+	public boolean canGrow(@Nonnull World worldIn, @Nonnull BlockPos pos, IBlockState state, boolean isClient)
 	{
 		return state.getValue(AGE) < 3;
 	}
 
 	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public boolean canUseBonemeal(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		return Lotus.CAN_BONEMEAL;
 	}
 
 	// Grow by bonemeal
 	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state)
+	public void grow(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos pos, IBlockState state)
 	{
 		int i = state.getValue(AGE);
 		if (i < 3) {

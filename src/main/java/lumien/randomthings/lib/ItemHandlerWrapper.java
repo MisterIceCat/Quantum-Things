@@ -3,6 +3,8 @@ package lumien.randomthings.lib;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ItemHandlerWrapper implements IItemHandler
 {
 	IItemHandler actualHandler;
@@ -31,7 +33,7 @@ public class ItemHandlerWrapper implements IItemHandler
 	}
 
 	@Override
-	public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+	public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
 	{
 		for (int i = 0; i < insertSlots.length; i++)
 		{

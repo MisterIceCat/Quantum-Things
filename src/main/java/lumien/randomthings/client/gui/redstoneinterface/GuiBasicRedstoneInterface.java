@@ -29,7 +29,7 @@ public class GuiBasicRedstoneInterface extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString(I18n.format("tile.basicRedstoneInterface.name", new Object[0]), 4, 6, 13107220);
+		fontRenderer.drawString(I18n.format("tile.basicRedstoneInterface.name"), 4, 6, 13107220);
 
 		BlockPos target = te.getTarget();
 

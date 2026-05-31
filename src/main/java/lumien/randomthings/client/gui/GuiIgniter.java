@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiIgniter extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/igniter.png");
@@ -40,7 +42,7 @@ public class GuiIgniter extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 

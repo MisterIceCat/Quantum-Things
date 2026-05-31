@@ -82,11 +82,8 @@ public class WorldUtil
 				{
 					RayTraceResult raytraceresult = iblockstate.collisionRayTrace(world, blockpos, vec31, vec32);
 
-					if (raytraceresult != null)
-					{
-						return raytraceresult;
-					}
-				}
+                    return raytraceresult;
+                }
 
 				RayTraceResult raytraceresult2 = null;
 				int k1 = 200;
@@ -217,11 +214,8 @@ public class WorldUtil
 						{
 							RayTraceResult raytraceresult1 = iblockstate1.collisionRayTrace(world, blockpos, vec31, vec32);
 
-							if (raytraceresult1 != null)
-							{
-								return raytraceresult1;
-							}
-						}
+                            return raytraceresult1;
+                        }
 						else
 						{
 							raytraceresult2 = new RayTraceResult(RayTraceResult.Type.MISS, vec31, enumfacing, blockpos);

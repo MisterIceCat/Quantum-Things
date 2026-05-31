@@ -24,6 +24,8 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockBeanStalk extends BlockBase implements IPlantable
 {
 	boolean strongMagic;
@@ -40,13 +42,13 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return STALK_AABB;
 	}
 
 	@Override
-	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn)
+	public void onEntityCollision(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, Entity entityIn)
 	{
 		if (entityIn.onGround || entityIn.collidedVertically)
 			return;
@@ -64,7 +66,7 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 		else if (entityIn.motionY <= -0.1)
 		{
 			Block bottom = entityIn.world.getBlockState(new BlockPos(MathHelper.floor(entityIn.posX), MathHelper.floor(entityIn.posY) - 3, MathHelper.floor(entityIn.posZ))).getBlock();
-			if (bottom == null || bottom == this)
+			if (bottom == this)
 			{ // prevent clipping into block
 				entityIn.setPosition(entityIn.posX, entityIn.posY - speed, entityIn.posZ);
 			}
@@ -73,13 +75,12 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList list)
 	{
-		return;
-	}
+    }
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -130,7 +131,7 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -140,7 +141,7 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block neighborBlock, BlockPos changedPos)
+	public void neighborChanged(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Block neighborBlock, @Nonnull BlockPos changedPos)
 	{
 		this.checkForDrop(worldIn, pos, state);
 	}
@@ -181,13 +182,13 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -200,19 +201,19 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	}
 
 	@Override
-	public boolean isLadder(IBlockState state, IBlockAccess world, BlockPos pos, EntityLivingBase entity)
+	public boolean isLadder(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityLivingBase entity)
 	{
 		return true;
 	}
 
 	@Override
-	public int quantityDropped(Random random)
+	public int quantityDropped(@Nonnull Random random)
 	{
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return null;
 	}

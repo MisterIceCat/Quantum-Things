@@ -16,6 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerPotionVaporizer extends Container
 {
 	public int duration;
@@ -55,7 +57,7 @@ public class ContainerPotionVaporizer extends Container
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -98,7 +100,7 @@ public class ContainerPotionVaporizer extends Container
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int startIndex, int endIndex, boolean reverseDirection)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int startIndex, int endIndex, boolean reverseDirection)
 	{
 		boolean flag1 = false;
 		int k = startIndex;

@@ -9,6 +9,8 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerVoxelProjector extends Container
 {
 	public ContainerVoxelProjector(EntityPlayer player, World world, int x, int y, int z)
@@ -17,7 +19,7 @@ public class ContainerVoxelProjector extends Container
 	}
 
 	@Override
-	public void addListener(IContainerListener listener)
+	public void addListener(@Nonnull IContainerListener listener)
 	{
 		super.addListener(listener);
 
@@ -34,7 +36,7 @@ public class ContainerVoxelProjector extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return true;
 	}

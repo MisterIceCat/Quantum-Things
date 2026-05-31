@@ -7,6 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
 
+import javax.annotation.Nonnull;
+
 public class WorldGenPatches extends WorldGenerator
 {
 	private final Block block;
@@ -17,7 +19,7 @@ public class WorldGenPatches extends WorldGenerator
 	}
 
 	@Override
-	public boolean generate(World worldIn, Random rand, BlockPos position)
+	public boolean generate(@Nonnull World worldIn, @Nonnull Random rand, @Nonnull BlockPos position)
 	{
 		for (int i = 0; i < 64; ++i)
 		{

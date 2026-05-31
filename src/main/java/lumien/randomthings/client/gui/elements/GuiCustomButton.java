@@ -112,7 +112,7 @@ public class GuiCustomButton extends GuiButton
 		if (toolTip != null)
 		{
 			toolTip = I18n.format(toolTip);
-			GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { toolTip }), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRenderer);
+			GuiUtils.drawHoveringText(Arrays.asList(toolTip), mouseX, mouseY, parent.mc.displayWidth, parent.mc.displayHeight, -1, parent.mc.fontRenderer);
 		}
 	}
 

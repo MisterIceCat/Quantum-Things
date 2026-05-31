@@ -30,6 +30,8 @@ import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemDungeonChestGenerator extends ItemBase
 {
 	private static Random rng = new Random();
@@ -43,7 +45,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack par1ItemStack, World world, List par3List, ITooltipFlag par4)
+	public void addInformation(@Nonnull ItemStack par1ItemStack, World world, @Nonnull List par3List, @Nonnull ITooltipFlag par4)
 	{
 		super.addInformation(par1ItemStack, world, par3List, par4);
 
@@ -104,7 +106,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
+	public boolean onEntitySwing(EntityLivingBase entityLiving, @Nonnull ItemStack stack)
 	{
 		if (!entityLiving.world.isRemote && entityLiving.isSneaking())
 		{
@@ -133,7 +135,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World par2World, EntityPlayer par3EntityPlayer, @Nonnull EnumHand hand)
 	{
 		ItemStack par1ItemStack = par3EntityPlayer.getHeldItem(hand);
 		if (!par2World.isRemote && par3EntityPlayer.isSneaking())
@@ -163,7 +165,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote && !playerIn.isSneaking())
@@ -203,18 +205,15 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 								LootTable lootTable = worldIn.getLootTableManager().getLootTableFromLocation(currentTableLocation);
 
-								if (lootTable != null)
-								{
-									worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
+                                worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
 
-									IInventory chestInventory = (IInventory) worldIn.getTileEntity(pos);
+                                IInventory chestInventory = (IInventory) worldIn.getTileEntity(pos);
 
-									LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn).withPlayer(playerIn);
+                                LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn).withPlayer(playerIn);
 
-									lootTable.fillInventory(chestInventory, worldIn.rand, builder.build());
-								}
+                                lootTable.fillInventory(chestInventory, worldIn.rand, builder.build());
 
-							}
+                            }
 						}
 					}
 				}
@@ -225,7 +224,7 @@ public class ItemDungeonChestGenerator extends ItemBase
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
+	public EnumRarity getRarity(@Nonnull ItemStack stack)
 	{
 		return EnumRarity.EPIC;
 	}

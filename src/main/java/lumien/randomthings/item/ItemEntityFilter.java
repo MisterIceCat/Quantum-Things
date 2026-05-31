@@ -55,7 +55,7 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer playerIn, EntityLivingBase target, EnumHand hand)
+	public boolean itemInteractionForEntity(@Nonnull ItemStack stack, EntityPlayer playerIn, @Nonnull EntityLivingBase target, @Nonnull EnumHand hand)
 	{
 		if (!playerIn.world.isRemote)
 		{
@@ -75,7 +75,7 @@ public class ItemEntityFilter extends ItemBase implements IEntityFilterItem
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		ItemStack stack = playerIn.getHeldItem(handIn);
 

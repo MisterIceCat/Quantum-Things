@@ -179,11 +179,8 @@ public class ModConfiguration
 				// Set the static field with the value from config Property
 				// This reads the CURRENT value from the Property object, which may have been
 				// updated by the GUI
-				if (result != null)
-				{
-					f.set(null, result);
-				}
-			}
+                f.set(null, result);
+            }
 			catch (Exception e)
 			{
 				RandomThings.logger.log(Level.ERROR, "Error loading config option: "

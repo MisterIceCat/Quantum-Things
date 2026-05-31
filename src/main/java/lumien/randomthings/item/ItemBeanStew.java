@@ -8,6 +8,8 @@ import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemBeanStew extends ItemFood
 {
 	public ItemBeanStew()
@@ -18,7 +20,7 @@ public class ItemBeanStew extends ItemFood
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase livingEntity)
+	public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase livingEntity)
 	{
 		super.onItemUseFinish(stack, worldIn, livingEntity);
 

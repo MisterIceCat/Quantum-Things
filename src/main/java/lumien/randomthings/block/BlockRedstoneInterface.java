@@ -4,6 +4,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumBlockRenderType;
 
+import javax.annotation.Nonnull;
+
 public abstract class BlockRedstoneInterface extends BlockContainerBase
 {
 	protected BlockRedstoneInterface(String name, Material materialIn)
@@ -12,7 +14,7 @@ public abstract class BlockRedstoneInterface extends BlockContainerBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}

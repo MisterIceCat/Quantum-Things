@@ -17,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class RenderFallingBlockSpecial extends Render<EntityFallingBlockSpecial>
 {
 	public RenderFallingBlockSpecial(RenderManager renderManagerIn)
@@ -72,7 +74,7 @@ public class RenderFallingBlockSpecial extends Render<EntityFallingBlockSpecial>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityFallingBlockSpecial entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntityFallingBlockSpecial entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}

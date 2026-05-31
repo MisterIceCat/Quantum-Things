@@ -17,6 +17,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiProcessingPlate extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/processingPlate.png");
@@ -41,7 +43,7 @@ public class GuiProcessingPlate extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 
@@ -62,8 +64,8 @@ public class GuiProcessingPlate extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRenderer.drawString(I18n.format("Insertion Facing", new Object[0]), 7, 5, 0);
-		fontRenderer.drawString(I18n.format("Extraction Facing", new Object[0]), 7, 38, 0);
+		fontRenderer.drawString(I18n.format("Insertion Facing"), 7, 5, 0);
+		fontRenderer.drawString(I18n.format("Extraction Facing"), 7, 38, 0);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

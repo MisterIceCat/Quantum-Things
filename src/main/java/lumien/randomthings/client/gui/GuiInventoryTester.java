@@ -51,7 +51,7 @@ public class GuiInventoryTester extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRenderer.drawString(I18n.format("tile.inventoryTester.name", new Object[0]), 33, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.inventoryTester.name"), 33, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

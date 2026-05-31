@@ -21,6 +21,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiRedstoneRemoteUse extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/redstoneRemote/redstoneRemoteUse.png");
@@ -40,13 +42,8 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 
 		remoteStack = player.getHeldItemMainhand();
 		using = EnumHand.MAIN_HAND;
-		if (remoteStack == null)
-		{
-			remoteStack = player.getHeldItemOffhand();
-			using = EnumHand.OFF_HAND;
-		}
 
-		if (remoteStack != null && remoteStack.getItem() == ModItems.redstoneRemote)
+        if (remoteStack.getItem() == ModItems.redstoneRemote)
 		{
 			remoteInventory = new InventoryItem("RedstoneRemote", 18, remoteStack);
 		}
@@ -55,14 +52,14 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 
 		for (int i = 0; i < slotButtons.size(); i++)
 		{
 			GuiSlotButton slotButton = slotButtons.get(i);
-			if (slotButton != null && slotButton == button)
+			if (slotButton == button)
 			{
 				MessageRedstoneRemote message = new MessageRedstoneRemote(using, slotButton.id);
 				PacketHandler.instance().sendToServer(message);
@@ -83,16 +80,11 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 			{
 				ItemStack position = remoteInventory.getStackInSlot(i);
 
-				if (position != null && position.getItem() == ModItems.positionFilter)
+				if (position.getItem() == ModItems.positionFilter)
 				{
 					ItemStack camo = remoteInventory.getStackInSlot(i + 9);
 
-					if (camo == null)
-					{
-						camo = position;
-					}
-
-					camo = camo.copy();
+                    camo = camo.copy();
 
 					String name = null;
 					NBTTagCompound stackTagCompound = position.getTagCompound();
@@ -127,7 +119,7 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRenderer.drawString(I18n.format("item.redstoneRemote.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.redstoneRemote.name"), 8, 6, 4210752);
 
 		for (GuiButton guibutton : this.buttonList)
 		{

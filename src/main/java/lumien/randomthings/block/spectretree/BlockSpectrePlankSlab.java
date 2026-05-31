@@ -26,6 +26,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 import java.util.Random;
 
 public class BlockSpectrePlankSlab extends BlockSlab {
@@ -69,22 +71,22 @@ public class BlockSpectrePlankSlab extends BlockSlab {
 	}
 
 	@Override
-	public Comparable<?> getTypeForItem(ItemStack stack) {
+	public Comparable<?> getTypeForItem(@Nonnull ItemStack stack) {
 		return Variant.DEFAULT;
 	}
 
 	@Override
-	public int damageDropped(IBlockState state) {
+	public int damageDropped(@Nonnull IBlockState state) {
 		return 0;
 	}
 
 	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune) {
 		return Item.getItemFromBlock(ModBlocks.spectreSlab);
 	}
 
 	@Override
-	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+	public ItemStack getItem(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state) {
 		return new ItemStack(ModBlocks.spectreSlab);
 	}
 
@@ -103,7 +105,7 @@ public class BlockSpectrePlankSlab extends BlockSlab {
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state) {
+	public int getMetaFromState(@Nonnull IBlockState state) {
 		int i = 0;
 		if (!this.isDouble() && state.getValue(HALF) == EnumBlockHalf.TOP) {
 			i |= 8;
@@ -118,8 +120,8 @@ public class BlockSpectrePlankSlab extends BlockSlab {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+                                        @Nonnull EnumFacing side) {
 		IBlockState neighborState = blockAccess.getBlockState(pos.offset(side));
 		Block neighborBlock = neighborState.getBlock();
 
@@ -153,17 +155,17 @@ public class BlockSpectrePlankSlab extends BlockSlab {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@Nonnull IBlockState state) {
 		return this.isDouble();
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(@Nonnull IBlockState state) {
 		return this.isDouble();
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+	public boolean doesSideBlockRendering(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
 		return false;
 	}
 
@@ -174,7 +176,7 @@ public class BlockSpectrePlankSlab extends BlockSlab {
 	}
 
 	@Override
-	public EnumPushReaction getPushReaction(IBlockState state) {
+	public EnumPushReaction getPushReaction(@Nonnull IBlockState state) {
 		return EnumPushReaction.NORMAL;
 	}
 

@@ -24,8 +24,8 @@ public class GuiAdvancedRedstoneInterface extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString(I18n.format("tile.advancedRedstoneInterface.name", new Object[0]), 8, 6, 4210752);
-		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, this.ySize - 96 + 2, 4210752);
+		fontRenderer.drawString(I18n.format("tile.advancedRedstoneInterface.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, this.ySize - 96 + 2, 4210752);
 	}
 
 	@Override

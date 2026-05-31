@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockRedstoneObserver extends BlockContainerBase
 {
 
@@ -32,13 +34,13 @@ public class BlockRedstoneObserver extends BlockContainerBase
 	}
 
 	@Override
-	public boolean canProvidePower(IBlockState state)
+	public boolean canProvidePower(@Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getWeakPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getWeakPower(@Nonnull IBlockState blockState, IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		TileEntity te = blockAccess.getTileEntity(pos);
 		if (te instanceof TileEntityRedstoneObserver) {
@@ -49,7 +51,7 @@ public class BlockRedstoneObserver extends BlockContainerBase
 	}
 
 	@Override
-	public int getStrongPower(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public int getStrongPower(@Nonnull IBlockState blockState, IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		TileEntity te = blockAccess.getTileEntity(pos);
 		if (te instanceof TileEntityRedstoneObserver) {
@@ -60,12 +62,12 @@ public class BlockRedstoneObserver extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
 			ItemStack equipped = playerIn.getHeldItemMainhand();
-			if (equipped != null && equipped.getItem() == ModItems.redstoneTool)
+			if (equipped.getItem() == ModItems.redstoneTool)
 			{
 				return false;
 			}

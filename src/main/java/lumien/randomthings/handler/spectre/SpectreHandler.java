@@ -16,6 +16,8 @@ import net.minecraft.world.storage.WorldSavedData;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import javax.annotation.Nonnull;
+
 public class SpectreHandler extends WorldSavedData
 {
 	public static final String ID = "SpectreHandler";
@@ -146,7 +148,7 @@ public class SpectreHandler extends WorldSavedData
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound nbt)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound nbt)
 	{
 		NBTTagList cubeTags = new NBTTagList();
 

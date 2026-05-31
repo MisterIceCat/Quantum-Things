@@ -1,24 +1,22 @@
 package lumien.randomthings.entitys;
 
 import io.netty.buffer.ByteBuf;
-import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ItemWeatherEgg;
 import lumien.randomthings.item.ItemWeatherEgg.TYPE;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class EntityThrownWeatherEgg extends EntityThrowable implements IEntityAdditionalSpawnData
 {
@@ -44,7 +42,7 @@ public class EntityThrownWeatherEgg extends EntityThrowable implements IEntityAd
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound compound)
+	public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.writeEntityToNBT(compound);
 
@@ -52,7 +50,7 @@ public class EntityThrownWeatherEgg extends EntityThrowable implements IEntityAd
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound compound)
+	public void readEntityFromNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.readEntityFromNBT(compound);
 

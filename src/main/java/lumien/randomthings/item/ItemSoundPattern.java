@@ -11,6 +11,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemSoundPattern extends ItemBase
 {
 
@@ -20,7 +22,7 @@ public class ItemSoundPattern extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		if (playerIn.isSneaking())
 		{
@@ -56,7 +58,7 @@ public class ItemSoundPattern extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	public void addInformation(ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
 	{
 		NBTTagCompound compound;
 		if (stack.hasTagCompound() && ((compound = stack.getTagCompound()).hasKey("sound")))

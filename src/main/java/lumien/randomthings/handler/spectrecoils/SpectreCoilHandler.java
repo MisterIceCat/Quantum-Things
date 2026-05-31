@@ -38,10 +38,8 @@ public class SpectreCoilHandler extends WorldSavedData
 		// Clamp energy to valid range (0 - maxEnergy) to fix corrupted/negative values
 		if (energy < 0)
 			return 0;
-		if (energy > maxEnergy)
-			return maxEnergy;
-		return energy;
-	}
+        return Math.min(energy, maxEnergy);
+    }
 
 	private int sharedReceiveEnergy(UUID owner, int maxReceive, boolean simulate) {
 		int rawEnergy = coilEntries.containsKey(owner) ? coilEntries.get(owner) : 0;

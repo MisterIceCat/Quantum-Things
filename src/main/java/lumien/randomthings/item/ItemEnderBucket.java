@@ -12,9 +12,7 @@ import lumien.randomthings.util.WorldUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
@@ -27,17 +25,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
-import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStackSimple;
-import net.minecraftforge.items.ItemHandlerHelper;
 
 public class ItemEnderBucket extends ItemBase
 {
@@ -71,7 +65,7 @@ public class ItemEnderBucket extends ItemBase
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(ItemStack stack, NBTTagCompound nbt)
+	public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, NBTTagCompound nbt)
 	{
 		return new FluidHandlerItemStackSimple(stack, 1000);
 	}
@@ -127,7 +121,7 @@ public class ItemEnderBucket extends ItemBase
 			// clicked on a block?
 			RayTraceResult mop = this.rayTrace(world, player, false);
 
-			if (mop == null || mop.typeOfHit != RayTraceResult.Type.BLOCK)
+			if (mop.typeOfHit != RayTraceResult.Type.BLOCK)
 			{
 				return ActionResult.newResult(EnumActionResult.PASS, itemstack);
 			}

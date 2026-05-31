@@ -20,6 +20,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
+import javax.annotation.Nonnull;
+
 public class GuiAdvancedRedstoneTorch extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/advancedRedstoneRepeater.png");
@@ -47,7 +49,7 @@ public class GuiAdvancedRedstoneTorch extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 
@@ -68,8 +70,8 @@ public class GuiAdvancedRedstoneTorch extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRenderer.drawString(I18n.format("Green Strength", new Object[0]), 8, 5, 0);
-		fontRenderer.drawString(I18n.format("Red Strength", new Object[0]), 13, 29, 0);
+		fontRenderer.drawString(I18n.format("Green Strength"), 8, 5, 0);
+		fontRenderer.drawString(I18n.format("Red Strength"), 13, 29, 0);
 
 		String signalStrengthOnString = ((ContainerTE<TileEntityAdvancedRedstoneTorch>) inventorySlots).getTE().getSignalStrengthOn() + "";
 		fontRenderer.drawString(signalStrengthOnString, xSize / 2 - fontRenderer.getStringWidth(signalStrengthOnString) / 2, 40, EnumDyeColor.RED.getColorValue());

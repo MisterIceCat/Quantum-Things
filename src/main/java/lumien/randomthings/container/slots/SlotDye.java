@@ -5,6 +5,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class SlotDye extends Slot
 {
 	public SlotDye(IInventory par1iInventory, int par2, int par3, int par4)
@@ -13,7 +15,7 @@ public class SlotDye extends Slot
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack par1ItemStack)
+	public boolean isItemValid(@Nonnull ItemStack par1ItemStack)
 	{
 		return DyeUtil.isVanillaDye(par1ItemStack);
 	}

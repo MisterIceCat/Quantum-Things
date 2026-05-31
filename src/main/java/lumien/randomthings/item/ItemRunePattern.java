@@ -24,6 +24,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemRunePattern extends ItemBase
 {
 
@@ -35,7 +37,7 @@ public class ItemRunePattern extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
+	public void addInformation(@Nonnull ItemStack stack, World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced)
 	{
 		super.addInformation(stack, world, tooltip, advanced);
 
@@ -83,7 +85,7 @@ public class ItemRunePattern extends ItemBase
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		if (playerIn.isSneaking())
 		{
@@ -94,7 +96,7 @@ public class ItemRunePattern extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(@Nonnull EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		IBlockState state = worldIn.getBlockState(pos);
 		if (worldIn.isAirBlock(pos.up()) && state.isSideSolid(worldIn, pos, EnumFacing.UP))

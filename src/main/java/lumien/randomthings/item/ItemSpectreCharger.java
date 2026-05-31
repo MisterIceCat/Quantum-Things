@@ -5,11 +5,9 @@ import java.util.List;
 
 import baubles.api.BaubleType;
 import baubles.api.IBauble;
-import lumien.randomthings.config.Numbers;
 import lumien.randomthings.config.SpectreCoils;
 import lumien.randomthings.handler.spectrecoils.SpectreCoilHandler;
 import lumien.randomthings.lib.ILuminousItem;
-import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.lib.IRTItemColor;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
@@ -30,6 +28,8 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILuminousItem, IBauble
@@ -63,7 +63,7 @@ public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILumin
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
+	public void addInformation(ItemStack stack, World player, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced)
 	{
 		String display;
 
@@ -93,13 +93,13 @@ public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILumin
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack stack)
+	public String getTranslationKey(@Nonnull ItemStack stack)
 	{
 		return super.getTranslationKey(stack) + "." + TIER.values()[stack.getItemDamage()].name;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		ItemStack me = playerIn.getHeldItem(handIn);
 		if (worldIn.isRemote)
@@ -117,7 +117,7 @@ public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILumin
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void onUpdate(@Nonnull ItemStack stack, World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		if (!worldIn.isRemote && entityIn instanceof EntityPlayerMP)
 		{
@@ -204,7 +204,7 @@ public class ItemSpectreCharger extends ItemBase implements IRTItemColor, ILumin
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items)
 	{
 		if (this.isInCreativeTab(tab))
 		{

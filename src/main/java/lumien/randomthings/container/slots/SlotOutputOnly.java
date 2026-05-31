@@ -4,6 +4,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class SlotOutputOnly extends Slot
 {
 
@@ -13,7 +15,7 @@ public class SlotOutputOnly extends Slot
 	}
 
 	@Override
-	public boolean isItemValid(ItemStack par1ItemStack)
+	public boolean isItemValid(@Nonnull ItemStack par1ItemStack)
 	{
 		return false;
 	}

@@ -2,6 +2,7 @@ package lumien.randomthings.client.render;
 
 import java.awt.Color;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import lumien.randomthings.entitys.EntityEclipsedClock;
@@ -113,10 +114,7 @@ public class RenderEclipsedClock extends Render<EntityEclipsedClock>
 			net.minecraft.client.gui.FontRenderer fontRenderer =
 					this.getFontRendererFromRenderManager();
 			// Try fallback
-			if (fontRenderer == null) {
-				fontRenderer = this.mc.fontRenderer;
-			}
-			if (fontRenderer != null && entity.facingDirection != null) {
+            if (entity.facingDirection != null) {
 				EntityRenderer.drawNameplate(fontRenderer, entity.getStringTargetTime(), (float) x,
 						(float) ((float) y + 0.45), (float) z, 0,
 						(entity.facingDirection.getHorizontalIndex() - 2) % 4 * 90, 0, false,
@@ -130,7 +128,7 @@ public class RenderEclipsedClock extends Render<EntityEclipsedClock>
 	 * unless you call Render.bindEntityTexture.
 	 */
 	@Nullable
-	protected ResourceLocation getEntityTexture(EntityEclipsedClock entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntityEclipsedClock entity)
 	{
 		return null;
 	}
@@ -154,7 +152,7 @@ public class RenderEclipsedClock extends Render<EntityEclipsedClock>
 		GlStateManager.popMatrix();
 	}
 
-	protected void renderName(EntityEclipsedClock entity, double x, double y, double z)
+	protected void renderName(@Nonnull EntityEclipsedClock entity, double x, double y, double z)
 	{
 		if (this.renderManager.pointedEntity == entity)
 		{

@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class PotionBase extends Potion
 {
 	private ResourceLocation icon;
@@ -24,7 +26,7 @@ public class PotionBase extends Potion
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha)
+	public void renderHUDEffect(int x, int y, @Nonnull PotionEffect effect, @Nonnull Minecraft mc, float alpha)
 	{
 		super.renderHUDEffect(x, y, effect, mc, alpha);
 
@@ -36,7 +38,7 @@ public class PotionBase extends Potion
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc)
+	public void renderInventoryEffect(int x, int y, @Nonnull PotionEffect effect, @Nonnull Minecraft mc)
 	{
 		super.renderInventoryEffect(x, y, effect, mc);
 

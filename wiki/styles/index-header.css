@@ -33,7 +33,7 @@ html, body{
   margin-bottom: 8px;
 }
 #desc {
-  margin-bottom: 0px;
+  margin-bottom: 0;
   font-size: 2em;
 }
 #desc > a:link,

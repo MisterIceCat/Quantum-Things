@@ -1,7 +1,6 @@
 package lumien.randomthings.block;
 
 import lumien.randomthings.config.Internals;
-import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.spectre.SpectreCube;
 import lumien.randomthings.handler.spectre.SpectreHandler;
 import lumien.randomthings.item.ItemIngredient;
@@ -10,7 +9,6 @@ import lumien.randomthings.lib.IExplosionImmune;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -29,6 +27,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 {
@@ -50,7 +50,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 		}
 	}
 
-	public static PropertyEnum<BlockSpectreCore.ORIENTATION> orientation = PropertyEnum.<BlockSpectreCore.ORIENTATION>create("orientation", BlockSpectreCore.ORIENTATION.class);
+	public static PropertyEnum<BlockSpectreCore.ORIENTATION> orientation = PropertyEnum.create("orientation", BlockSpectreCore.ORIENTATION.class);
 
 	protected BlockSpectreCore()
 	{
@@ -64,13 +64,13 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list)
 	{
 
 	}
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		ORIENTATION blockPosition;
 
@@ -95,7 +95,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public int getMetaFromState(IBlockState state)
+	public int getMetaFromState(@Nonnull IBlockState state)
 	{
 		return 0;
 	}
@@ -103,11 +103,11 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { orientation });
+		return new BlockStateContainer(this, orientation);
 	}
 
 	@Override
-	public boolean canEntityDestroy(IBlockState state, IBlockAccess world, BlockPos pos, Entity entity)
+	public boolean canEntityDestroy(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull Entity entity)
 	{
 		return false;
 	}
@@ -120,14 +120,14 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state)
+	public boolean isNormalCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -146,7 +146,7 @@ public class BlockSpectreCore extends BlockBase implements IExplosionImmune
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.provider.getDimension() == Internals.SPECTRE_ID)
 		{

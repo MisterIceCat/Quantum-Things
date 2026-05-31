@@ -6,6 +6,8 @@ import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ContainerCustomWorkbench extends ContainerWorkbench
 {
 
@@ -15,7 +17,7 @@ public class ContainerCustomWorkbench extends ContainerWorkbench
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return true;
 	}

@@ -7,7 +7,6 @@ import lumien.randomthings.tileentity.TileEntitySpecialChest;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -37,6 +36,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockSpecialChest extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -53,14 +54,14 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return CHEST_AABB;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(CreativeTabs tab, NonNullList list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList list)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -69,7 +70,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest)
+	public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player, boolean willHarvest)
 	{
 		if (!player.capabilities.isCreativeMode)
 		{
@@ -79,13 +80,13 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockExploded(World world, BlockPos pos, Explosion explosion)
+	public void onBlockExploded(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull Explosion explosion)
 	{
 		Block.spawnAsEntity(world, pos, new ItemStack(this, 1, ((TileEntitySpecialChest) world.getTileEntity(pos)).getChestType()));
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 		List<ItemStack> ret = new java.util.ArrayList<>();
 
@@ -99,31 +100,31 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		EnumFacing enumfacing = EnumFacing
 				.byHorizontalIndex(MathHelper.floor(placer.rotationYaw * 4.0F / 360.0F + 0.5D) & 3).getOpposite();
@@ -158,7 +159,7 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (worldIn.isRemote)
 		{
@@ -194,13 +195,13 @@ public class BlockSpecialChest extends BlockContainerBase
 	}
 
 	@Override
-	public boolean hasComparatorInputOverride(IBlockState state)
+	public boolean hasComparatorInputOverride(@Nonnull IBlockState state)
 	{
 		return true;
 	}
 
 	@Override
-	public int getComparatorInputOverride(IBlockState state, World worldIn, BlockPos pos)
+	public int getComparatorInputOverride(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos)
 	{
 		return Container.calcRedstoneFromInventory(this.getLockableContainer(worldIn, pos));
 	}
@@ -227,12 +228,12 @@ public class BlockSpecialChest extends BlockContainerBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager) {
+	public boolean addDestroyEffects(@Nonnull World world, @Nonnull BlockPos pos, ParticleManager manager) {
 		IBlockState state = Blocks.CHEST.getDefaultState();
 		manager.addBlockDestroyEffects(pos, state);
 		return true;
@@ -241,8 +242,8 @@ public class BlockSpecialChest extends BlockContainerBase
 	// This piece of shit code sucks
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target,
-			ParticleManager manager) {
+	public boolean addHitEffects(@Nonnull IBlockState state, @Nonnull World worldObj, RayTraceResult target,
+                                 @Nonnull ParticleManager manager) {
 		if (target.typeOfHit == RayTraceResult.Type.BLOCK) {
 			BlockPos pos = target.getBlockPos();
 			IBlockState particleState = Blocks.CHEST.getDefaultState();

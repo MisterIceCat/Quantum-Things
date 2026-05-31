@@ -18,6 +18,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiGlobalChatDetector extends GuiContainerBase
 {
 	TileEntityGlobalChatDetector te;
@@ -91,8 +93,8 @@ public class GuiGlobalChatDetector extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int param1, int param2)
 	{
-		fontRenderer.drawString(I18n.format("tile.globalChatDetector.name", new Object[0]), 8, 6, 4210752);
-		this.fontRenderer.drawString(I18n.format("container.inventory", new Object[0]), 8, 75 - 10, 4210752);
+		fontRenderer.drawString(I18n.format("tile.globalChatDetector.name"), 8, 6, 4210752);
+		this.fontRenderer.drawString(I18n.format("container.inventory"), 8, 75 - 10, 4210752);
 	}
 
 	@Override
@@ -103,7 +105,7 @@ public class GuiGlobalChatDetector extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 

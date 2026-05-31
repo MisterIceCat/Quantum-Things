@@ -8,6 +8,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVoxelProjector>
 {
@@ -54,7 +56,7 @@ public class RenderVoxelProjector extends TileEntitySpecialRenderer<TileEntityVo
     }
 
 	@Override
-	public boolean isGlobalRenderer(TileEntityVoxelProjector voxelProjector)
+	public boolean isGlobalRenderer(@Nonnull TileEntityVoxelProjector voxelProjector)
 	{
 		return true;
 	}

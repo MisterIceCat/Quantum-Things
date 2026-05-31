@@ -8,6 +8,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockCreativePlayerInterface extends BlockContainerBase
 {
 	protected BlockCreativePlayerInterface()
@@ -25,7 +27,7 @@ public class BlockCreativePlayerInterface extends BlockContainerBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}

@@ -89,13 +89,15 @@ public class RenderBlockDiaphanous extends TileEntitySpecialRenderer<TileEntityB
 		}
 		else
 		{
+			float distanceAlphaBase = (float) Math.cos(Math.PI * Math.min(Math.max(0, distance - 8), 25) / 25);
+			float alphaValue = -0.5F * (distanceAlphaBase - 1);
 			if (te.isInverted())
 			{
-				alpha = 1 - (-1F / 2 * ((float) Math.cos(Math.PI * Math.min(Math.max(0, distance - 8), 25) / 25) - 1));
+				alpha = 1 - alphaValue;
 			}
 			else
 			{
-				alpha = -1F / 2 * ((float) Math.cos(Math.PI * Math.min(Math.max(0, distance - 8), 25) / 25) - 1);
+				alpha = alphaValue;
 			}
 		}
 

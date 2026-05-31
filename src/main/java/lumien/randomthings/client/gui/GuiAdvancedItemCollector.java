@@ -16,6 +16,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiAdvancedItemCollector extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/advancedItemCollector.png");
@@ -41,7 +43,7 @@ public class GuiAdvancedItemCollector extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 
@@ -89,7 +91,7 @@ public class GuiAdvancedItemCollector extends GuiContainerBase
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		fontRenderer.drawString(I18n.format("tile.advancedItemCollector.name", new Object[0]), 8 + 14, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.advancedItemCollector.name"), 8 + 14, 6, 4210752);
 
 		String radiusX = I18n.format("gui.entityDetector.radiusX", advancedItemCollector.getRangeX());
 		fontRenderer.drawString(radiusX, xSize / 2 - fontRenderer.getStringWidth(radiusX) / 2 - 3, 26, 4210752);

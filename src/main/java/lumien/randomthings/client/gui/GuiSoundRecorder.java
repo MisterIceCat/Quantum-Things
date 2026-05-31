@@ -38,7 +38,7 @@ public class GuiSoundRecorder extends GuiContainerBase implements IStringCallbac
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString(I18n.format("item.soundRecorder.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.soundRecorder.name"), 8, 6, 4210752);
 		fontRenderer.drawString(I18n.format("container.inventory"), 15, this.ySize - 96 + 2, 4210752);
 	}
 

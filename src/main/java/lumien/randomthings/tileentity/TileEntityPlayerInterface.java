@@ -18,6 +18,8 @@ import net.minecraftforge.items.wrapper.EmptyHandler;
 import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.items.wrapper.RangedWrapper;
 
+import javax.annotation.Nonnull;
+
 public class TileEntityPlayerInterface extends TileEntityBase
 {
 	UUID playerUUID;
@@ -41,7 +43,7 @@ public class TileEntityPlayerInterface extends TileEntityBase
 		else
 		{
 			EntityPlayer player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(playerUUID);
-			return player != null ? new PlayerInventoryWrapper((ContainerPlayer) player.inventoryContainer, player.inventory) : null;
+			return new PlayerInventoryWrapper((ContainerPlayer) player.inventoryContainer, player.inventory);
 		}
 	}
 
@@ -181,7 +183,7 @@ public class TileEntityPlayerInterface extends TileEntityBase
 		}
 
 		@Override
-		public void setInventorySlotContents(int index, ItemStack stack)
+		public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
 		{
 			inventory.setInventorySlotContents(index, stack);
 		}
@@ -199,25 +201,25 @@ public class TileEntityPlayerInterface extends TileEntityBase
 		}
 
 		@Override
-		public boolean isUsableByPlayer(EntityPlayer player)
+		public boolean isUsableByPlayer(@Nonnull EntityPlayer player)
 		{
 			return inventory.isUsableByPlayer(player);
 		}
 
 		@Override
-		public void openInventory(EntityPlayer player)
+		public void openInventory(@Nonnull EntityPlayer player)
 		{
 			inventory.openInventory(player);
 		}
 
 		@Override
-		public void closeInventory(EntityPlayer player)
+		public void closeInventory(@Nonnull EntityPlayer player)
 		{
 			inventory.closeInventory(player);
 		}
 
 		@Override
-		public boolean isItemValidForSlot(int index, ItemStack stack)
+		public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
 		{
 			return container.getSlotFromInventory(inventory, index).isItemValid(stack);
 		}

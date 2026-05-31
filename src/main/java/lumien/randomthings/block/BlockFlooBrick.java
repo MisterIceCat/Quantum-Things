@@ -16,6 +16,8 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockFlooBrick extends BlockContainerBase implements ILuminousBlock
 {
 
@@ -29,7 +31,7 @@ public class BlockFlooBrick extends BlockContainerBase implements ILuminousBlock
 	}
 
 	@Override
-	public int quantityDropped(Random random)
+	public int quantityDropped(@Nonnull Random random)
 	{
 		return 0;
 	}
@@ -41,13 +43,13 @@ public class BlockFlooBrick extends BlockContainerBase implements ILuminousBlock
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced)
+	public void addInformation(@Nonnull ItemStack stack, World player, List<String> tooltip, @Nonnull ITooltipFlag advanced)
 	{
 		tooltip.add("�cINTERNAL BLOCK, DO NOT USE!");
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs itemIn, NonNullList<ItemStack> items)
+	public void getSubBlocks(@Nonnull CreativeTabs itemIn, @Nonnull NonNullList<ItemStack> items)
 	{
 
 	}

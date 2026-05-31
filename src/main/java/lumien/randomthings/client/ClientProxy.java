@@ -1,6 +1,5 @@
 package lumien.randomthings.client;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,7 +12,6 @@ import lumien.randomthings.handler.redstone.IRedstoneConnectionProvider;
 import org.lwjgl.opengl.GL11;
 
 import lumien.randomthings.CommonProxy;
-import lumien.randomthings.asm.MCPNames;
 import lumien.randomthings.client.particles.ParticleFlooFlame;
 import lumien.randomthings.client.models.ItemModels;
 import lumien.randomthings.client.models.blocks.BlockModels;
@@ -89,6 +87,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 
+import javax.annotation.Nonnull;
+
 public class ClientProxy extends CommonProxy
 {
 	
@@ -113,7 +113,7 @@ public class ClientProxy extends CommonProxy
 				Minecraft.getMinecraft().getBlockColors().registerBlockColorHandler(new IBlockColor()
 				{
 					@Override
-					public int colorMultiplier(IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
+					public int colorMultiplier(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos, int tintIndex)
 					{
 						return blockColor.colorMultiplier(state, worldIn, pos, tintIndex);
 					}
@@ -129,7 +129,7 @@ public class ClientProxy extends CommonProxy
 					itemColors.registerItemColorHandler(new IItemColor()
 					{
 						@Override
-						public int colorMultiplier(ItemStack stack, int tintIndex)
+						public int colorMultiplier(@Nonnull ItemStack stack, int tintIndex)
 						{
 							return itemColor.getColorFromItemstack(stack, tintIndex);
 						}
@@ -163,7 +163,7 @@ public class ClientProxy extends CommonProxy
 		{
 			NetworkPlayerInfo info = iterator.next();
 
-			if (info.getGameProfile().getName().toLowerCase().equals(username.toLowerCase()))
+			if (info.getGameProfile().getName().equalsIgnoreCase(username))
 			{
 				return true;
 			}
@@ -207,17 +207,14 @@ public class ClientProxy extends CommonProxy
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		ItemStack itemStack = player.getHeldItemMainhand();
-		if (itemStack != null)
-		{
-			Item item = itemStack.getItem();
+        Item item = itemStack.getItem();
 
-			if (item == ModItems.redstoneTool)
-			{
-				drawInterfaceLines(player, partialTicks);
-				drawLinkingCube(itemStack, player, partialTicks);
-			}
-		}
-	}
+        if (item == ModItems.redstoneTool)
+        {
+            drawInterfaceLines(player, partialTicks);
+            drawLinkingCube(itemStack, player, partialTicks);
+        }
+    }
 
 	private void drawLinkingCube(ItemStack itemStack, EntityPlayerSP player, float partialTicks)
 	{

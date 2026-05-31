@@ -13,6 +13,8 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockLapisLamp extends BlockBase
 {
 	protected BlockLapisLamp()
@@ -25,7 +27,7 @@ public class BlockLapisLamp extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
 		if (worldIn.isRemote && worldIn.getLight(pos) == 0)
 		{
@@ -34,7 +36,7 @@ public class BlockLapisLamp extends BlockBase
 	}
 
 	@Override
-	public int getLightValue(IBlockState state, IBlockAccess world, BlockPos pos)
+	public int getLightValue(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		if (state.getBlock() != this)
 		{

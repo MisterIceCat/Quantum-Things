@@ -26,7 +26,7 @@ public class BlockEnderAnchor extends BlockContainerBase
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
 	{
 		TileEntity te = worldIn.getTileEntity(pos);
-		if (te != null && te instanceof TileEntityEnderAnchor)
+		if (te instanceof TileEntityEnderAnchor)
 		{
 			((TileEntityEnderAnchor) te).discardTicket();
 		}

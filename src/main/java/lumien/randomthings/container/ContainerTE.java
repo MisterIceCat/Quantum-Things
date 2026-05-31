@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public abstract class ContainerTE<E extends TileEntity> extends Container
 {
 	E te;
@@ -40,7 +42,7 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 	}
 
 	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(@Nonnull EntityPlayer playerIn)
 	{
 		return te != null
 				&& !te.isInvalid()
@@ -103,7 +105,7 @@ public abstract class ContainerTE<E extends TileEntity> extends Container
 	}
 
 	@Override
-	public void addListener(IContainerListener listener)
+	public void addListener(@Nonnull IContainerListener listener)
 	{
 		super.addListener(listener);
 	}

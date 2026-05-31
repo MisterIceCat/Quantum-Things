@@ -90,8 +90,8 @@ public class TileEntityIgniter extends TileEntityBase implements IRedstoneSensit
 				world.setBlockState(pos.offset(facing), Blocks.FIRE.getDefaultState());
 			}
 		}
-		else
-			return;
+		else {
+        }
 	}
 
 	public void rotateMode()

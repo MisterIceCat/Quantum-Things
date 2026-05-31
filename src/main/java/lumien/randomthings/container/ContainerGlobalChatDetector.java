@@ -11,6 +11,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerGlobalChatDetector extends ContainerTE<TileEntityGlobalChatDetector>
 {
 	IItemHandler itemHandler;
@@ -24,7 +26,7 @@ public class ContainerGlobalChatDetector extends ContainerTE<TileEntityGlobalCha
 			this.addSlotToContainer(new SlotItemHandler(itemHandler, i, 8 + i * 18, 40)
 			{
 				@Override
-				public boolean isItemValid(ItemStack stack)
+				public boolean isItemValid(@Nonnull ItemStack stack)
 				{
 					return stack.getItem() == ModItems.idCard && super.isItemValid(stack);
 				}
@@ -48,7 +50,7 @@ public class ContainerGlobalChatDetector extends ContainerTE<TileEntityGlobalCha
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -65,7 +67,7 @@ public class ContainerGlobalChatDetector extends ContainerTE<TileEntityGlobalCha
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (par2 > 8 && !this.mergeItemStack(itemstack1, 0, 9, false))
+			else if (!this.mergeItemStack(itemstack1, 0, 9, false))
 			{
 				return ItemStack.EMPTY;
 			}
@@ -91,7 +93,7 @@ public class ContainerGlobalChatDetector extends ContainerTE<TileEntityGlobalCha
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;

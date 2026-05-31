@@ -10,6 +10,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemPickaxe;
 
+import javax.annotation.Nonnull;
+
 public class ItemSpectrePickaxe extends ItemPickaxe
 {
 	public static UUID MOD_UUID = UUID.nameUUIDFromBytes("SoectreRangeModifier".getBytes());
@@ -22,7 +24,7 @@ public class ItemSpectrePickaxe extends ItemPickaxe
 	}
 
 	@Override
-	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot)
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(@Nonnull EntityEquipmentSlot equipmentSlot)
 	{
 		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 

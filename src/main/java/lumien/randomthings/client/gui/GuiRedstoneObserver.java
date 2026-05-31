@@ -34,7 +34,7 @@ public class GuiRedstoneObserver extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString(I18n.format("tile.redstoneObserver.name", new Object[0]), 4, 6, 13107220);
+		fontRenderer.drawString(I18n.format("tile.redstoneObserver.name"), 4, 6, 13107220);
 
 		if (te == null) {
 			return;

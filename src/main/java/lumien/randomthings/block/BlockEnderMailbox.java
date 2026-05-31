@@ -12,7 +12,6 @@ import lumien.randomthings.lib.GuiIds;
 import lumien.randomthings.tileentity.TileEntityEnderMailbox;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -36,6 +35,8 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockEnderMailbox extends BlockContainerBase
 {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -55,7 +56,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		EnumFacing facing = state.getValue(FACING);
 
@@ -70,7 +71,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public void randomDisplayTick(IBlockState state, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull Random rand)
 	{
 		if (state.getValue(ACTIVE))
 		{
@@ -95,19 +96,19 @@ public class BlockEnderMailbox extends BlockContainerBase
 					d5 = rand.nextFloat() * 2.0F * j;
 				}
 
-				worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5, new int[0]);
+				worldIn.spawnParticle(EnumParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
 			}
 		}
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos)
+	public IBlockState getExtendedState(IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return state.withProperty(ACTIVE, true);
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -180,13 +181,13 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -224,18 +225,18 @@ public class BlockEnderMailbox extends BlockContainerBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING, ACTIVE });
+		return new BlockStateContainer(this, FACING, ACTIVE);
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
 	{
 		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite())
 				.withProperty(ACTIVE, false);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, IBlockState state, EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		worldIn.setBlockState(pos,
 				state.withProperty(FACING, placer.getHorizontalFacing().getOpposite()).withProperty(ACTIVE, false),
@@ -256,7 +257,7 @@ public class BlockEnderMailbox extends BlockContainerBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}

@@ -38,6 +38,8 @@ import net.minecraftforge.common.property.IUnlistedProperty;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, ILuminousBlock, INoItem
 {
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0D, 0.0D, 0D, 1D, 0.005D, 1D);
@@ -53,25 +55,25 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+	public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player)
 	{
 		return ItemStack.EMPTY;
 	}
 
 	@Override
-	public boolean addHitEffects(IBlockState state, World worldObj, RayTraceResult target, ParticleManager manager)
+	public boolean addHitEffects(@Nonnull IBlockState state, @Nonnull World worldObj, @Nonnull RayTraceResult target, @Nonnull ParticleManager manager)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean addDestroyEffects(World world, BlockPos pos, ParticleManager manager)
+	public boolean addDestroyEffects(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull ParticleManager manager)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean addLandingEffects(IBlockState state, WorldServer worldObj, BlockPos blockPosition, IBlockState iblockstate, EntityLivingBase entity, int numberOfParticles)
+	public boolean addLandingEffects(@Nonnull IBlockState state, @Nonnull WorldServer worldObj, @Nonnull BlockPos blockPosition, @Nonnull IBlockState iblockstate, @Nonnull EntityLivingBase entity, int numberOfParticles)
 	{
 		return true;
 	}
@@ -87,7 +89,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list)
 	{
 
 	}
@@ -125,7 +127,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public int quantityDropped(IBlockState state, int fortune, Random random)
+	public int quantityDropped(@Nonnull IBlockState state, int fortune, @Nonnull Random random)
 	{
 		return 0;
 	}
@@ -213,8 +215,8 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player,
-			boolean willHarvest) {
+	public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos, EntityPlayer player,
+                                   boolean willHarvest) {
 		// In creative mode, break only one piece at a time instead of all pieces
 		if (player.capabilities.isCreativeMode && !world.isRemote) {
 			if (breakSingleRunePiece(world, pos, player)) {
@@ -229,7 +231,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public void onBlockClicked(World worldIn, BlockPos pos, EntityPlayer playerIn) {
+	public void onBlockClicked(World worldIn, @Nonnull BlockPos pos, @Nonnull EntityPlayer playerIn) {
 		if (!worldIn.isRemote) {
 			breakSingleRunePiece(worldIn, pos, playerIn);
 		}
@@ -262,26 +264,26 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return AABB;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+	public AxisAlignedBB getSelectedBoundingBox(@Nonnull IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos)
 	{
 		return AABB.offset(pos);
 	}
@@ -293,7 +295,7 @@ public class BlockRuneBase extends BlockContainerBase implements IRTBlockColor, 
 	}
 
 	@Override
-	public IBlockState getExtendedState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getExtendedState(@Nonnull IBlockState state, IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		TileEntityRuneBase te = (TileEntityRuneBase) worldIn.getTileEntity(pos);
 		IExtendedBlockState actualState = (IExtendedBlockState) state;

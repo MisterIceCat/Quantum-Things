@@ -1,35 +1,24 @@
 package lumien.randomthings.client.render;
 
 import java.awt.Color;
-import java.util.Random;
 
-import lumien.randomthings.client.ClientProxy;
 import lumien.randomthings.client.render.magiccircles.ColorFunctions;
 import lumien.randomthings.client.render.magiccircles.IColorFunction;
-import lumien.randomthings.entitys.EntityGoldenChicken;
 import lumien.randomthings.entitys.EntityTimeAccelerator;
-import lumien.randomthings.entitys.EntityWeatherCloud;
 import lumien.randomthings.handler.RTEventHandler;
-import lumien.randomthings.item.ItemWeatherEgg;
 import lumien.randomthings.util.client.MKRRenderUtil;
 import lumien.randomthings.util.client.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.ModelChicken;
-import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.passive.EntityChicken;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderTimeAccelerator extends Render<EntityTimeAccelerator>
@@ -145,7 +134,7 @@ public class RenderTimeAccelerator extends Render<EntityTimeAccelerator>
 	}
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityTimeAccelerator entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntityTimeAccelerator entity)
 	{
 		return null;
 	}

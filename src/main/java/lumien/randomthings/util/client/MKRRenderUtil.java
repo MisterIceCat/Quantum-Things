@@ -57,7 +57,7 @@ public class MKRRenderUtil
 
 			while (length > 0.1F)
 			{
-				float nextPoint = (float) (rng.nextFloat() * 0.05F + 0.05F);
+				float nextPoint = rng.nextFloat() * 0.05F + 0.05F;
 				passedLength += nextPoint;
 
 				Vector3f nextPointVec = Vector3f.add(vec1, (Vector3f) new Vector3f(dif).normalise(null).scale(passedLength), null);
@@ -367,7 +367,7 @@ public class MKRRenderUtil
 			GlStateManager.glBegin(GL11.GL_QUADS);
 
 			int charMod = new Random((long) (q * 1000) + RTEventHandler.clientAnimationCounter / 15).nextInt(25);
-			float uXMod = (float) (1F / 256F * 10F * charMod);
+			float uXMod = 1F / 256F * 10F * charMod;
 			float uYMod = brokenNess * 1 / 256F * 9;
 
 			GlStateManager.glTexCoord2f(uXMod, uYMod);

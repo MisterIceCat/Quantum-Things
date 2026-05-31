@@ -15,6 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 
+import javax.annotation.Nonnull;
+
 public class ItemLotusSeeds extends ItemBase implements IPlantable
 {
 
@@ -24,7 +26,7 @@ public class ItemLotusSeeds extends ItemBase implements IPlantable
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack itemstack = player.getHeldItem(hand);
 		net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);

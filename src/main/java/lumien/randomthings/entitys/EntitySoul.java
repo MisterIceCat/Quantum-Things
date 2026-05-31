@@ -14,6 +14,8 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 {
 	String playerName;
@@ -64,7 +66,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public void applyEntityCollision(Entity entityIn)
+	public void applyEntityCollision(@Nonnull Entity entityIn)
 	{
 
 	}
@@ -88,7 +90,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public final boolean processInitialInteract(EntityPlayer player, EnumHand hand)
+	public final boolean processInitialInteract(@Nonnull EntityPlayer player, @Nonnull EnumHand hand)
 	{
 		return false;
 	}
@@ -100,7 +102,7 @@ public class EntitySoul extends Entity implements IEntityAdditionalSpawnData
 	}
 
 	@Override
-	public AxisAlignedBB getCollisionBox(Entity entityIn)
+	public AxisAlignedBB getCollisionBox(@Nonnull Entity entityIn)
 	{
 		return null;
 	}

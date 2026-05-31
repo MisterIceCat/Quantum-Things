@@ -72,7 +72,7 @@ public class GuiPotionVaporizer extends GuiContainerBase
 	{
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 
-		fontRenderer.drawString(I18n.format("tile.potionVaporizer.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.potionVaporizer.name"), 8, 6, 4210752);
 
 		// Draw Active Potion
 
@@ -100,20 +100,20 @@ public class GuiPotionVaporizer extends GuiContainerBase
 					}
 					potion.renderInventoryEffect(i, j, new PotionEffect(potion, container.durationLeft), mc);
 
-					String s1 = I18n.format(potion.getName(), new Object[0]);
+					String s1 = I18n.format(potion.getName());
 
 					int amplifier = container.amplifier;
 					if (amplifier == 1)
 					{
-						s1 = s1 + " " + I18n.format("enchantment.level.2", new Object[0]);
+						s1 = s1 + " " + I18n.format("enchantment.level.2");
 					}
 					else if (amplifier == 2)
 					{
-						s1 = s1 + " " + I18n.format("enchantment.level.3", new Object[0]);
+						s1 = s1 + " " + I18n.format("enchantment.level.3");
 					}
 					else if (amplifier == 3)
 					{
-						s1 = s1 + " " + I18n.format("enchantment.level.4", new Object[0]);
+						s1 = s1 + " " + I18n.format("enchantment.level.4");
 					}
 
 					this.fontRenderer.drawStringWithShadow(s1, i + 10 + 18, j + 6, 16777215);

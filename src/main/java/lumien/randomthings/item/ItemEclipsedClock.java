@@ -1,13 +1,11 @@
 package lumien.randomthings.item;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import lumien.randomthings.entitys.EntityEclipsedClock;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItemFrame;
-import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
@@ -16,7 +14,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -31,7 +28,7 @@ public class ItemEclipsedClock extends ItemBase
 		this.addPropertyOverride(new ResourceLocation("time"), new IItemPropertyGetter()
 		{
 			@SideOnly(Side.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+			public float apply(@Nonnull ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
 			{
 				int time = 6000;
 				
@@ -60,7 +57,7 @@ public class ItemEclipsedClock extends ItemBase
 		});
 	}
 
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer player, @Nonnull World worldIn, BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
 		ItemStack itemstack = player.getHeldItem(hand);
 		BlockPos blockpos = pos.offset(facing);
@@ -69,7 +66,7 @@ public class ItemEclipsedClock extends ItemBase
 		{
 			EntityHanging entityhanging = new EntityEclipsedClock(worldIn, blockpos, facing);
 
-			if (entityhanging != null && entityhanging.onValidSurface())
+			if (entityhanging.onValidSurface())
 			{
 				if (!worldIn.isRemote)
 				{

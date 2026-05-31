@@ -84,17 +84,11 @@ nav a:hover {
 
 #container_content blockquote {
     border-left: 4px solid #9c53e8;
-    padding-left: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 1em 20px;
     font-style: italic;
     color: #ac92be;
     background-color: #211927;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-right: 15px;
+    padding: 10px 15px 10px 20px;
 }
 
 #container_content table {

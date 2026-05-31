@@ -8,7 +8,6 @@ import java.util.Random;
 import lumien.randomthings.item.block.ItemBlockOfSticks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -23,6 +22,8 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockBlockOfSticks extends BlockBase
 {
@@ -39,7 +40,7 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < 2; i++)
 		{
@@ -67,11 +68,11 @@ public class BlockBlockOfSticks extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { RETURNING });
+		return new BlockStateContainer(this, RETURNING);
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -80,13 +81,13 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -128,7 +129,7 @@ public class BlockBlockOfSticks extends BlockBase
 	}
 
 	@Override
-	public boolean causesSuffocation(IBlockState state)
+	public boolean causesSuffocation(@Nonnull IBlockState state)
 	{
 		return false;
 	}

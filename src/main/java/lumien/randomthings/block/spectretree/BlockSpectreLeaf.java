@@ -14,7 +14,6 @@ import lumien.randomthings.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -81,7 +80,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { CHECK_DECAY, DECAYABLE });
+		return new BlockStateContainer(this, CHECK_DECAY, DECAYABLE);
 	}
 
 	/**
@@ -96,7 +95,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	public void breakBlock(World worldIn, BlockPos pos, @Nonnull IBlockState state)
 	{
 		int i = 1;
 		int j = i + 1;
@@ -126,7 +125,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote)
 		{
@@ -246,14 +245,14 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState stateIn, World worldIn, BlockPos pos, @Nonnull Random rand)
 	{
 		if (worldIn.isRainingAt(pos.up()) && !worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && rand.nextInt(15) == 1)
 		{
 			double d0 = pos.getX() + rand.nextFloat();
 			double d1 = pos.getY() - 0.05D;
 			double d2 = pos.getZ() + rand.nextFloat();
-			worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
+			worldIn.spawnParticle(EnumParticleTypes.DRIP_WATER, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		}
 	}
 
@@ -271,7 +270,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	 */
 	@Override
 	@Nullable
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	public Item getItemDropped(@Nonnull IBlockState state, @Nonnull Random rand, int fortune)
 	{
 		return Item.getItemFromBlock(ModBlocks.spectreSapling);
 	}
@@ -280,7 +279,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	 * Spawns this Block's drops into the World as EntityItems.
 	 */
 	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+	public void dropBlockAsItemWithChance(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, float chance, int fortune)
 	{
 		super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
 	}
@@ -302,7 +301,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -315,25 +314,25 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	}
 
 	@Override
-	public boolean causesSuffocation(IBlockState state)
+	public boolean causesSuffocation(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isShearable(ItemStack item, IBlockAccess world, BlockPos pos)
+	public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
+	public boolean isLeaves(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public void beginLeavesDecay(IBlockState state, World world, BlockPos pos)
+	public void beginLeavesDecay(IBlockState state, @Nonnull World world, @Nonnull BlockPos pos)
 	{
 		if (!(Boolean) state.getValue(CHECK_DECAY))
 		{
@@ -342,7 +341,7 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 	}
 
 	@Override
-	public java.util.List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+	public java.util.List<ItemStack> getDrops(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull IBlockState state, int fortune)
 	{
 		java.util.List<ItemStack> ret = new java.util.ArrayList<>();
 		Random rand = world instanceof World ? ((World) world).rand : new Random();
@@ -365,13 +364,13 @@ public class BlockSpectreLeaf extends Block implements net.minecraftforge.common
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, @Nonnull IBlockAccess blockAccess, @Nonnull BlockPos pos, @Nonnull EnumFacing side)
 	{
 		return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
 	}
 
 	@Override
-	public List<ItemStack> onSheared(ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
+	public List<ItemStack> onSheared(@Nonnull ItemStack item, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
 	{
 		return java.util.Arrays.asList(new ItemStack(this));
 	}

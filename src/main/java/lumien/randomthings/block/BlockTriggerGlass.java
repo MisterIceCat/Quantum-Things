@@ -6,7 +6,6 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -19,6 +18,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class BlockTriggerGlass extends BlockBase
 {
@@ -35,13 +36,13 @@ public class BlockTriggerGlass extends BlockBase
 	}
 
 	@Override
-	public boolean isReplaceable(IBlockAccess worldIn, BlockPos pos)
+	public boolean isReplaceable(@Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return false;
 	}
 
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	public void neighborChanged(@Nonnull IBlockState state, World worldIn, @Nonnull BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos fromPos)
 	{
 		if (!worldIn.isRemote && !state.getValue(TRIGGERED))
 		{
@@ -58,7 +59,7 @@ public class BlockTriggerGlass extends BlockBase
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (!worldIn.isRemote && state.getValue(TRIGGERED))
 		{
@@ -81,23 +82,23 @@ public class BlockTriggerGlass extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { TRIGGERED });
+		return new BlockStateContainer(this, TRIGGERED);
 	}
 
 	@Override
-	public Material getMaterial(IBlockState state)
+	public Material getMaterial(@Nonnull IBlockState state)
 	{
 		return Material.GROUND;
 	}
 
 	@Override
-	public boolean isAir(IBlockState state, IBlockAccess world, BlockPos pos)
+	public boolean isAir(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return false;
 	}
 
 	@Override
-	public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState)
+	public void addCollisionBoxToList(IBlockState state, @Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull AxisAlignedBB entityBox, @Nonnull List<AxisAlignedBB> collidingBoxes, Entity entityIn, boolean isActualState)
 	{
 		if (!state.getValue(TRIGGERED))
 		{
@@ -107,7 +108,7 @@ public class BlockTriggerGlass extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -133,13 +134,13 @@ public class BlockTriggerGlass extends BlockBase
 	}
 
 	@Override
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -151,7 +152,7 @@ public class BlockTriggerGlass extends BlockBase
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state)
+	public boolean isNormalCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}

@@ -17,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.storage.WorldSavedData;
 
+import javax.annotation.Nonnull;
+
 public class SpectreIlluminationHandler extends WorldSavedData
 {
 	final static String ID = "RTSIH";
@@ -59,7 +61,7 @@ public class SpectreIlluminationHandler extends WorldSavedData
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
 	{
 		NBTTagList list = new NBTTagList();
 

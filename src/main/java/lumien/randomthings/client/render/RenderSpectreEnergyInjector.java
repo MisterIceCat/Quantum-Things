@@ -11,15 +11,17 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
+import javax.annotation.Nonnull;
+
 public class RenderSpectreEnergyInjector extends TileEntitySpecialRenderer<TileEntitySpectreEnergyInjector>
 {
 	@Override
-	public void render(TileEntitySpectreEnergyInjector te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
+	public void render(@Nonnull TileEntitySpectreEnergyInjector te, double x, double y, double z, float partialTicks, int destroyStage, float alpha)
 	{
 		Tessellator tessellator = Tessellator.getInstance();
 		BufferBuilder bufferbuilder = tessellator.getBuffer();
 		RenderHelper.disableStandardItemLighting();
-		float f = ((float) (RTEventHandler.clientAnimationCounter + partialTicks)) / 200.0F;
+		float f = (RTEventHandler.clientAnimationCounter + partialTicks) / 200.0F;
 
 		x += 0.5;
 		y += 0.6;
@@ -54,10 +56,10 @@ public class RenderSpectreEnergyInjector extends TileEntitySpecialRenderer<TileE
 			
 			bufferbuilder.begin(6, DefaultVertexFormats.POSITION_COLOR);
 			bufferbuilder.pos(0.0D, 0.0D, 0.0D).color(0, 0, 0, (int) (255.0F * (1.0F - f1))).endVertex();
-			bufferbuilder.pos(-0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(red, 230, 226, 0).endVertex();
-			bufferbuilder.pos(0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(red, 230, 226, 0).endVertex();
-			bufferbuilder.pos(0.0D, (double) f2, (double) (1.0F * f3)).color(red, 230, 226, 0).endVertex();
-			bufferbuilder.pos(-0.866D * (double) f3, (double) f2, (double) (-0.5F * f3)).color(red, 230, 226, 0).endVertex();
+			bufferbuilder.pos(-0.866D * (double) f3, f2, -0.5F * f3).color(red, 230, 226, 0).endVertex();
+			bufferbuilder.pos(0.866D * (double) f3, f2, -0.5F * f3).color(red, 230, 226, 0).endVertex();
+			bufferbuilder.pos(0.0D, f2, 1.0F * f3).color(red, 230, 226, 0).endVertex();
+			bufferbuilder.pos(-0.866D * (double) f3, f2, -0.5F * f3).color(red, 230, 226, 0).endVertex();
 			tessellator.draw();
 		}
 

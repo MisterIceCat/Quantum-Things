@@ -117,8 +117,7 @@ public class SpectreCube implements IInventoryChangedListener
 		{
 			newHeight = height + amount;
 		}
-		else if (difference <= 0)
-		{
+		else {
 			newHeight = height + heightLeft;
 		}
 
@@ -181,7 +180,7 @@ public class SpectreCube implements IInventoryChangedListener
 	{
 		ItemStack spawnPosStack = inventory.getStackInSlot(0);
 
-		if (spawnPosStack == null || spawnPosStack.getItem() != ModItems.positionFilter)
+		if (spawnPosStack.getItem() != ModItems.positionFilter)
 		{
 			spawnBlock = new BlockPos(position * 16 + 8, 0, 8);
 		}

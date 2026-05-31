@@ -196,19 +196,19 @@ public class ItemModels
 		registerRuneDust();
 
 		ModelLoader.setCustomMeshDefinition(ModItems.redstoneActivator, new RedstoneActivatorMesh());
-		ModelBakery.registerItemVariants(ModItems.redstoneActivator, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:redstoneactivator_0"), new ModelResourceLocation("randomthings:redstoneactivator_1"), new ModelResourceLocation("randomthings:redstoneactivator_2") });
+		ModelBakery.registerItemVariants(ModItems.redstoneActivator, new ModelResourceLocation("randomthings:redstoneactivator_0"), new ModelResourceLocation("randomthings:redstoneactivator_1"), new ModelResourceLocation("randomthings:redstoneactivator_2"));
 
 		ModelLoader.setCustomMeshDefinition(ModItems.portKey, new PortKeyMesh());
 		ModelLoader.setCustomModelResourceLocation(ModItems.portKey, 1, new ModelResourceLocation("randomthings:portkey"));
 
 		ModelLoader.setCustomMeshDefinition(ModItems.soundRecorder, new SoundRecorderMesh());
-		ModelBakery.registerItemVariants(ModItems.soundRecorder, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundrecorder_idle"), new ModelResourceLocation("randomthings:soundrecorder_active") });
+		ModelBakery.registerItemVariants(ModItems.soundRecorder, new ModelResourceLocation("randomthings:soundrecorder_idle"), new ModelResourceLocation("randomthings:soundrecorder_active"));
 
 		ModelLoader.setCustomMeshDefinition(ModItems.soundPattern, new SoundPatternMesh());
-		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full") });
+		ModelBakery.registerItemVariants(ModItems.soundPattern, new ModelResourceLocation("randomthings:soundpattern_empty"), new ModelResourceLocation("randomthings:soundpattern_full"));
 	
 		ModelLoader.setCustomMeshDefinition(ModItems.spectreCharger, new SpectreChargerMesh());
-		ModelBakery.registerItemVariants(ModItems.spectreCharger, new ModelResourceLocation[] { new ModelResourceLocation("randomthings:spectrecharger/normal"), new ModelResourceLocation("randomthings:spectrecharger/redstone"), new ModelResourceLocation("randomthings:spectrecharger/ender"), new ModelResourceLocation("randomthings:spectrecharger/genesis"),new ModelResourceLocation("randomthings:spectrecharger/normal_enabled"), new ModelResourceLocation("randomthings:spectrecharger/redstone_enabled"), new ModelResourceLocation("randomthings:spectrecharger/ender_enabled"), new ModelResourceLocation("randomthings:spectrecharger/genesis_enabled") });
+		ModelBakery.registerItemVariants(ModItems.spectreCharger, new ModelResourceLocation("randomthings:spectrecharger/normal"), new ModelResourceLocation("randomthings:spectrecharger/redstone"), new ModelResourceLocation("randomthings:spectrecharger/ender"), new ModelResourceLocation("randomthings:spectrecharger/genesis"),new ModelResourceLocation("randomthings:spectrecharger/normal_enabled"), new ModelResourceLocation("randomthings:spectrecharger/redstone_enabled"), new ModelResourceLocation("randomthings:spectrecharger/ender_enabled"), new ModelResourceLocation("randomthings:spectrecharger/genesis_enabled"));
 		
 		SpectreStateMapper spectreStateMapper = new SpectreStateMapper();
 		ModelLoader.setCustomStateMapper(ModBlocks.spectreCoilNormal, spectreStateMapper);

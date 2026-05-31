@@ -10,6 +10,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class RTCreativeTab extends CreativeTabs
 {
 	public RTCreativeTab()
@@ -26,7 +28,7 @@ public class RTCreativeTab extends CreativeTabs
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void displayAllRelevantItems(NonNullList<ItemStack> p_78018_1_)
+	public void displayAllRelevantItems(@Nonnull NonNullList<ItemStack> p_78018_1_)
 	{
 		super.displayAllRelevantItems(p_78018_1_);
 

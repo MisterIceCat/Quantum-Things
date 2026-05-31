@@ -142,7 +142,7 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 	private boolean checkSupposedPowereredState()
 	{
 		List<Entity> entityList = world.getEntitiesWithinAABB(Entity.class, new AxisAlignedBB(this.pos, this.pos.add(1, 1, 1)).grow(rangeX, rangeY, rangeZ), new FilterPredicate(filter.filterClass, filterInventory.getStackInSlot(0)));
-		entityCount = entityList != null ? entityList.size() : 0;
+		entityCount = entityList.size();
 
 		// Determine if entities are detected
 		boolean hasEntities = entityCount > 0;
@@ -232,11 +232,8 @@ public class TileEntityEntityDetector extends TileEntityBase implements ITickabl
 
 		NBTTagCompound inventoryCompound = compound.getCompoundTag("inventory");
 
-		if (inventoryCompound != null)
-		{
-			InventoryUtil.readInventoryFromCompound(inventoryCompound, filterInventory);
-		}
-	}
+        InventoryUtil.readInventoryFromCompound(inventoryCompound, filterInventory);
+    }
 
 	public boolean isPowered()
 	{

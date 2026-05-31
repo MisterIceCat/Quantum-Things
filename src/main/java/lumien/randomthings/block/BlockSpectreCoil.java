@@ -13,7 +13,6 @@ import lumien.randomthings.lib.IRTBlockColor;
 import lumien.randomthings.tileentity.TileEntitySpectreCoil;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -130,31 +129,31 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	}
 
 	@Override
-	public boolean canRenderInLayer(IBlockState state, BlockRenderLayer layer)
+	public boolean canRenderInLayer(@Nonnull IBlockState state, @Nonnull BlockRenderLayer layer)
 	{
 		return layer == BlockRenderLayer.CUTOUT || layer == BlockRenderLayer.TRANSLUCENT;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+	public boolean canPlaceBlockOnSide(@Nonnull World worldIn, @Nonnull BlockPos pos, EnumFacing side)
 	{
 		return canPlaceBlock(worldIn, pos, side.getOpposite());
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	public boolean canPlaceBlockAt(@Nonnull World worldIn, @Nonnull BlockPos pos)
 	{
 		for (EnumFacing enumfacing : EnumFacing.values())
 		{
@@ -189,7 +188,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	 * allow for adjustments to the IBlockstate
 	 */
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer)
 	{
 		return canPlaceBlock(worldIn, pos, facing.getOpposite()) ? this.getDefaultState().withProperty(FACING, facing) : this.getDefaultState().withProperty(FACING, EnumFacing.DOWN);
 	}
@@ -208,7 +207,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
 		if (!worldIn.isRemote && placer instanceof EntityPlayer)
 		{
@@ -216,13 +215,10 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 
 			GameProfile profile = player.getGameProfile();
 
-			if (profile != null)
-			{
-				TileEntitySpectreCoil coil = (TileEntitySpectreCoil) worldIn.getTileEntity(pos);
+            TileEntitySpectreCoil coil = (TileEntitySpectreCoil) worldIn.getTileEntity(pos);
 
-				coil.setOwner(profile.getId());
-			}
-		}
+            coil.setOwner(profile.getId());
+        }
 	}
 
 	private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)
@@ -240,7 +236,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		EnumFacing enumfacing = state.getValue(FACING);
 		switch (enumfacing)
@@ -265,7 +261,7 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { FACING });
+		return new BlockStateContainer(this, FACING);
 	}
 
 	@Override

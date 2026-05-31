@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockRotatedPillar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -21,9 +20,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
+import javax.annotation.Nonnull;
+
 public class BlockSpectreLog extends BlockRotatedPillar
 {
-	public static final PropertyEnum<BlockSpectreLog.EnumAxis> LOG_AXIS = PropertyEnum.<BlockSpectreLog.EnumAxis>create("axis", BlockSpectreLog.EnumAxis.class);
+	public static final PropertyEnum<BlockSpectreLog.EnumAxis> LOG_AXIS = PropertyEnum.create("axis", BlockSpectreLog.EnumAxis.class);
 
 	public BlockSpectreLog()
 	{
@@ -42,7 +43,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { LOG_AXIS });
+		return new BlockStateContainer(this, LOG_AXIS);
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 	}
 
 	@Override
-	public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+	public void breakBlock(World worldIn, BlockPos pos, @Nonnull IBlockState state)
 	{
 		int i = 4;
 		int j = i + 1;
@@ -82,7 +83,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 	 * allow for adjustments to the IBlockstate
 	 */
 	@Override
-	public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+	public IBlockState getStateForPlacement(@Nonnull World worldIn, @Nonnull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @Nonnull EntityLivingBase placer)
 	{
 		return this.getStateFromMeta(meta).withProperty(LOG_AXIS, BlockSpectreLog.EnumAxis.fromFacingAxis(facing.getAxis()));
 	}
@@ -92,7 +93,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 	 * inapplicable, returns the passed blockstate.
 	 */
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot)
+	public IBlockState withRotation(@Nonnull IBlockState state, Rotation rot)
 	{
 		switch (rot)
 		{
@@ -115,13 +116,13 @@ public class BlockSpectreLog extends BlockRotatedPillar
 	}
 
 	@Override
-	public boolean canSustainLeaves(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos)
+	public boolean canSustainLeaves(@Nonnull IBlockState state, @Nonnull net.minecraft.world.IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return true;
 	}
 
 	@Override
-	public boolean isWood(net.minecraft.world.IBlockAccess world, BlockPos pos)
+	public boolean isWood(@Nonnull net.minecraft.world.IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return true;
 	}
@@ -167,7 +168,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -186,7 +187,7 @@ public class BlockSpectreLog extends BlockRotatedPillar
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}

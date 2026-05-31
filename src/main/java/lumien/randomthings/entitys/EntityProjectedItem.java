@@ -1,5 +1,6 @@
 package lumien.randomthings.entitys;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import io.netty.buffer.ByteBuf;
@@ -35,7 +36,7 @@ import net.minecraftforge.items.ItemHandlerHelper;
 
 public class EntityProjectedItem extends Entity implements IEntityAdditionalSpawnData
 {
-	private static final DataParameter<ItemStack> ITEM = EntityDataManager.<ItemStack>createKey(EntityProjectedItem.class, DataSerializers.ITEM_STACK);
+	private static final DataParameter<ItemStack> ITEM = EntityDataManager.createKey(EntityProjectedItem.class, DataSerializers.ITEM_STACK);
 	/**
 	 * The age of this EntityItem (used to animate it up and down as well as expire
 	 * it)
@@ -227,7 +228,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 * Called when the entity is attacked.
 	 */
 	@Override
-	public boolean attackEntityFrom(DamageSource source, float amount)
+	public boolean attackEntityFrom(@Nonnull DamageSource source, float amount)
 	{
 		if (this.isEntityInvulnerable(source))
 		{
@@ -290,7 +291,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 	 * Called by a player entity when they collide with an entity
 	 */
 	@Override
-	public void onCollideWithPlayer(EntityPlayer entityIn)
+	public void onCollideWithPlayer(@Nonnull EntityPlayer entityIn)
 	{
 		if (!this.world.isRemote && this.canBePickedUp)
 		{
@@ -301,7 +302,7 @@ public class EntityProjectedItem extends Entity implements IEntityAdditionalSpaw
 			{
 				if (!this.isSilent())
 				{
-					this.world.playSound((EntityPlayer) null, entityIn.posX, entityIn.posY, entityIn.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+					this.world.playSound(null, entityIn.posX, entityIn.posY, entityIn.posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
 				}
 
 				entityIn.onItemPickup(this, i);

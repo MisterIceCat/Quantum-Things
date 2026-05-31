@@ -16,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockAdvancedRedstoneInterface extends BlockRedstoneInterface
 {
 
@@ -46,12 +48,12 @@ public class BlockAdvancedRedstoneInterface extends BlockRedstoneInterface
 	}
 
 	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public boolean onBlockActivated(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityPlayer playerIn, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		if (!worldIn.isRemote)
 		{
 			ItemStack equipped = playerIn.getHeldItemMainhand();
-			if (equipped != null && equipped.getItem() == ModItems.redstoneTool)
+			if (equipped.getItem() == ModItems.redstoneTool)
 			{
 				return false;
 			}

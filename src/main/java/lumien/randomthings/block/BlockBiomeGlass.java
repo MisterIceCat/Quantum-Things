@@ -16,6 +16,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 {
 	protected BlockBiomeGlass()
@@ -34,7 +36,7 @@ public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 	}
 
 	@Override
-	public boolean isFullBlock(IBlockState state)
+	public boolean isFullBlock(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -53,7 +55,7 @@ public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
+	public boolean shouldSideBeRendered(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos, @Nonnull EnumFacing side)
 	{
 		IBlockState iblockstate = worldIn.getBlockState(pos.offset(side));
 		Block block = iblockstate.getBlock();
@@ -72,7 +74,7 @@ public class BlockBiomeGlass extends BlockBase implements IRTBlockColor
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}

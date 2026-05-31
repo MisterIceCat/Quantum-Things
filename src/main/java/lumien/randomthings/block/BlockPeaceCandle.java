@@ -17,6 +17,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockPeaceCandle extends BlockContainerBase
 {
 	protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.3125F, 0F, 0.3125F, 0.6875F, 0.125F, 0.6875F);
@@ -29,7 +31,7 @@ public class BlockPeaceCandle extends BlockContainerBase
 	}
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	public AxisAlignedBB getBoundingBox(@Nonnull IBlockState state, @Nonnull IBlockAccess source, @Nonnull BlockPos pos)
 	{
 		return AABB;
 	}
@@ -41,20 +43,20 @@ public class BlockPeaceCandle extends BlockContainerBase
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, BlockPos pos, @Nonnull Random rand)
 	{
 		double d0 = pos.getX() + 0.5D;
 		double d1 = pos.getY() + 0.3D;
@@ -66,13 +68,13 @@ public class BlockPeaceCandle extends BlockContainerBase
 	}
 
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		this.checkForDrop(worldIn, pos, state);
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
+	public boolean canPlaceBlockAt(@Nonnull World worldIn, BlockPos pos)
 	{
 		return canPlaceOn(worldIn, pos.down());
 	}

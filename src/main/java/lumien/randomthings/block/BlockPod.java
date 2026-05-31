@@ -1,6 +1,5 @@
 package lumien.randomthings.block;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -9,15 +8,15 @@ import lumien.randomthings.item.ItemIngredient;
 import lumien.randomthings.item.ModItems;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
+
+import javax.annotation.Nonnull;
 
 public class BlockPod extends BlockBase
 {
@@ -31,7 +30,7 @@ public class BlockPod extends BlockBase
 	}
 	
 	@Override
-	public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+	public void dropBlockAsItemWithChance(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, float chance, int fortune)
 	{
         if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots)
         {

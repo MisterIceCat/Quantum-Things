@@ -16,6 +16,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemIDCard extends ItemBase implements IEntityFilterItem
 {
 
@@ -25,7 +27,7 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 	}
 
 	@Override
-	public String getHighlightTip(ItemStack stack, String displayName)
+	public String getHighlightTip(ItemStack stack, @Nonnull String displayName)
 	{
 		if (stack.hasTagCompound())
 		{
@@ -41,7 +43,7 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 
@@ -59,33 +61,26 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		ItemStack me = playerIn.getHeldItem(handIn);
 		GameProfile playerProfile = playerIn.getGameProfile();
 
-		if (playerProfile != null)
-		{
-			UUID uuid = playerProfile.getId();
-			String name = playerProfile.getName();
+        UUID uuid = playerProfile.getId();
+        String name = playerProfile.getName();
 
-			if (!me.hasTagCompound())
-			{
-				me.setTagCompound(new NBTTagCompound());
-			}
+        if (!me.hasTagCompound())
+        {
+            me.setTagCompound(new NBTTagCompound());
+        }
 
-			NBTTagCompound compound = me.getTagCompound();
+        NBTTagCompound compound = me.getTagCompound();
 
-			compound.setString("uuid", uuid.toString());
-			compound.setString("name", name != null ? name : "Anonymous");
+        compound.setString("uuid", uuid.toString());
+        compound.setString("name", name != null ? name : "Anonymous");
 
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, me);
-		}
-		else
-		{
-			return super.onItemRightClick(worldIn, playerIn, handIn);
-		}
-	}
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, me);
+    }
 
 	@Override
 	public boolean apply(ItemStack me, Entity entity)

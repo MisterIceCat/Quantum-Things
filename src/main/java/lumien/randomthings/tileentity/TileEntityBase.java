@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+import javax.annotation.Nonnull;
+
 public abstract class TileEntityBase extends TileEntity
 {
 	private IItemHandler inventoryHandler;
@@ -55,7 +57,7 @@ public abstract class TileEntityBase extends TileEntity
 			}
 
 			@Override
-			public ItemStack insertItem(int slot, ItemStack stack, boolean simulate)
+			public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate)
 			{
 				if (slotFilter != null && slotFilter.containsKey(slot))
 				{
@@ -92,13 +94,13 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState)
+	public boolean shouldRefresh(@Nonnull World world, @Nonnull BlockPos pos, IBlockState oldState, IBlockState newState)
 	{
 		return (oldState.getBlock() != newState.getBlock());
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.writeToNBT(compound);
 
@@ -124,7 +126,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound compound)
+	public void readFromNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.readFromNBT(compound);
 
@@ -147,7 +149,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet)
+	public void onDataPacket(@Nonnull NetworkManager net, SPacketUpdateTileEntity packet)
 	{
 		handleUpdateTag(packet.getNbtCompound());
 
@@ -159,7 +161,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public void handleUpdateTag(NBTTagCompound tag)
+	public void handleUpdateTag(@Nonnull NBTTagCompound tag)
 	{
 		super.readFromNBT(tag);
 
@@ -249,7 +251,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public <T> T getCapability(net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
+	public <T> T getCapability(@Nonnull net.minecraftforge.common.capabilities.Capability<T> capability, net.minecraft.util.EnumFacing facing)
 	{
 		if (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !itemHandlerInternal)
 		{
@@ -259,7 +261,7 @@ public abstract class TileEntityBase extends TileEntity
 	}
 
 	@Override
-	public boolean hasCapability(net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing)
+	public boolean hasCapability(@Nonnull net.minecraftforge.common.capabilities.Capability<?> capability, net.minecraft.util.EnumFacing facing)
 	{
 		return (capability == net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && !itemHandlerInternal) || super.hasCapability(capability, facing);
 	}

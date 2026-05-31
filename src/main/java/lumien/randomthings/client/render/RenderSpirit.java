@@ -10,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 @SideOnly(Side.CLIENT)
 public class RenderSpirit extends RenderLiving<EntitySpirit>
 {
@@ -25,7 +27,7 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	 * Renders the desired {@code T} type Entity.
 	 */
 	@Override
-	public void doRender(EntitySpirit entity, double x, double y, double z, float entityYaw, float partialTicks)
+	public void doRender(@Nonnull EntitySpirit entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
 		this.shadowSize = 0.25F * (float) 0.5;
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
@@ -39,7 +41,7 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	 * model is rendered. Args: entityLiving, partialTickTime
 	 */
 	@Override
-	protected void preRenderCallback(EntitySpirit entitylivingbaseIn, float partialTickTime)
+	protected void preRenderCallback(@Nonnull EntitySpirit entitylivingbaseIn, float partialTickTime)
 	{
 		float f = 0.5f;
 		GlStateManager.scale(f, f, f);
@@ -52,7 +54,7 @@ public class RenderSpirit extends RenderLiving<EntitySpirit>
 	 * you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(EntitySpirit entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntitySpirit entity)
 	{
 		return slimeTextures;
 	}

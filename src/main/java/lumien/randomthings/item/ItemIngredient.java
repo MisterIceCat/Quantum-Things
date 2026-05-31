@@ -276,16 +276,13 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 					int xpSpread = (int) (xpBase * 0.625f); // random spread based on 3-13
 					int xpAmount =
 							Math.max(1, xpBase + (itemRand.nextInt(xpSpread * 2 + 1) - xpSpread));
-					if (xpAmount > 0)
-					{
-						while (xpAmount > 0) {
-							int j = EntityXPOrb.getXPSplit(xpAmount);
-							xpAmount -= j;
-							worldIn.spawnEntity(new EntityXPOrb(worldIn, entityplayer.posX,
-									entityplayer.posY, entityplayer.posZ, j));
-						}
-					}
-				}
+                    while (xpAmount > 0) {
+                        int j = EntityXPOrb.getXPSplit(xpAmount);
+                        xpAmount -= j;
+                        worldIn.spawnEntity(new EntityXPOrb(worldIn, entityplayer.posX,
+                                entityplayer.posY, entityplayer.posZ, j));
+                    }
+                }
 			}
 
 			stack.shrink(1);
@@ -339,7 +336,7 @@ public class ItemIngredient extends ItemBase implements IRTItemColor
 				itemstack.shrink(1);
 			}
 
-			worldIn.playSound((EntityPlayer) null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 1F));
+			worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 1F));
 
 			if (!worldIn.isRemote)
 			{

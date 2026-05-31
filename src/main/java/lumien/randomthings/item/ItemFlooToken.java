@@ -12,6 +12,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemFlooToken extends ItemBase
 {
 
@@ -21,7 +23,7 @@ public class ItemFlooToken extends ItemBase
 	}
 
 	@Override
-	public boolean onEntityItemUpdate(EntityItem entityItem)
+	public boolean onEntityItemUpdate(@Nonnull EntityItem entityItem)
 	{
 		int age = ReflectionUtil.getEntityItemAge(entityItem);
 

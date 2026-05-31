@@ -74,7 +74,7 @@ public class WorldGenAncientFurnace implements IWorldGenerator
 				int z = chunkZ * 16 + 8 + random.nextInt(16);
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && target.getY() >= 5)
+				if (target.getY() >= 5)
 				{
 					Biome biome = world.getBiome(target);
 

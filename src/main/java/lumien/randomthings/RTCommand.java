@@ -47,6 +47,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 
+import javax.annotation.Nonnull;
+
 public class RTCommand extends CommandBase
 {
 	private static final String COMMAND_ROOT = "rt";
@@ -77,21 +79,21 @@ public class RTCommand extends CommandBase
 	}
 
 	@Override
-	public String getUsage(ICommandSender sender)
+	public String getUsage(@Nonnull ICommandSender sender)
 	{
 		return COMMAND_PREFIX;
 	}
 
 	@Override
-	public List<String> getTabCompletions(MinecraftServer server, ICommandSender sender, String[] args, BlockPos pos)
+	public List<String> getTabCompletions(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, String[] args, BlockPos pos)
 	{
 		if (args.length == 1)
 		{
 			return getListOfStringsMatchingLastWord(args,
-					new String[] { SUB_GENERATE_BIOME_CRYSTAL_CHESTS, SUB_SET_BIOME_CRYSTAL, SUB_TP_FILTER,
-							SUB_TEST_SLIME_SPAWN,
-							SUB_NOTIFY, SUB_FIREPLACES, SUB_FESTIVAL, SUB_OP, SUB_TIME_IN_A_BOTTLE,
-							SUB_TEST_ENDER_MAILBOX });
+                    SUB_GENERATE_BIOME_CRYSTAL_CHESTS, SUB_SET_BIOME_CRYSTAL, SUB_TP_FILTER,
+                    SUB_TEST_SLIME_SPAWN,
+                    SUB_NOTIFY, SUB_FIREPLACES, SUB_FESTIVAL, SUB_OP, SUB_TIME_IN_A_BOTTLE,
+                    SUB_TEST_ENDER_MAILBOX);
 		}
 		else
 		{
@@ -112,25 +114,25 @@ public class RTCommand extends CommandBase
 			}
 			else if (args[0].equals(SUB_OP))
 			{
-				if (args.length > 1 && args.length <= 4)
+				if (args.length <= 4)
 				{
 					return getTabCompletionCoordinate(args, 1, pos);
 				}
 			}
 			else if (args[0].equals(SUB_TIME_IN_A_BOTTLE)) {
 				if (args.length == 2) {
-					return getListOfStringsMatchingLastWord(args, new String[] { TIB_MODE_TRANSFER, TIB_MODE_ADD,
-							TIB_MODE_QUERY, TIB_MODE_SET, TIB_MODE_SUBTRACT });
+					return getListOfStringsMatchingLastWord(args, TIB_MODE_TRANSFER, TIB_MODE_ADD,
+                            TIB_MODE_QUERY, TIB_MODE_SET, TIB_MODE_SUBTRACT);
 				} else if (args.length == 3) {
 					return getListOfStringsMatchingLastWord(args, server.getOnlinePlayerNames());
 				} else if (args.length == 4
 						&& (args[1].equals(TIB_MODE_TRANSFER) || args[1].equals(TIB_MODE_ADD)
 								|| args[1].equals(TIB_MODE_SET) || args[1].equals(TIB_MODE_SUBTRACT))) {
-					return getListOfStringsMatchingLastWord(args, new String[] { "30s", "60s", "10m", "1h" });
+					return getListOfStringsMatchingLastWord(args, "30s", "60s", "10m", "1h");
 				}
 			}
 		}
-		return Collections.<String>emptyList();
+		return Collections.emptyList();
 	}
 
 	@Override
@@ -140,13 +142,13 @@ public class RTCommand extends CommandBase
 	}
 
 	@Override
-	public boolean checkPermission(MinecraftServer server, ICommandSender sender)
+	public boolean checkPermission(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender)
 	{
 		return true;
 	}
 
 	@Override
-	public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
+	public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender, String[] args) throws CommandException
 	{
 		if (args.length == 0)
 			return;
@@ -167,7 +169,7 @@ public class RTCommand extends CommandBase
 
 				ItemStack equipped = player.getHeldItemMainhand();
 
-				if (equipped != null && equipped.getItem() instanceof ItemBiomeCrystal)
+				if (equipped.getItem() instanceof ItemBiomeCrystal)
 				{
 					if (equipped.getTagCompound() == null)
 					{
@@ -227,13 +229,10 @@ public class RTCommand extends CommandBase
 			BlockPos pos = sender.getPosition();
 			World world = sender.getEntityWorld();
 
-			if (pos != null && world != null)
-			{
-				EntitySlime slime = new EntitySlime(world);
-				slime.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
-				sender.sendMessage(new TextComponentString(slime.getCanSpawnHere() + ""));
-			}
-		}
+            EntitySlime slime = new EntitySlime(world);
+            slime.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
+            sender.sendMessage(new TextComponentString(slime.getCanSpawnHere() + ""));
+        }
 		else if (args[0].equals(SUB_NOTIFY) && args.length == 5)
 		{
 			String title = args[1];

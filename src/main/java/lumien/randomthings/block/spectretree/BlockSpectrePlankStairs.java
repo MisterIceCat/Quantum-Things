@@ -15,6 +15,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class BlockSpectrePlankStairs extends BlockStairs {
 	public BlockSpectrePlankStairs() {
 		super(ModBlocks.spectrePlank.getDefaultState());
@@ -30,24 +32,24 @@ public class BlockSpectrePlankStairs extends BlockStairs {
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@Nonnull IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(@Nonnull IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean doesSideBlockRendering(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing face) {
+	public boolean doesSideBlockRendering(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
 		return false;
 	}
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
-			EnumFacing side) {
+	public boolean shouldSideBeRendered(@Nonnull IBlockState blockState, IBlockAccess blockAccess, BlockPos pos,
+                                        @Nonnull EnumFacing side) {
 		IBlockState neighborState = blockAccess.getBlockState(pos.offset(side));
 		Block neighborBlock = neighborState.getBlock();
 
@@ -82,7 +84,7 @@ public class BlockSpectrePlankStairs extends BlockStairs {
 	}
 
 	@Override
-	public EnumPushReaction getPushReaction(IBlockState state) {
+	public EnumPushReaction getPushReaction(@Nonnull IBlockState state) {
 		return EnumPushReaction.NORMAL;
 	}
 }

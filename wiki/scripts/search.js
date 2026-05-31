@@ -1,11 +1,11 @@
 // Wiki search functionality
-var searchInput = document.getElementById('wiki-search');
-var nav = document.getElementById('nav');
+const searchInput = document.getElementById('wiki-search');
+const nav = document.getElementById('nav');
 
 if (searchInput && nav) {
-    var allSections = Array.from(nav.querySelectorAll('li.section'));
-    var allPages = Array.from(nav.querySelectorAll('li.page'));
-    
+    const allSections = Array.from(nav.querySelectorAll('li.section'));
+    const allPages = Array.from(nav.querySelectorAll('li.page'));
+
     function matches(search, text) {
         if (!search) return true;
         search = search.toLowerCase();
@@ -16,15 +16,15 @@ if (searchInput && nav) {
     }
     
     function filterNavigation(term) {
-        var search = term ? term.trim().toLowerCase() : '';
-        
+        const search = term ? term.trim().toLowerCase() : '';
+
         allSections.forEach(function(section) {
-            var pages = Array.from(section.querySelectorAll('li.page'));
-            var visibleCount = 0;
-            
+            const pages = Array.from(section.querySelectorAll('li.page'));
+            let visibleCount = 0;
+
             pages.forEach(function(page) {
-                var link = page.querySelector('a');
-                var isVisible = link && matches(search, link.textContent);
+                const link = page.querySelector('a');
+                const isVisible = link && matches(search, link.textContent);
                 page.style.display = isVisible ? '' : 'none';
                 if (isVisible) visibleCount++;
             });
@@ -32,8 +32,8 @@ if (searchInput && nav) {
             section.style.display = visibleCount > 0 ? '' : 'none';
         });
     }
-    
-    var debounceTimer;
+
+    let debounceTimer;
     searchInput.addEventListener('input', function(e) {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(function() {

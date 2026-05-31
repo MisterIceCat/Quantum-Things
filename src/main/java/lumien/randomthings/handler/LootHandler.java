@@ -25,13 +25,15 @@ import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.event.LootTableLoadEvent;
 
+import javax.annotation.Nonnull;
+
 public class LootHandler
 {
 	static LootCondition onlyFound = new LootCondition()
 	{
 		
 		@Override
-		public boolean testCondition(Random rand, LootContext context)
+		public boolean testCondition(@Nonnull Random rand, LootContext context)
 		{
 			return context.getKillerPlayer() instanceof EntityPlayer && !(context.getKillerPlayer() instanceof FakePlayer);
 		}
@@ -98,7 +100,7 @@ public class LootHandler
 			LootEntry crystalEntry = new LootEntryItem(ModItems.biomeCrystal, 1, 0, new LootFunction[] { new LootFunction(new LootCondition[] {})
 			{
 				@Override
-				public ItemStack apply(ItemStack stack, Random rand, LootContext context)
+				public ItemStack apply(@Nonnull ItemStack stack, @Nonnull Random rand, @Nonnull LootContext context)
 				{
 					Object[] locationArray = Biome.REGISTRY.getKeys().toArray();
 					ResourceLocation randomLocation = (ResourceLocation) locationArray[rand.nextInt(locationArray.length)];

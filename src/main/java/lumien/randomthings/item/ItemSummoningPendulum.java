@@ -32,6 +32,8 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class ItemSummoningPendulum extends ItemBase
 {
 	private static final int MAX_ENTITIES = 5;
@@ -44,7 +46,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public int getRGBDurabilityForDisplay(ItemStack stack)
+	public int getRGBDurabilityForDisplay(@Nonnull ItemStack stack)
 	{
 		return EnumDyeColor.PURPLE.getColorValue();
 	}
@@ -97,7 +99,7 @@ public class ItemSummoningPendulum extends ItemBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World world, List<String> tooltip, ITooltipFlag advanced)
+	public void addInformation(ItemStack stack, World world, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag advanced)
 	{
 		int entityCount = 0;
 
@@ -128,7 +130,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public boolean itemInteractionForEntity(ItemStack itemstack, EntityPlayer player, EntityLivingBase entity, EnumHand hand)
+	public boolean itemInteractionForEntity(@Nonnull ItemStack itemstack, @Nonnull EntityPlayer player, EntityLivingBase entity, @Nonnull EnumHand hand)
 	{
 		if (entity.world.isRemote)
 			return false;
@@ -202,7 +204,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, @Nonnull BlockPos pos, @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ)
 	{
 		ItemStack stack = playerIn.getHeldItem(hand);
 		pos = pos.offset(side);
@@ -237,7 +239,7 @@ public class ItemSummoningPendulum extends ItemBase
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
+	public EnumRarity getRarity(@Nonnull ItemStack stack)
 	{
 		return EnumRarity.RARE;
 	}

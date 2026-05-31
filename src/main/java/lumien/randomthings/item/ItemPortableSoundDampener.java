@@ -13,6 +13,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Optional;
 
+import javax.annotation.Nonnull;
+
 @Optional.Interface(iface = "baubles.api.IBauble", modid = "baubles")
 public class ItemPortableSoundDampener extends ItemBase implements IBauble
 {
@@ -30,7 +32,7 @@ public class ItemPortableSoundDampener extends ItemBase implements IBauble
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand handIn)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(handIn);
 		if (!worldIn.isRemote && handIn == EnumHand.MAIN_HAND)

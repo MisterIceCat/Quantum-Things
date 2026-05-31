@@ -2,6 +2,7 @@ package lumien.randomthings.entitys;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
@@ -45,7 +46,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 	private int fallHurtMax = 40;
 	private float fallHurtAmount = 2.0F;
 	public NBTTagCompound tileEntityData;
-	protected static final DataParameter<BlockPos> ORIGIN = EntityDataManager.<BlockPos>createKey(EntityFallingBlockSpecial.class, DataSerializers.BLOCK_POS);
+	protected static final DataParameter<BlockPos> ORIGIN = EntityDataManager.createKey(EntityFallingBlockSpecial.class, DataSerializers.BLOCK_POS);
 
 	public EntityFallingBlockSpecial(World worldIn)
 	{
@@ -207,7 +208,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 
 						if (!this.dontSetBlock)
 						{
-							if (this.world.mayPlace(block, blockpos1, true, EnumFacing.UP, (Entity) null) && (flag1 || !BlockFalling.canFallThrough(this.world.getBlockState(blockpos1.down()))) && this.world.setBlockState(blockpos1, this.fallTile, 3) || (this.world.mayPlace(block, blockpos1.up(), true, EnumFacing.UP, (Entity) null) && (flag1 || !BlockFalling.canFallThrough(this.world.getBlockState(blockpos1))) && this.world.setBlockState(blockpos1.up(), this.fallTile, 3)))
+							if (this.world.mayPlace(block, blockpos1, true, EnumFacing.UP, null) && (flag1 || !BlockFalling.canFallThrough(this.world.getBlockState(blockpos1.down()))) && this.world.setBlockState(blockpos1, this.fallTile, 3) || (this.world.mayPlace(block, blockpos1.up(), true, EnumFacing.UP, null) && (flag1 || !BlockFalling.canFallThrough(this.world.getBlockState(blockpos1))) && this.world.setBlockState(blockpos1.up(), this.fallTile, 3)))
 							{
 								if (block instanceof BlockFalling)
 								{
@@ -302,7 +303,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 	{
 		Block block = this.fallTile != null ? this.fallTile.getBlock() : Blocks.AIR;
 		ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(block);
-		compound.setString("Block", resourcelocation == null ? "" : resourcelocation.toString());
+		compound.setString("Block", resourcelocation.toString());
 		compound.setByte("Data", (byte) block.getMetaFromState(this.fallTile));
 		compound.setInteger("Time", this.fallTime);
 		compound.setBoolean("DropItem", this.shouldDropItem);
@@ -361,7 +362,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 			this.tileEntityData = compound.getCompoundTag("TileEntityData");
 		}
 
-		if (block == null || block.getDefaultState().getMaterial() == Material.AIR)
+		if (block.getDefaultState().getMaterial() == Material.AIR)
 		{
 			this.fallTile = Blocks.SAND.getDefaultState();
 		}
@@ -373,7 +374,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 	}
 
 	@Override
-	public void addEntityCrashInfo(CrashReportCategory category)
+	public void addEntityCrashInfo(@Nonnull CrashReportCategory category)
 	{
 		super.addEntityCrashInfo(category);
 

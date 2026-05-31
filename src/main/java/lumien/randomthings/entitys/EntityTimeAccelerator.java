@@ -12,16 +12,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 public class EntityTimeAccelerator extends Entity implements IEntityAdditionalSpawnData
 {
 	int remainingTime;
 
-	private static final DataParameter<Integer> TIME_RATE = EntityDataManager.<Integer> createKey(EntityTimeAccelerator.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> TIME_RATE = EntityDataManager.createKey(EntityTimeAccelerator.class, DataSerializers.VARINT);
 
 	BlockPos target;
 
@@ -94,7 +95,7 @@ public class EntityTimeAccelerator extends Entity implements IEntityAdditionalSp
 		{
 			targetTE = this.world.getTileEntity(target);
 			
-			if (targetTE != null && targetTE instanceof ITickable && (!horror || !this.world.isRemote))
+			if (targetTE instanceof ITickable && (!horror || !this.world.isRemote))
 			{
 				((ITickable) targetTE).update();
 			}
@@ -125,7 +126,7 @@ public class EntityTimeAccelerator extends Entity implements IEntityAdditionalSp
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound compound)
+	protected void readEntityFromNBT(@Nonnull NBTTagCompound compound)
 	{
 		this.target = NBTUtil.readBlockPosFromNBT(compound, "target");
 		this.remainingTime = compound.getInteger("remainingTime");
@@ -133,7 +134,7 @@ public class EntityTimeAccelerator extends Entity implements IEntityAdditionalSp
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound)
+	protected void writeEntityToNBT(@Nonnull NBTTagCompound compound)
 	{
 		NBTUtil.writeBlockPosToNBT(compound, "target", target);
 		compound.setInteger("remainingTime", remainingTime);

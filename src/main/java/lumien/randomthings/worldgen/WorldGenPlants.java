@@ -14,10 +14,12 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 
+import javax.annotation.Nonnull;
+
 public class WorldGenPlants extends WorldGenerator
 {
 	@Override
-	public boolean generate(World world, Random random, BlockPos position)
+	public boolean generate(World world, @Nonnull Random random, @Nonnull BlockPos position)
 	{
 		if (world.getWorldType() != WorldType.DEBUG_ALL_BLOCK_STATES)
 		{
@@ -29,7 +31,7 @@ public class WorldGenPlants extends WorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && target.getY() > 0 && world.isAirBlock(target) && (target.getY() < 255) && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
+				if (target.getY() > 0 && world.isAirBlock(target) && target.getY() < 255 && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
 				{
 					world.setBlockState(target, ModBlocks.beanSprout.getDefaultState(), 2);
 				}
@@ -43,7 +45,7 @@ public class WorldGenPlants extends WorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && target.getY() >= 0)
+				if (target.getY() >= 0)
 				{
 					Biome biome = world.getBiome(target);
 
@@ -61,7 +63,7 @@ public class WorldGenPlants extends WorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target != null && target.getY() >= 0)
+				if (target.getY() >= 0)
 				{
 					Biome biome = world.getBiome(target);
 					IBlockState state = world.getBlockState(target);

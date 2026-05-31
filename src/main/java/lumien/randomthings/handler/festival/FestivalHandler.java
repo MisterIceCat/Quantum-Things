@@ -27,6 +27,8 @@ import lumien.randomthings.handler.festival.Festival.STATE;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.util.ReflectionUtil;
 
+import javax.annotation.Nonnull;
+
 public class FestivalHandler extends WorldSavedData
 {
 	static final String ID = "RTFestivalHandler";
@@ -54,7 +56,7 @@ public class FestivalHandler extends WorldSavedData
 		{
 			List<VillageDoorInfo> doorInfos = v.getVillageDoorInfoList();
 
-			if (doorInfos != null && !doorInfos.isEmpty())
+			if (!doorInfos.isEmpty())
 			{
 				Festival f = new Festival();
 
@@ -288,7 +290,7 @@ public class FestivalHandler extends WorldSavedData
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound)
+	public NBTTagCompound writeToNBT(@Nonnull NBTTagCompound compound)
 	{
 		NBTTagList list = new NBTTagList();
 

@@ -18,10 +18,11 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ItemTimeInABottle extends ItemBase
 {
@@ -43,13 +44,13 @@ public class ItemTimeInABottle extends ItemBase
 	}
 
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
+	public boolean shouldCauseReequipAnimation(@Nonnull ItemStack oldStack, @Nonnull ItemStack newStack, boolean slotChanged)
 	{
 		return !ItemStack.areItemsEqual(oldStack, newStack);
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void onUpdate(@Nonnull ItemStack stack, World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		if (!worldIn.isRemote && entityIn instanceof EntityPlayer) {
 			EntityPlayer player = (EntityPlayer) entityIn;
@@ -164,10 +165,8 @@ public class ItemTimeInABottle extends ItemBase
 		}
 
 		NBTTagCompound holder = root.getCompoundTag(BOTTLE_LAST_HOLDER);
-		if (player.getUniqueID() != null) {
-			holder.setString(BOTTLE_LAST_HOLDER_UUID, player.getUniqueID().toString());
-		}
-		holder.setString(BOTTLE_LAST_HOLDER_NAME, player.getName());
+        holder.setString(BOTTLE_LAST_HOLDER_UUID, player.getUniqueID().toString());
+        holder.setString(BOTTLE_LAST_HOLDER_NAME, player.getName());
 		root.setTag(BOTTLE_LAST_HOLDER, holder);
 	}
 
@@ -183,7 +182,7 @@ public class ItemTimeInABottle extends ItemBase
 		}
 
 		String uuid = holder.getString(BOTTLE_LAST_HOLDER_UUID);
-		return uuid == null || uuid.isEmpty() ? Optional.empty() : Optional.of(uuid);
+		return uuid.isEmpty() ? Optional.empty() : Optional.of(uuid);
 	}
 
 	public static Optional<String> getLastHolderName(ItemStack stack)
@@ -198,11 +197,11 @@ public class ItemTimeInABottle extends ItemBase
 		}
 
 		String name = holder.getString(BOTTLE_LAST_HOLDER_NAME);
-		return name == null || name.isEmpty() ? Optional.empty() : Optional.of(name);
+		return name.isEmpty() ? Optional.empty() : Optional.of(name);
 	}
 
 	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
+	public EnumActionResult onItemUseFirst(@Nonnull EntityPlayer player, World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull EnumHand hand)
 	{
 		if (!world.isRemote)
 		{
@@ -245,7 +244,8 @@ public class ItemTimeInABottle extends ItemBase
 								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.793701F);
 								break;
 							case 4:
-								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.890899F);
+                            case 32:
+                                world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.890899F);
 								break;
 							case 8:
 								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 1.059463F);
@@ -253,10 +253,7 @@ public class ItemTimeInABottle extends ItemBase
 							case 16:
 								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.943874F);
 								break;
-							case 32:
-								world.playSound(null, pos, SoundEvents.BLOCK_NOTE_HARP, SoundCategory.BLOCKS, 0.5F, 0.890899F);
-								break;
-						}
+                        }
 						
 						// C# D E G F E
 						return EnumActionResult.SUCCESS;

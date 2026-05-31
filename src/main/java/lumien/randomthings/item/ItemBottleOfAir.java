@@ -11,6 +11,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemBottleOfAir extends ItemBase
 {
 	public ItemBottleOfAir()
@@ -19,19 +21,19 @@ public class ItemBottleOfAir extends ItemBase
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack)
+	public int getMaxItemUseDuration(@Nonnull ItemStack stack)
 	{
 		return 32;
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
+	public EnumAction getItemUseAction(@Nonnull ItemStack stack)
 	{
 		return EnumAction.DRINK;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldObj, EntityPlayer player, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(@Nonnull World worldObj, EntityPlayer player, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStack = player.getHeldItem(hand);
 		if (player.isInsideOfMaterial(Material.WATER))
@@ -44,13 +46,13 @@ public class ItemBottleOfAir extends ItemBase
 	}
 
 	@Override
-	public EnumRarity getRarity(ItemStack stack)
+	public EnumRarity getRarity(@Nonnull ItemStack stack)
 	{
 		return EnumRarity.RARE;
 	}
 
 	@Override
-	public void onUsingTick(ItemStack stack, EntityLivingBase livingEntity, int count)
+	public void onUsingTick(@Nonnull ItemStack stack, @Nonnull EntityLivingBase livingEntity, int count)
 	{
 		super.onUsingTick(stack, livingEntity, count);
 

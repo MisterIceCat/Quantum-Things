@@ -30,6 +30,8 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class EntityEclipsedClock extends EntityHanging implements IEntityAdditionalSpawnData
 {
 	ItemStack clock;
@@ -61,7 +63,7 @@ public class EntityEclipsedClock extends EntityHanging implements IEntityAdditio
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound compound)
+	public void writeEntityToNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.writeEntityToNBT(compound);
 
@@ -69,7 +71,7 @@ public class EntityEclipsedClock extends EntityHanging implements IEntityAdditio
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound compound)
+	public void readEntityFromNBT(@Nonnull NBTTagCompound compound)
 	{
 		super.readEntityFromNBT(compound);
 
@@ -114,7 +116,7 @@ public class EntityEclipsedClock extends EntityHanging implements IEntityAdditio
 	}
 
 	@Override
-	public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
+	public boolean processInitialInteract(EntityPlayer player, @Nonnull EnumHand hand)
 	{
 		ItemStack bottle;
 

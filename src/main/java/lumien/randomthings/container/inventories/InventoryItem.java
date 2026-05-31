@@ -9,6 +9,8 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
 
+import javax.annotation.Nonnull;
+
 public class InventoryItem implements IInventory
 {
 	String name;
@@ -128,7 +130,7 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public void setInventorySlotContents(int index, ItemStack stack)
+	public void setInventorySlotContents(int index, @Nonnull ItemStack stack)
 	{
 		this.cacheInventory.set(index, stack);
 
@@ -165,23 +167,23 @@ public class InventoryItem implements IInventory
 	}
 
 	@Override
-	public boolean isUsableByPlayer(EntityPlayer player)
+	public boolean isUsableByPlayer(@Nonnull EntityPlayer player)
 	{
 		return true;
 	}
 
 	@Override
-	public void openInventory(EntityPlayer player)
+	public void openInventory(@Nonnull EntityPlayer player)
 	{
 	}
 
 	@Override
-	public void closeInventory(EntityPlayer player)
+	public void closeInventory(@Nonnull EntityPlayer player)
 	{
 	}
 
 	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack)
+	public boolean isItemValidForSlot(int index, @Nonnull ItemStack stack)
 	{
 		return true;
 	}

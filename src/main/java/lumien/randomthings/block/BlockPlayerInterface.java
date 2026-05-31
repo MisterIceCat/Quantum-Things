@@ -12,6 +12,8 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockPlayerInterface extends BlockContainerBase
 {
 	protected BlockPlayerInterface()
@@ -29,15 +31,15 @@ public class BlockPlayerInterface extends BlockContainerBase
 	}
 
 	@Override
-	public EnumBlockRenderType getRenderType(IBlockState state)
+	public EnumBlockRenderType getRenderType(@Nonnull IBlockState state)
 	{
 		return EnumBlockRenderType.MODEL;
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
-		if (!worldIn.isRemote && placer != null && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) != null)
+		if (!worldIn.isRemote && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) != null)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) placer;
 			((TileEntityPlayerInterface) worldIn.getTileEntity(pos)).setPlayerUUID(player.getGameProfile().getId());

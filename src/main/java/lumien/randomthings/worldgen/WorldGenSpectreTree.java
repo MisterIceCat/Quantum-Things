@@ -10,6 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+import javax.annotation.Nonnull;
+
 public class WorldGenSpectreTree extends WorldGenAbstractTree
 {
 	private static final IBlockState LOG = ModBlocks.spectreLog.getDefaultState();
@@ -21,7 +23,7 @@ public class WorldGenSpectreTree extends WorldGenAbstractTree
 	}
 
 	@Override
-	public boolean generate(World worldIn, Random rand, BlockPos position)
+	public boolean generate(@Nonnull World worldIn, Random rand, BlockPos position)
 	{
 		int i = rand.nextInt(3) + 5;
 

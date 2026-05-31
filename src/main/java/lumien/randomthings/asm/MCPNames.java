@@ -14,6 +14,8 @@ import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.google.common.io.LineProcessor;
 
+import javax.annotation.Nonnull;
+
 public class MCPNames
 {
 	private static Map<String, String> fields;
@@ -101,7 +103,7 @@ public class MCPNames
 		private boolean foundFirst;
 
 		@Override
-		public boolean processLine(String line) throws IOException
+		public boolean processLine(@Nonnull String line) throws IOException
 		{
 			if (!foundFirst)
 			{

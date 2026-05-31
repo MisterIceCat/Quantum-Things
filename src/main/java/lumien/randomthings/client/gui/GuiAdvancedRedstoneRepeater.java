@@ -19,6 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
+import javax.annotation.Nonnull;
+
 public class GuiAdvancedRedstoneRepeater extends GuiContainerBase
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/advancedRedstoneRepeater.png");
@@ -46,7 +48,7 @@ public class GuiAdvancedRedstoneRepeater extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 
@@ -85,8 +87,8 @@ public class GuiAdvancedRedstoneRepeater extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
 	{
-		fontRenderer.drawString(I18n.format("Turn Off Delay", new Object[0]), 7, 5, 0);
-		fontRenderer.drawString(I18n.format("Turn On Delay", new Object[0]), 9, 29, 0);
+		fontRenderer.drawString(I18n.format("Turn Off Delay"), 7, 5, 0);
+		fontRenderer.drawString(I18n.format("Turn On Delay"), 9, 29, 0);
 
 		String turnOnDelayString = ((ContainerTE<TileEntityAdvancedRedstoneRepeater>) inventorySlots).getTE().getTurnOnDelay() + "";
 		fontRenderer.drawString(turnOnDelayString, xSize / 2 - fontRenderer.getStringWidth(turnOnDelayString) / 2, 40, 9830400);

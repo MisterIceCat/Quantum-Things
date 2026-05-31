@@ -12,7 +12,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.translation.I18n;
@@ -20,6 +19,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.Level;
+
+import javax.annotation.Nonnull;
 
 /**
  * Legacy divining rod item that uses metadata variants.
@@ -37,13 +38,13 @@ public class ItemDiviningRodLegacy extends ItemBase implements IRTItemColor {
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items) {
 		// Don't show in creative menu
 		// The item still supports all metadata values for loading old worlds
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack stack) {
+	public String getTranslationKey(@Nonnull ItemStack stack) {
 		return "item.diviningRodLegacy";
 	}
 
@@ -69,14 +70,14 @@ public class ItemDiviningRodLegacy extends ItemBase implements IRTItemColor {
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip,
-			ITooltipFlag flagIn) {
+	public void addInformation(@Nonnull ItemStack stack, World worldIn, @Nonnull List<String> tooltip,
+                               @Nonnull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		tooltip.add(I18n.translateToLocal("item.diviningRodLegacy.migration"));
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+	public void onUpdate(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
 		convertWhenHeld(stack, worldIn, entityIn);
 	}

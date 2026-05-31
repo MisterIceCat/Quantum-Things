@@ -1,21 +1,16 @@
 package lumien.randomthings.item.block;
 
-import lumien.randomthings.tileentity.TileEntityBlockDiaphanous;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class ItemBlockBlockDiaphanous extends ItemBlock
 {
@@ -25,7 +20,7 @@ public class ItemBlockBlockDiaphanous extends ItemBlock
 	}
 
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
+	public void getSubItems(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> items)
 	{
 		if (this.isInCreativeTab(tab))
 		{
@@ -41,14 +36,14 @@ public class ItemBlockBlockDiaphanous extends ItemBlock
 	}
 
 	@Override
-	public String getTranslationKey(ItemStack stack)
+	public String getTranslationKey(@Nonnull ItemStack stack)
 	{
 		return super.getTranslationKey(stack)
 				+ (stack.hasTagCompound() && stack.getTagCompound().getBoolean("inverted") ? "_inverted" : "");
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack stack)
+	public String getItemStackDisplayName(@Nonnull ItemStack stack)
 	{
 		String display = super.getItemStackDisplayName(stack);
 

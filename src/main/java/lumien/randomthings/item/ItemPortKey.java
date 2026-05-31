@@ -16,6 +16,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemPortKey extends ItemBase
 {
 
@@ -27,7 +29,7 @@ public class ItemPortKey extends ItemBase
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	public void addInformation(ItemStack stack, World worldIn, @Nonnull List<String> tooltip, @Nonnull ITooltipFlag flagIn)
 	{
 		NBTTagCompound targetCompound = stack.getSubCompound("target");
 
@@ -58,7 +60,7 @@ public class ItemPortKey extends ItemBase
 	}
 
 	@Override
-	public EnumActionResult onItemUseFirst(EntityPlayer player, World world, BlockPos pos, EnumFacing side, float hitX, float hitY, float hitZ, EnumHand hand)
+	public EnumActionResult onItemUseFirst(@Nonnull EntityPlayer player, World world, @Nonnull BlockPos pos, @Nonnull EnumFacing side, float hitX, float hitY, float hitZ, @Nonnull EnumHand hand)
 	{
 		if (!world.isRemote)
 		{
@@ -76,7 +78,7 @@ public class ItemPortKey extends ItemBase
 	}
 
 	@Override
-	public String getHighlightTip(ItemStack item, String displayName)
+	public String getHighlightTip(ItemStack item, @Nonnull String displayName)
 	{
 		NBTTagCompound target = item.getSubCompound("target");
 
@@ -94,7 +96,7 @@ public class ItemPortKey extends ItemBase
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected)
+	public void onUpdate(ItemStack stack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected)
 	{
 		stack.removeSubCompound("trueage");
 	}

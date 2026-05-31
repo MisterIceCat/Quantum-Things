@@ -7,7 +7,8 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 public class GuiFacingButton extends GuiButton
 {
@@ -36,7 +37,7 @@ public class GuiFacingButton extends GuiButton
 		this.instance = instance;
 	}
 
-    public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks)
+    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks)
     {
         if (this.visible)
         {

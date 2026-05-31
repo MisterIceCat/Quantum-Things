@@ -10,6 +10,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockAncientFurnace extends BlockContainerBase
 {
 
@@ -19,17 +21,17 @@ public class BlockAncientFurnace extends BlockContainerBase
 	}
 
 	@Override
-	public float getBlockHardness(IBlockState blockState, World worldIn, BlockPos pos) {
+	public float getBlockHardness(@Nonnull IBlockState blockState, @Nonnull World worldIn, @Nonnull BlockPos pos) {
 		return Features.ANCIENT_BRICK_DROP_ITEMS ? 2.0F : -1.0F;
 	}
 
 	@Override
-	public float getExplosionResistance(Entity exploder) {
+	public float getExplosionResistance(@Nonnull Entity exploder) {
 		return Features.ANCIENT_BRICK_DROP_ITEMS ? 2.0F : (this.blockResistance / 5.0F);
 	}
 
 	@Override
-	public float getExplosionResistance(World world, BlockPos pos, Entity exploder, Explosion explosion) {
+	public float getExplosionResistance(@Nonnull World world, @Nonnull BlockPos pos, Entity exploder, @Nonnull Explosion explosion) {
 		return Features.ANCIENT_BRICK_DROP_ITEMS ? 2.0F : 6000000.0F;
 	}
 

@@ -11,12 +11,13 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderProjectedItem extends Render<EntityProjectedItem>
@@ -37,40 +38,33 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		ItemStack itemstack = itemIn.getItem();
 		Item item = itemstack.getItem();
 
-		if (item == null)
-		{
-			return 0;
-		}
-		else
-		{
-			boolean flag = p_177077_9_.isGui3d();
-			int i = this.getModelCount(itemstack);
-			float f = 0.25F;
-			float f2 = p_177077_9_.getItemCameraTransforms().getTransform(ItemCameraTransforms.TransformType.GROUND).scale.y;
+        boolean flag = p_177077_9_.isGui3d();
+        int i = this.getModelCount(itemstack);
+        float f = 0.25F;
+        float f2 = p_177077_9_.getItemCameraTransforms().getTransform(ItemCameraTransforms.TransformType.GROUND).scale.y;
 
-			float modY = (float) p_177077_4_ + f2 * 0.25f;
+        float modY = (float) p_177077_4_ + f2 * 0.25f;
 
-			if (flag)
-			{
-				modY -= 0.15f;
-			}
-			else
-			{
-				modY -= 0.2;
-			}
+        if (flag)
+        {
+            modY -= 0.15f;
+        }
+        else
+        {
+            modY -= 0.2;
+        }
 
-			GlStateManager.translate((float) p_177077_2_, modY, (float) p_177077_6_);
+        GlStateManager.translate((float) p_177077_2_, modY, (float) p_177077_6_);
 
-			if (flag || this.renderManager.options != null)
-			{
-				float f3 = ((itemIn.getAge() + p_177077_8_) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI);
-				GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
-			}
+        if (flag || this.renderManager.options != null)
+        {
+            float f3 = ((itemIn.getAge() + p_177077_8_) / 20.0F + itemIn.hoverStart) * (180F / (float) Math.PI);
+            GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
+        }
 
-			GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-			return i;
-		}
-	}
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+        return i;
+    }
 
 	protected int getModelCount(ItemStack stack)
 	{
@@ -105,7 +99,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		ItemStack itemstack = entity.getItem();
 		int i;
 
-		if (!itemstack.isEmpty() && itemstack.getItem() != null)
+		if (!itemstack.isEmpty())
 		{
 			i = Item.getIdFromItem(itemstack.getItem()) + itemstack.getMetadata();
 		}
@@ -129,7 +123,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		RenderHelper.enableStandardItemLighting();
 		GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
 		GlStateManager.pushMatrix();
-		IBakedModel ibakedmodel = this.itemRenderer.getItemModelWithOverrides(itemstack, entity.world, (EntityLivingBase) null);
+		IBakedModel ibakedmodel = this.itemRenderer.getItemModelWithOverrides(itemstack, entity.world, null);
 		int j = this.transformModelCount(entity, x, y, z, partialTicks, ibakedmodel);
 		boolean flag1 = ibakedmodel.isGui3d();
 
@@ -207,7 +201,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 	 * you call Render.bindEntityTexture.
 	 */
 	@Override
-	protected ResourceLocation getEntityTexture(EntityProjectedItem entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntityProjectedItem entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}

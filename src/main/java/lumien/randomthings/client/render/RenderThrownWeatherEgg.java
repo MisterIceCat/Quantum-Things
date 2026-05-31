@@ -8,12 +8,12 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
 
 @SideOnly(Side.CLIENT)
 public class RenderThrownWeatherEgg extends Render<EntityThrownWeatherEgg>
@@ -29,7 +29,7 @@ public class RenderThrownWeatherEgg extends Render<EntityThrownWeatherEgg>
     /**
      * Renders the desired {@code T} type Entity.
      */
-    public void doRender(EntityThrownWeatherEgg entity, double x, double y, double z, float entityYaw, float partialTicks)
+    public void doRender(@Nonnull EntityThrownWeatherEgg entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
         GlStateManager.translate((float)x, (float)y, (float)z);
@@ -58,7 +58,7 @@ public class RenderThrownWeatherEgg extends Render<EntityThrownWeatherEgg>
     }
 
 	@Override
-	protected ResourceLocation getEntityTexture(EntityThrownWeatherEgg entity)
+	protected ResourceLocation getEntityTexture(@Nonnull EntityThrownWeatherEgg entity)
 	{
 		return TextureMap.LOCATION_BLOCKS_TEXTURE;
 	}

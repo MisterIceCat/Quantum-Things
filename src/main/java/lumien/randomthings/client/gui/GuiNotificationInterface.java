@@ -17,6 +17,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class GuiNotificationInterface extends GuiContainerBase implements GuiResponder
 {
 	final ResourceLocation background = new ResourceLocation("randomthings:textures/gui/notificationInterface.png");
@@ -35,7 +37,7 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString(I18n.format("tile.notificationInterface.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("tile.notificationInterface.name"), 8, 6, 4210752);
 	}
 
 	@Override
@@ -124,7 +126,7 @@ public class GuiNotificationInterface extends GuiContainerBase implements GuiRes
 	}
 
 	@Override
-	public void setEntryValue(int id, String value)
+	public void setEntryValue(int id, @Nonnull String value)
 	{
 		String newTitle = titleField.getText();
 		String newDescription = descriptionField.getText();

@@ -57,13 +57,10 @@ public class DriverNotificationInterface extends DriverSidedTileEntity
 			{
 				EntityPlayerMP player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(owner);
 
-				if (player != null)
-				{
-					MessageNotification message = new MessageNotification(title, description, iconStack);
+                MessageNotification message = new MessageNotification(title, description, iconStack);
 
-					PacketHandler.instance().sendTo(message, player);
-				}
-			}
+                PacketHandler.instance().sendTo(message, player);
+            }
 
 			return new Object[] {};
 		}

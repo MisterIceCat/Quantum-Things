@@ -11,6 +11,8 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
 import net.minecraft.world.gen.IChunkGenerator;
 
+import javax.annotation.Nonnull;
+
 public class SpectreChunkProvider implements IChunkGenerator
 {
 	World worldObj;
@@ -38,30 +40,30 @@ public class SpectreChunkProvider implements IChunkGenerator
 	}
 
 	@Override
-	public boolean generateStructures(Chunk chunkIn, int x, int z)
+	public boolean generateStructures(@Nonnull Chunk chunkIn, int x, int z)
 	{
 		return false;
 	}
 
 	@Override
-	public List<SpawnListEntry> getPossibleCreatures(EnumCreatureType creatureType, BlockPos pos)
+	public List<SpawnListEntry> getPossibleCreatures(@Nonnull EnumCreatureType creatureType, @Nonnull BlockPos pos)
 	{
 		return new ArrayList<>();
 	}
 
 	@Override
-	public void recreateStructures(Chunk chunkIn, int x, int z)
+	public void recreateStructures(@Nonnull Chunk chunkIn, int x, int z)
 	{
 	}
 
 	@Override
-	public BlockPos getNearestStructurePos(World worldIn, String structureName, BlockPos position, boolean findUnexplored)
+	public BlockPos getNearestStructurePos(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos position, boolean findUnexplored)
 	{
 		return null;
 	}
 
 	@Override
-	public boolean isInsideStructure(World worldIn, String structureName, BlockPos pos)
+	public boolean isInsideStructure(@Nonnull World worldIn, @Nonnull String structureName, @Nonnull BlockPos pos)
 	{
 		return false;
 	}

@@ -10,6 +10,8 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerIronDropper extends ContainerTE<TileEntityIronDropper>
 {
 	IItemHandler itemHandler;
@@ -44,7 +46,7 @@ public class ContainerIronDropper extends ContainerTE<TileEntityIronDropper>
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -61,7 +63,7 @@ public class ContainerIronDropper extends ContainerTE<TileEntityIronDropper>
 					return ItemStack.EMPTY;
 				}
 			}
-			else if (par2 > 8 && !this.mergeItemStack(itemstack1, 0, 9, false))
+			else if (!this.mergeItemStack(itemstack1, 0, 9, false))
 			{
 				return ItemStack.EMPTY;
 			}
@@ -87,7 +89,7 @@ public class ContainerIronDropper extends ContainerTE<TileEntityIronDropper>
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;

@@ -71,7 +71,7 @@ public class GuiSlotButton extends GuiButton
 	{
 		if (tooltip != null)
 		{
-			GuiUtils.drawHoveringText(Arrays.<String>asList(new String[] { tooltip }), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
+			GuiUtils.drawHoveringText(Arrays.asList(tooltip), mouseX, mouseY, mc.displayWidth, mc.displayHeight, -1, mc.fontRenderer);
 		}
 	}
 }

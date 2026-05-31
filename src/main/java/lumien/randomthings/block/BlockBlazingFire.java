@@ -2,6 +2,7 @@ package lumien.randomthings.block;
 
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -9,7 +10,6 @@ import net.minecraft.block.BlockTNT;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -52,13 +52,12 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubBlocks(@Nonnull CreativeTabs tab, @Nonnull NonNullList<ItemStack> list)
 	{
-		return;
-	}
+    }
 
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public IBlockState getActualState(@Nonnull IBlockState state, IBlockAccess worldIn, BlockPos pos)
 	{
 		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !Blocks.FIRE.canCatchFire(worldIn, pos.down(), EnumFacing.UP))
 		{
@@ -69,7 +68,7 @@ public class BlockBlazingFire extends BlockBase
 
 	@Override
 	@Nullable
-	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	public AxisAlignedBB getCollisionBoundingBox(@Nonnull IBlockState blockState, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return NULL_AABB;
 	}
@@ -79,13 +78,13 @@ public class BlockBlazingFire extends BlockBase
 	 * render
 	 */
 	@Override
-	public boolean isOpaqueCube(IBlockState state)
+	public boolean isOpaqueCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state)
+	public boolean isFullCube(@Nonnull IBlockState state)
 	{
 		return false;
 	}
@@ -94,7 +93,7 @@ public class BlockBlazingFire extends BlockBase
 	 * Returns the quantity of items to drop on block destruction.
 	 */
 	@Override
-	public int quantityDropped(Random random)
+	public int quantityDropped(@Nonnull Random random)
 	{
 		return 0;
 	}
@@ -103,13 +102,13 @@ public class BlockBlazingFire extends BlockBase
 	 * How many world ticks before ticking
 	 */
 	@Override
-	public int tickRate(World worldIn)
+	public int tickRate(@Nonnull World worldIn)
 	{
 		return 15; // 30 -> 15
 	}
 
 	@Override
-	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+	public void updateTick(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull Random rand)
 	{
 		if (worldIn.getGameRules().getBoolean("doFireTick"))
 		{
@@ -329,7 +328,7 @@ public class BlockBlazingFire extends BlockBase
 	 * etc.
 	 */
 	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos changedPos)
+	public void neighborChanged(@Nonnull IBlockState state, World worldIn, BlockPos pos, @Nonnull Block blockIn, @Nonnull BlockPos changedPos)
 	{
 		if (!worldIn.getBlockState(pos.down()).isSideSolid(worldIn, pos.down(), EnumFacing.UP) && !this.canNeighborCatchFire(worldIn, pos))
 		{
@@ -342,7 +341,7 @@ public class BlockBlazingFire extends BlockBase
 	 * is set
 	 */
 	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
+	public void onBlockAdded(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
 		if (worldIn.provider.getDimensionType().getId() > 0 || !Blocks.PORTAL.trySpawnPortal(worldIn, pos))
 		{
@@ -359,7 +358,7 @@ public class BlockBlazingFire extends BlockBase
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+	public void randomDisplayTick(@Nonnull IBlockState stateIn, @Nonnull World worldIn, @Nonnull BlockPos pos, Random rand)
 	{
 		if (rand.nextInt(24) == 0)
 		{
@@ -375,7 +374,7 @@ public class BlockBlazingFire extends BlockBase
 					double d3 = pos.getX() + rand.nextDouble() * 0.10000000149011612D;
 					double d8 = pos.getY() + rand.nextDouble();
 					double d13 = pos.getZ() + rand.nextDouble();
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d3, d8, d13, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d3, d8, d13, 0.0D, 0.0D, 0.0D);
 				}
 			}
 
@@ -386,7 +385,7 @@ public class BlockBlazingFire extends BlockBase
 					double d4 = pos.getX() + 1 - rand.nextDouble() * 0.10000000149011612D;
 					double d9 = pos.getY() + rand.nextDouble();
 					double d14 = pos.getZ() + rand.nextDouble();
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d4, d9, d14, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d4, d9, d14, 0.0D, 0.0D, 0.0D);
 				}
 			}
 
@@ -397,7 +396,7 @@ public class BlockBlazingFire extends BlockBase
 					double d5 = pos.getX() + rand.nextDouble();
 					double d10 = pos.getY() + rand.nextDouble();
 					double d15 = pos.getZ() + rand.nextDouble() * 0.10000000149011612D;
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d5, d10, d15, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d5, d10, d15, 0.0D, 0.0D, 0.0D);
 				}
 			}
 
@@ -408,7 +407,7 @@ public class BlockBlazingFire extends BlockBase
 					double d6 = pos.getX() + rand.nextDouble();
 					double d11 = pos.getY() + rand.nextDouble();
 					double d16 = pos.getZ() + 1 - rand.nextDouble() * 0.10000000149011612D;
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d6, d11, d16, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d6, d11, d16, 0.0D, 0.0D, 0.0D);
 				}
 			}
 
@@ -419,7 +418,7 @@ public class BlockBlazingFire extends BlockBase
 					double d7 = pos.getX() + rand.nextDouble();
 					double d12 = pos.getY() + 1 - rand.nextDouble() * 0.10000000149011612D;
 					double d17 = pos.getZ() + rand.nextDouble();
-					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d12, d17, 0.0D, 0.0D, 0.0D, new int[0]);
+					worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d7, d12, d17, 0.0D, 0.0D, 0.0D);
 				}
 			}
 		}
@@ -430,7 +429,7 @@ public class BlockBlazingFire extends BlockBase
 				double d0 = pos.getX() + rand.nextDouble();
 				double d1 = pos.getY() + rand.nextDouble() * 0.5D + 0.5D;
 				double d2 = pos.getZ() + rand.nextDouble();
-				worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D, new int[0]);
+				worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, d0, d1, d2, 0.0D, 0.0D, 0.0D);
 			}
 		}
 	}
@@ -439,7 +438,7 @@ public class BlockBlazingFire extends BlockBase
 	 * Get the MapColor for this Block and the given BlockState
 	 */
 	@Override
-	public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+	public MapColor getMapColor(@Nonnull IBlockState state, @Nonnull IBlockAccess worldIn, @Nonnull BlockPos pos)
 	{
 		return MapColor.TNT;
 	}
@@ -452,7 +451,7 @@ public class BlockBlazingFire extends BlockBase
 	}
 
 	@Override
-	public boolean isBurning(IBlockAccess world, BlockPos pos)
+	public boolean isBurning(@Nonnull IBlockAccess world, @Nonnull BlockPos pos)
 	{
 		return true;
 	}
@@ -478,7 +477,7 @@ public class BlockBlazingFire extends BlockBase
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
-		return new BlockStateContainer(this, new IProperty[] { AGE, NORTH, EAST, SOUTH, WEST, UPPER });
+		return new BlockStateContainer(this, AGE, NORTH, EAST, SOUTH, WEST, UPPER);
 	}
 
 	/*

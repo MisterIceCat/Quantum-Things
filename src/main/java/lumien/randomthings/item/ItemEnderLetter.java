@@ -66,13 +66,13 @@ public class ItemEnderLetter extends ItemBase
 	}
 
 	@Override
-	public boolean doesSneakBypassUse(ItemStack stack, net.minecraft.world.IBlockAccess world, BlockPos pos, EntityPlayer player)
+	public boolean doesSneakBypassUse(@Nonnull ItemStack stack, @Nonnull net.minecraft.world.IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player)
 	{
 		return true;
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, @Nonnull EnumHand hand)
 	{
 		ItemStack itemStackIn = playerIn.getHeldItem(hand);
 		if (!worldIn.isRemote && hand == EnumHand.MAIN_HAND)

@@ -7,6 +7,8 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
 
+import javax.annotation.Nonnull;
+
 public class SlotDyeCrafting extends SlotCrafting
 {
 	IInventory craftMatrix;
@@ -21,13 +23,13 @@ public class SlotDyeCrafting extends SlotCrafting
 	}
 
 	@Override
-	protected void onCrafting(ItemStack par1ItemStack)
+	protected void onCrafting(@Nonnull ItemStack par1ItemStack)
 	{
 
 	}
 
 	@Override
-	public ItemStack onTake(EntityPlayer par1EntityPlayer, ItemStack par2ItemStack)
+	public ItemStack onTake(@Nonnull EntityPlayer par1EntityPlayer, @Nonnull ItemStack par2ItemStack)
 	{
 		for (int i = 0; i < this.craftMatrix.getSizeInventory(); ++i)
 		{

@@ -19,6 +19,8 @@ import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+
 public class EntityArtificialEndPortal extends Entity implements IEntityAdditionalSpawnData
 {
 	public int actionTimer;
@@ -88,7 +90,7 @@ public class EntityArtificialEndPortal extends Entity implements IEntityAddition
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer entityIn)
+	public void onCollideWithPlayer(@Nonnull EntityPlayer entityIn)
 	{
 		super.onCollideWithPlayer(entityIn);
 

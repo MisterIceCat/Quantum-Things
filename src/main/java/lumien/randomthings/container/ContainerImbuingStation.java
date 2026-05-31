@@ -16,6 +16,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import javax.annotation.Nonnull;
+
 public class ContainerImbuingStation extends Container
 {
 	TileEntityImbuingStation te;
@@ -61,7 +63,7 @@ public class ContainerImbuingStation extends Container
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+	public ItemStack transferStackInSlot(@Nonnull EntityPlayer par1EntityPlayer, int par2)
 	{
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(par2);
@@ -104,7 +106,7 @@ public class ContainerImbuingStation extends Container
 	}
 
 	@Override
-	public boolean mergeItemStack(ItemStack par1ItemStack, int par2, int par3, boolean par4)
+	public boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int par2, int par3, boolean par4)
 	{
 		boolean flag1 = false;
 		int k = par2;
@@ -226,7 +228,7 @@ public class ContainerImbuingStation extends Container
 	}
 
 	@Override
-	public void addListener(IContainerListener listener)
+	public void addListener(@Nonnull IContainerListener listener)
 	{
 		super.addListener(listener);
 		listener.sendWindowProperty(this, 0, this.te.imbuingProgress);

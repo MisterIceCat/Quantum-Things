@@ -22,6 +22,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.config.GuiButtonExt;
 
+import javax.annotation.Nonnull;
+
 public class GuiChunkAnalyzer extends GuiContainerBase
 {
 	ItemStack analyzerStack;
@@ -109,7 +111,7 @@ public class GuiChunkAnalyzer extends GuiContainerBase
 	}
 
 	@Override
-	protected void actionPerformed(GuiButton button) throws IOException
+	protected void actionPerformed(@Nonnull GuiButton button) throws IOException
 	{
 		super.actionPerformed(button);
 
@@ -125,7 +127,7 @@ public class GuiChunkAnalyzer extends GuiContainerBase
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
-		fontRenderer.drawString(I18n.format("item.chunkAnalyzer.name", new Object[0]), 8, 6, 4210752);
+		fontRenderer.drawString(I18n.format("item.chunkAnalyzer.name"), 8, 6, 4210752);
 	}
 
 	@Override

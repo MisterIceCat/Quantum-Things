@@ -1,10 +1,6 @@
 package lumien.randomthings.tileentity;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
 
 import lumien.randomthings.config.Numbers;
@@ -203,9 +199,7 @@ public class TileEntityAncientFurnace extends TileEntityBase implements ITickabl
 									} else {
 										Boolean[] newArray = new Boolean[EnumFacing.HORIZONTALS.length];
 
-										for (int i = 0; i < newArray.length; i++) {
-											newArray[i] = true;
-										}
+                                        Arrays.fill(newArray, true);
 
 										newArray[facing.getOpposite().getHorizontalIndex()] = false;
 
@@ -256,7 +250,7 @@ public class TileEntityAncientFurnace extends TileEntityBase implements ITickabl
 					{
 						world.setBlockToAir(nextBreak);
 
-						world.playSound((EntityPlayer) null, nextBreak, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
+						world.playSound(null, nextBreak, SoundEvents.BLOCK_LAVA_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (world.rand.nextFloat() - world.rand.nextFloat()) * 0.8F);
 						world.playEvent(2000, nextBreak, 4);
 					}
 				}
@@ -306,10 +300,7 @@ public class TileEntityAncientFurnace extends TileEntityBase implements ITickabl
 
 		Boolean[] newArray = new Boolean[EnumFacing.HORIZONTALS.length];
 
-		for (int i = 0; i < newArray.length; i++)
-		{
-			newArray[i] = true;
-		}
+        Arrays.fill(newArray, true);
 
 		nextCheckEntries.put(this.pos, newArray);
 
