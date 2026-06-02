@@ -135,6 +135,7 @@ The goal of Quantum Things is to provide continued support for Random Things, su
 - Fixed a crash when the Notification Interface was used in Multiplayer. ([courtesy of Alternis](https://github.com/MagicJinn/Quantum-Things/pull/57))
 - Fixed a rare crash caused by the Chat Detector and Global Chat Detector trying to access a null world.
 - Fixed the Ancient Furnace being able to break indestructible blocks.
+- Fixed Magic Beans being able to resume growing when being interacted with with the Acceleration Wand (or any other item that would run updateTick()).
 
 ### Reporting Issues
 

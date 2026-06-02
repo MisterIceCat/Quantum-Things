@@ -1,5 +1,6 @@
 package lumien.randomthings.item;
 
+import lumien.randomthings.block.BlockBeanStalk;
 import lumien.randomthings.block.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,6 +73,8 @@ public class ItemBean extends ItemBase
 		}
 		else if (worldIn.isAirBlock(pos.up()))
 		{
+			boolean isLesserMagic = stack.getItemDamage() == 1;
+			boolean isStrongMagic = stack.getItemDamage() == 2;
 			if (stack.getItemDamage() == 0 && ModBlocks.beanSprout.canPlaceBlockAt(worldIn, pos.up()))
 			{
 				worldIn.setBlockState(pos.up(), ModBlocks.beanSprout.getDefaultState());
@@ -81,32 +84,23 @@ public class ItemBean extends ItemBase
 				stack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
-			else if (stack.getItemDamage() == 1 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
-			{
-				worldIn.setBlockState(pos.up(), ModBlocks.lesserBeanStalk.getDefaultState());
-				worldIn.scheduleUpdate(pos.up(), ModBlocks.lesserBeanStalk, 20);
-
-				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
-
+			else if ((isLesserMagic || isStrongMagic) && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up())) {
+				if (isLesserMagic) {
+					worldIn.setBlockState(pos.up(),
+							ModBlocks.lesserBeanStalk.getDefaultState().withProperty(BlockBeanStalk.SHOULD_GROW, true));
+					worldIn.scheduleUpdate(pos.up(), ModBlocks.lesserBeanStalk, 20);
+				} else if (isStrongMagic) {
+					worldIn.setBlockState(pos.up(),
+							ModBlocks.beanStalk.getDefaultState().withProperty(BlockBeanStalk.SHOULD_GROW, true));
+					worldIn.scheduleUpdate(pos.up(), ModBlocks.beanStalk, 20);
+				}
+				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(),
+						SoundCategory.BLOCKS, 1, 1);
 				stack.shrink(1);
 				return EnumActionResult.SUCCESS;
 			}
-			else if (stack.getItemDamage() == 2 && ModBlocks.beanStalk.canPlaceBlockAt(worldIn, pos.up()))
-			{
-				worldIn.setBlockState(pos.up(), ModBlocks.beanStalk.getDefaultState());
-				worldIn.scheduleUpdate(pos.up(), ModBlocks.beanStalk, 20);
-
-				worldIn.playSound(null, pos.up(), ModBlocks.beanStalk.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 1);
-
-				stack.shrink(1);
-				return EnumActionResult.SUCCESS;
-			}
-			return EnumActionResult.FAIL;
 		}
-		else
-		{
-			return EnumActionResult.FAIL;
-		}
+		return EnumActionResult.FAIL;
 	}
 
 	@Override

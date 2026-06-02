@@ -15,6 +15,7 @@ This page documents the changes and fixes made in Quantum Things, compared to th
 - Fixed a crash from CustomClassWriter on newer java versions. ([courtesy of Leclowndu93150](https://github.com/MagicJinn/Quantum-Things/pull/55))
 - Fixed a crash when the Notification Interface was used in Multiplayer. ([courtesy of Alternis](https://github.com/MagicJinn/Quantum-Things/pull/57))
 - Fixed the Ancient Furnace being able to break indestructible blocks.
+- Fixed Magic Beans being able to resume growing when being interacted with with the Acceleration Wand (or any other item that would run updateTick()).
 
 ## 1.2.0
 

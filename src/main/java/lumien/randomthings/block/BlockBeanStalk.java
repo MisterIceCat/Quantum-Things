@@ -5,6 +5,8 @@ import java.util.Random;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -28,6 +30,9 @@ import javax.annotation.Nonnull;
 
 public class BlockBeanStalk extends BlockBase implements IPlantable
 {
+	private static final int MAX_HEIGHT = 512;
+	public static final PropertyBool SHOULD_GROW = PropertyBool.create("should_grow");
+
 	boolean strongMagic;
 
 	protected static final AxisAlignedBB STALK_AABB = new AxisAlignedBB(0.4f, 0, 0.4f, 0.6f, 1, 0.6f);
@@ -37,6 +42,7 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 		super(strongMagic ? "beanStalk" : "lesserBeanStalk", Material.PLANTS);
 
 		this.setSoundType(SoundType.PLANT);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(SHOULD_GROW, false));
 
 		this.strongMagic = strongMagic;
 	}
@@ -84,14 +90,21 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	{
 		if (!worldIn.isRemote)
 		{
-			int height = Math.min(512, worldIn.getHeight());
+			if (!state.getValue(SHOULD_GROW))
+				return;
+
+			// set has grown to true
+			worldIn.setBlockState(pos, state.withProperty(SHOULD_GROW, false));
+
+			// Grows up to 512 blocks tall, or the height of the world, whichever is lower.
+			final int maxHeight = Math.min(512, worldIn.getHeight());
 			if (strongMagic)
 			{
-				if (pos.getY() >= height - 2)
+				if (pos.getY() >= maxHeight - 2)
 				{
 					IBlockState podReplace = worldIn.getBlockState(pos.up());
 
-					if (podReplace.getBlock().getBlockHardness(podReplace, worldIn, pos.up()) != -1)
+					if (podReplace.getBlock().getBlockHardness(podReplace, worldIn, pos.up()) >= 0)
 					{
 						worldIn.setBlockState(pos.up(), ModBlocks.beanPod.getDefaultState());
 					}
@@ -100,7 +113,7 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 			}
 			else
 			{
-				if (pos.getY() >= height || !worldIn.isAirBlock(pos.up()))
+				if (pos.getY() >= maxHeight || !worldIn.isAirBlock(pos.up()))
 				{
 					return;
 				}
@@ -115,12 +128,13 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 				}
 				else
 				{
-					worldIn.playEvent(2001, pos, Block.getStateId(this.getDefaultState()));
+					worldIn.playEvent(2001, pos,
+							Block.getStateId(this.getDefaultState()));
 					worldIn.playSound(null, pos, this.getSoundType().getPlaceSound(), SoundCategory.BLOCKS, 1, 2);
 				}
 
 				worldIn.playEvent(2005, pos.up(), 0);
-				worldIn.setBlockState(pos.up(), this.getDefaultState());
+				worldIn.setBlockState(pos.up(), this.getDefaultState().withProperty(SHOULD_GROW, true));
 				worldIn.scheduleUpdate(pos.up(), this, strongMagic ? 1 : 5);
 			}
 			else
@@ -204,6 +218,21 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 	public boolean isLadder(@Nonnull IBlockState state, @Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nonnull EntityLivingBase entity)
 	{
 		return true;
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		return state.getValue(SHOULD_GROW) ? 1 : 0;
+	}
+
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+		return this.getDefaultState().withProperty(SHOULD_GROW, meta == 1);
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState() {
+		return new BlockStateContainer(this, SHOULD_GROW);
 	}
 
 	@Override
