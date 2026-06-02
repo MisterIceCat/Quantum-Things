@@ -89,8 +89,6 @@ public class AsmHandler
 		}
 	}
 
-	public static boolean worldGenDisabler = false;
-
 	public static int overrideLightValue(Block b, IBlockState state, IBlockAccess world, BlockPos pos)
 	{
 		if (Features.DISABLE_SPECTRE_ILLUMINATOR || state.getBlock() instanceof BlockAir)
