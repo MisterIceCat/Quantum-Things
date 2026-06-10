@@ -9,6 +9,8 @@ This page documents the changes and fixes made in Quantum Things, compared to th
 
 ## 1.2.2
 
+### Fixes
+
 - Fix Spectre Lens NullPointerException when starting a server (introduced in 1.2.1).
 
 ## 1.2.1
