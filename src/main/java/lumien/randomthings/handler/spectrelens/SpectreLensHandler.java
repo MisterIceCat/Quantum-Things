@@ -77,7 +77,7 @@ public class SpectreLensHandler extends WorldSavedData
 			{
 				EntityPlayer player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
 
-				if (player.world == worldObj)
+				if (player != null && player.world == worldObj)
 				{
 					LensEntry entry = lensEntries.get(uuid);
 					
