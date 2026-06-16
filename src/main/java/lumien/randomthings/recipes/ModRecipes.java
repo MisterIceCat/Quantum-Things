@@ -111,7 +111,8 @@ public class ModRecipes
 
 		ArrayUtils.reverse(oreDictDyes);
 
-		RecipeSorter.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
+		if (!Features.DISABLE_CUSTOM_WORKBENCH)
+			RecipeSorter.register("randomthings:customWorkbenchRecipe", RecipeWorkbench.class, Category.SHAPED, "");
 
 		final ItemStack rottenFlesh = new ItemStack(Items.ROTTEN_FLESH);
 		final ItemStack boneMeal = new ItemStack(Items.DYE, 1, 15);
@@ -131,7 +132,8 @@ public class ModRecipes
 		final ItemStack glisteringMelon = new ItemStack(Items.SPECKLED_MELON);
 		final ItemStack witherSkull = new ItemStack(Items.SKULL, 1, 1);
 
-		ForgeRegistries.RECIPES.register(new RecipeWorkbench());
+		if (!Features.DISABLE_CUSTOM_WORKBENCH)
+			ForgeRegistries.RECIPES.register(new RecipeWorkbench());
 
 		// Imbuing Station
 		ImbuingRecipeHandler.addRecipe(waterBottle, vine, boneMeal, cobblestone, mossyCobblestone);

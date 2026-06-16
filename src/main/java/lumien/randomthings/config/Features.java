@@ -48,6 +48,9 @@ public class Features {
 	@ConfigOption(category = CATEGORY, name = "DisableSpectreIlluminator", comment = "Whether the Spectre Illuminator should be disabled. Removes the recipe and item from the game, as well as slightly improving TPS performance.")
 	public static boolean DISABLE_SPECTRE_ILLUMINATOR = false;
 
+	@ConfigOption(category = CATEGORY, name = "DisableCustomWorkbench", comment = "Whether the Custom Workbench should be disabled. Removes the recipe and item from the game.")
+	public static boolean DISABLE_CUSTOM_WORKBENCH = false;
+
 	@ConfigOption(category = CATEGORY, name = "LuminousBlocksEmitLight", comment = "Whether the Luminous and Luminous Translucent blocks should emit light.")
 	public static boolean LUMINOUS_BLOCKS_EMIT_LIGHT = false;
 

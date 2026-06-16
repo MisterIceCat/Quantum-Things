@@ -680,11 +680,13 @@ public class RTEventHandler {
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:fluidDisplay", "inventory"),
 				modelFluidDisplay);
 
-		ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
-		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"),
-				modelCustomWorkbench);
-		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"),
-				modelCustomWorkbench);
+		if (!Features.DISABLE_CUSTOM_WORKBENCH) {
+			ModelCustomWorkbench modelCustomWorkbench = new ModelCustomWorkbench();
+			event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "normal"),
+					modelCustomWorkbench);
+			event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:customWorkbench", "inventory"),
+					modelCustomWorkbench);
+		}
 
 		ModelRune runeBaseModel = new ModelRune();
 		event.getModelRegistry().putObject(new ModelResourceLocation("randomthings:runeBase", "normal"), runeBaseModel);
