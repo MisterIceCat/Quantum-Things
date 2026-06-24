@@ -162,7 +162,12 @@ public class BlockBeanSprout extends BlockBush implements IGrowable, IPlantable
 	@Override
 	public boolean canBlockStay(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state)
 	{
-		return (worldIn.getLight(pos) >= 8 || worldIn.canSeeSky(pos)) && worldIn.getBlockState(pos.down()).getBlock().canSustainPlant(worldIn.getBlockState(pos.down()), worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
+		// Early exit to prevent unnecessary work during worldgen
+		if (!worldIn.canSeeSky(pos) && worldIn.getLight(pos) < 8)
+			return false;
+
+		IBlockState soil = worldIn.getBlockState(pos.down());
+		return soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this);
 	}
 
 	@Override

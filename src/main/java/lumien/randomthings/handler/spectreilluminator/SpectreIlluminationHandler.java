@@ -96,6 +96,11 @@ public class SpectreIlluminationHandler extends WorldSavedData
 		return illuminatedChunks.contains(chunkLong);
 	}
 
+	public boolean hasIlluminatedChunks()
+	{
+		return !illuminatedChunks.isEmpty();
+	}
+
 	@SuppressWarnings("null")
 	public void toggleChunk(World world, BlockPos pos)
 	{

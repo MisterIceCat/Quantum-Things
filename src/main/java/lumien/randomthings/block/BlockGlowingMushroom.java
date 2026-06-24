@@ -94,7 +94,6 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 	@Override
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
 	{
-		IBlockState soil = worldIn.getBlockState(pos.down());
 		return super.canPlaceBlockAt(worldIn, pos) && canBlockStay(worldIn, pos, this.getDefaultState());
 	}
 
@@ -158,27 +157,35 @@ public class BlockGlowingMushroom extends BlockBase implements IPlantable, ILumi
 
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	{
-		if (pos.getY() >= 0 && pos.getY() < 256)
-		{
-			IBlockState soil = worldIn.getBlockState(pos.down());
-
-			if (soil.getBlock() == Blocks.MYCELIUM)
-			{
-				return true;
-			}
-			else
-			{
-				return worldIn.getLight(pos) < 13 && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), net.minecraft.util.EnumFacing.UP, this) && canSustainBush(soil);
-			}
-		}
-		else
-		{
+		if (!isWithinWorldHeight(pos) || !isValidSoil(worldIn, pos))
 			return false;
-		}
+
+		return !worldIn.canSeeSky(pos) || worldIn.getLight(pos) < 13;
 	}
 
-	protected boolean canSustainBush(IBlockState state)
+	protected boolean canSustainBush(IBlockState state) {
+		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE
+				|| state.getBlock() == ModBlocks.fertilizedDirt;
+	}
+
+	public boolean canGenerateAt(World worldIn, BlockPos pos) {
+		if (!isWithinWorldHeight(pos) || !worldIn.isAirBlock(pos))
+			return false;
+
+		return isValidSoil(worldIn, pos);
+	}
+
+	private static boolean isWithinWorldHeight(BlockPos pos) {
+		return pos.getY() >= 0 && pos.getY() < 256;
+	}
+
+	private boolean isValidSoil(World worldIn, BlockPos pos)
 	{
-		return state.getBlock() == Blocks.GRASS || state.getBlock() == Blocks.DIRT || state.getBlock() == Blocks.STONE || state.getBlock() == ModBlocks.fertilizedDirt;
+		IBlockState soil = worldIn.getBlockState(pos.down());
+
+		if (soil.getBlock() == Blocks.MYCELIUM)
+			return true;
+
+		return canSustainBush(soil) && soil.getBlock().canSustainPlant(soil, worldIn, pos.down(), EnumFacing.UP, this);
 	}
 }

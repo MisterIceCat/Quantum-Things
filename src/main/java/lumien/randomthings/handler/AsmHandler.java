@@ -96,12 +96,20 @@ public class AsmHandler
 
 		if (world instanceof World) {
 			World worldObj = (World) world;
-			return worldObj.isRemote ? overrideLightValueClient(pos) : overrideLightValueServer(worldObj, pos);
+			if (worldObj.isRemote) {
+				if (!SpectreIlluminationClientHandler.hasIlluminatedChunks())
+					return -1;
+				return overrideLightValueClient(pos);
+			}
+			return overrideLightValueServer(worldObj, pos);
 		}
 
 		// Fallback for non-World IBlockAccess implementations.
-		if (FMLCommonHandler.instance().getEffectiveSide().isClient())
+		if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
+			if (!SpectreIlluminationClientHandler.hasIlluminatedChunks())
+				return -1;
 			return overrideLightValueClient(pos);
+		}
 
 		return -1;
 	}
@@ -121,11 +129,7 @@ public class AsmHandler
 	}
 
 	private static int overrideLightValueServer(World worldObj, BlockPos pos) {
-		long chunkLong = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
 		LightValueQueryCache cache = LIGHT_VALUE_QUERY_CACHE.get();
-		if (cache.lastServerWorld == worldObj && cache.lastServerChunkLong == chunkLong) {
-			return cache.lastServerIlluminated ? 14 : -1;
-		}
 
 		SpectreIlluminationHandler handler;
 		if (cache.lastServerWorld == worldObj && cache.lastServerHandler != null) {
@@ -135,6 +139,15 @@ public class AsmHandler
 			handler = SpectreIlluminationHandler.get(worldObj);
 			cache.lastServerWorld = worldObj;
 			cache.lastServerHandler = handler;
+			cache.lastServerChunkLong = Long.MIN_VALUE;
+		}
+
+		if (!handler.hasIlluminatedChunks())
+			return -1;
+
+		long chunkLong = ChunkPos.asLong(pos.getX() >> 4, pos.getZ() >> 4);
+		if (cache.lastServerChunkLong == chunkLong) {
+			return cache.lastServerIlluminated ? 14 : -1;
 		}
 
 		boolean illuminated = handler.isIlluminatedChunk(chunkLong);

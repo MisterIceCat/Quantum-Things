@@ -6,6 +6,7 @@ import lumien.randomthings.block.BlockLotus;
 import lumien.randomthings.block.ModBlocks;
 import lumien.randomthings.config.Worldgen;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
@@ -31,7 +32,9 @@ public class WorldGenPlants extends WorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target.getY() > 0 && world.isAirBlock(target) && target.getY() < 255 && ModBlocks.beanSprout.canBlockStay(world, target, ModBlocks.beanSprout.getDefaultState()))
+				IBlockState soil = world.getBlockState(target.down());
+				if (target.getY() > 0 && target.getY() < 255 && world.isAirBlock(target) && world.canSeeSky(target)
+						&& soil.getBlock().canSustainPlant(soil, world, target.down(), EnumFacing.UP, ModBlocks.beanSprout))
 				{
 					world.setBlockState(target, ModBlocks.beanSprout.getDefaultState(), 2);
 				}

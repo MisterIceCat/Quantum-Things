@@ -23,6 +23,11 @@ public class SpectreIlluminationClientHandler
 		return illuminatedChunks.contains(chunkLong);
 	}
 
+	public static boolean hasIlluminatedChunks()
+	{
+		return !illuminatedChunks.isEmpty();
+	}
+
 	public static void loadChunk(Chunk chunk)
 	{
 		illuminatedChunks.remove(ChunkPos.asLong(chunk.x, chunk.z));
