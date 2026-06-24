@@ -50,7 +50,10 @@ public class ItemModels
 		registerBlock(ModBlocks.spectreBlock);
 		registerBlock(ModBlocks.analogEmitter);
 		registerBlock(ModBlocks.fluidDisplay);
-		registerBlock(ModBlocks.customWorkbench);
+
+		if (!Features.DISABLE_CUSTOM_WORKBENCH)
+			registerBlock(ModBlocks.customWorkbench);
+
 		registerBlock(ModBlocks.enderMailbox);
 		registerBlock(ModBlocks.pitcherPlant);
 		registerBlock(ModBlocks.specialChest);

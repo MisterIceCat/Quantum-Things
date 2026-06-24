@@ -24,6 +24,7 @@ import lumien.randomthings.block.spectretree.BlockSpectrePlankSlab;
 import lumien.randomthings.block.spectretree.BlockSpectrePlankSlabDouble;
 import lumien.randomthings.block.spectretree.BlockSpectrePlankStairs;
 import lumien.randomthings.block.spectretree.BlockSpectreSapling;
+import lumien.randomthings.config.Features;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ModBlocks
@@ -181,7 +182,10 @@ public class ModBlocks
 		specialChest = new BlockSpecialChest();
 		analogEmitter = new BlockAnalogEmitter();
 		fluidDisplay = new BlockFluidDisplay();
-		customWorkbench = new BlockCustomWorkbench();
+
+		if (!Features.DISABLE_CUSTOM_WORKBENCH)
+			customWorkbench = new BlockCustomWorkbench();
+
 		enderMailbox = new BlockEnderMailbox();
 		pitcherPlant = new BlockPitcherPlant();
 		platform = new BlockPlatform();

@@ -230,6 +230,11 @@ public class ModConfiguration
 			if (disableSpectreIlluminatorProp != null) {
 				disableSpectreIlluminatorProp.setRequiresMcRestart(true);
 			}
+
+			Property disableCustomWorkbenchProp = configuration.getCategory(Features.CATEGORY).get("DisableCustomWorkbench");
+			if (disableCustomWorkbenchProp != null) {
+				disableCustomWorkbenchProp.setRequiresMcRestart(true);
+			}
 		}
 
 		if (configuration != null && configuration.hasCategory(Internals.CATEGORY)) {

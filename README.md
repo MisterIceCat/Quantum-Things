@@ -73,6 +73,7 @@ The goal of Quantum Things is to provide continued support for Random Things, su
 - Added `/rt timeinabottle transfer <playername> <time><s|m|h|d>` to let players transfer their stored Time in a Bottle value to other players.
 - Added the ability to configure whether Spectre Illuminators should be disabled.
 - Added Spectre variants of Stairs, Fences, Fence Gates and Slabs.
+- Added the ability to configure whether Custom Workbenches should be disabled. ([courtesy of Bronitt](https://github.com/MagicJinn/Quantum-Things/pull/60))
 
 ### Fixes
 

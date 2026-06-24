@@ -7,6 +7,12 @@ category: about
 
 This page documents the changes and fixes made in Quantum Things, compared to the original Random Things mod, in reverse chronological order.
 
+## 1.2.3
+
+### Changes
+
+- Added the ability to configure whether Custom Workbenches should be disabled. ([courtesy of Bronitt](https://github.com/MagicJinn/Quantum-Things/pull/60))
+
 ## 1.2.2
 
 ### Fixes
