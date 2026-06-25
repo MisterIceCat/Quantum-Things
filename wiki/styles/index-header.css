@@ -50,3 +50,23 @@ body.dark-mode #container2 {
   color: #ccc;
 }
 
+@media screen and (max-width: 768px) {
+  #main-header-wrapper {
+    min-height: calc(100vh - 140px);
+    padding: 0 10px;
+  }
+  #container1 {
+    max-width: 100%;
+  }
+  #container3 {
+    padding: 16px 20px;
+  }
+  #ih {
+    font-size: 2em;
+  }
+  #desc {
+    font-size: 1em;
+    line-height: 1.4;
+  }
+}
+
