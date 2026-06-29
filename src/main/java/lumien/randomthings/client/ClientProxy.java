@@ -217,6 +217,7 @@ public class ClientProxy extends CommonProxy
 				drawLinkingCube(itemStack, player, partialTicks);
 			}
 		}
+	}
 
 	private void drawLinkingCube(ItemStack itemStack, EntityPlayerSP player, float partialTicks)
 	{
