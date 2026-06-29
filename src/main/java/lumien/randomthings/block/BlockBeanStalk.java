@@ -72,7 +72,7 @@ public class BlockBeanStalk extends BlockBase implements IPlantable
 		else if (entityIn.motionY <= -0.1)
 		{
 			Block bottom = entityIn.world.getBlockState(new BlockPos(MathHelper.floor(entityIn.posX), MathHelper.floor(entityIn.posY) - 3, MathHelper.floor(entityIn.posZ))).getBlock();
-			if (bottom == this)
+			if (bottom == null || bottom == this)
 			{ // prevent clipping into block
 				entityIn.setPosition(entityIn.posX, entityIn.posY - speed, entityIn.posZ);
 			}

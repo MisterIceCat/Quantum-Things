@@ -170,7 +170,7 @@ public class RTCommand extends CommandBase
 
 				ItemStack equipped = player.getHeldItemMainhand();
 
-				if (equipped.getItem() instanceof ItemBiomeCrystal)
+				if (equipped != null && equipped.getItem() instanceof ItemBiomeCrystal)
 				{
 					if (equipped.getTagCompound() == null)
 					{
@@ -230,10 +230,13 @@ public class RTCommand extends CommandBase
 			BlockPos pos = sender.getPosition();
 			World world = sender.getEntityWorld();
 
-            EntitySlime slime = new EntitySlime(world);
-            slime.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
-            sender.sendMessage(new TextComponentString(slime.getCanSpawnHere() + ""));
-        }
+			if (pos != null && world != null)
+			{
+				EntitySlime slime = new EntitySlime(world);
+				slime.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), 0F, 0F);
+				sender.sendMessage(new TextComponentString(slime.getCanSpawnHere() + ""));
+			}
+		}
 		else if (args[0].equals(SUB_NOTIFY) && args.length == 5)
 		{
 			String title = args[1];

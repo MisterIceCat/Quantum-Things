@@ -114,7 +114,10 @@ public class RenderEclipsedClock extends Render<EntityEclipsedClock>
 			net.minecraft.client.gui.FontRenderer fontRenderer =
 					this.getFontRendererFromRenderManager();
 			// Try fallback
-            if (entity.facingDirection != null) {
+			if (fontRenderer == null) {
+				fontRenderer = this.mc.fontRenderer;
+			}
+			if (fontRenderer != null && entity.facingDirection != null) {
 				EntityRenderer.drawNameplate(fontRenderer, entity.getStringTargetTime(), (float) x,
 						(float) ((float) y + 0.45), (float) z, 0,
 						(entity.facingDirection.getHorizontalIndex() - 2) % 4 * 90, 0, false,

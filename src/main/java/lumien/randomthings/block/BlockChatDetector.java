@@ -88,7 +88,7 @@ public class BlockChatDetector extends BlockContainerBase
 	@Override
 	public void onBlockPlacedBy(World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state, @Nonnull EntityLivingBase placer, @Nonnull ItemStack stack)
 	{
-		if (!worldIn.isRemote && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) != null)
+		if (!worldIn.isRemote && placer != null && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) != null)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) placer;
 			((TileEntityChatDetector) worldIn.getTileEntity(pos)).setPlayerUUID(player.getGameProfile().getId());

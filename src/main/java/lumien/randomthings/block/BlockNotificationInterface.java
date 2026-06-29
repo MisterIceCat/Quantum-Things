@@ -48,7 +48,7 @@ public class BlockNotificationInterface extends BlockContainerBase
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 
-		if (!worldIn.isRemote && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) instanceof TileEntityNotificationInterface)
+		if (!worldIn.isRemote && placer != null && placer instanceof EntityPlayerMP && worldIn.getTileEntity(pos) instanceof TileEntityNotificationInterface)
 		{
 			EntityPlayerMP player = (EntityPlayerMP) placer;
 			((TileEntityNotificationInterface) worldIn.getTileEntity(pos)).setPlayerUUID(player.getGameProfile().getId());

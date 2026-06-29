@@ -162,7 +162,12 @@ public class ModelCustomWorkbench implements IBakedModel
 
 				IBlockState woodState = woodBlock.getStateFromMeta(meta);
 
-                if (modelCache.containsKey(woodState))
+				if (woodState == null)
+				{
+					return defaultModel;
+				}
+
+				if (modelCache.containsKey(woodState))
 				{
 					return modelCache.get(woodState);
 				}

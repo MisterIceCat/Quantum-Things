@@ -215,10 +215,13 @@ public class BlockSpectreCoil extends BlockContainerBase implements ILuminousBlo
 
 			GameProfile profile = player.getGameProfile();
 
-            TileEntitySpectreCoil coil = (TileEntitySpectreCoil) worldIn.getTileEntity(pos);
+			if (profile != null)
+			{
+				TileEntitySpectreCoil coil = (TileEntitySpectreCoil) worldIn.getTileEntity(pos);
 
-            coil.setOwner(profile.getId());
-        }
+				coil.setOwner(profile.getId());
+			}
+		}
 	}
 
 	private boolean checkForDrop(World worldIn, BlockPos pos, IBlockState state)

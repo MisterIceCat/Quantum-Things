@@ -148,7 +148,7 @@ public class BlockCustomWorkbench extends BlockContainerBase
 			return;
 
 		Block woodBlock = Block.getBlockFromItem(woodStack.getItem());
-		if (woodBlock == Blocks.AIR)
+		if (woodBlock == null || woodBlock == Blocks.AIR)
 			return;
 
 		ResourceLocation registryName = woodBlock.getRegistryName();

@@ -35,7 +35,7 @@ public class BlockLapisGlass extends BlockBase
 		AxisAlignedBB blockBox = state.getCollisionBoundingBox(worldIn, pos);
 		AxisAlignedBB axisalignedbb = blockBox.offset(pos);
 
-		if (entityBox.intersects(axisalignedbb) && entityIn instanceof EntityPlayer)
+		if (axisalignedbb != null && entityBox.intersects(axisalignedbb) && entityIn != null && entityIn instanceof EntityPlayer)
 		{
 			collidingBoxes.add(axisalignedbb);
 		}

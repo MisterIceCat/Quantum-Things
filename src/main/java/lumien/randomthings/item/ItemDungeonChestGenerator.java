@@ -205,15 +205,18 @@ public class ItemDungeonChestGenerator extends ItemBase
 
 								LootTable lootTable = worldIn.getLootTableManager().getLootTableFromLocation(currentTableLocation);
 
-                                worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
+								if (lootTable != null)
+								{
+									worldIn.setBlockState(pos, Blocks.CHEST.getDefaultState());
 
-                                IInventory chestInventory = (IInventory) worldIn.getTileEntity(pos);
+									IInventory chestInventory = (IInventory) worldIn.getTileEntity(pos);
 
-                                LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn).withPlayer(playerIn);
+									LootContext.Builder builder = new LootContext.Builder((WorldServer) worldIn).withPlayer(playerIn);
 
-                                lootTable.fillInventory(chestInventory, worldIn.rand, builder.build());
+									lootTable.fillInventory(chestInventory, worldIn.rand, builder.build());
+								}
 
-                            }
+							}
 						}
 					}
 				}

@@ -52,7 +52,7 @@ public class InventoryUtil
 		for (int slot = 0; slot < inventory.getSizeInventory(); slot++)
 		{
 			ItemStack itemInSlot = inventory.getStackInSlot(slot);
-			if (itemInSlot.getItem() == i)
+			if (itemInSlot != null && itemInSlot.getItem() == i)
 			{
 				return slot;
 			}
@@ -86,12 +86,18 @@ public class InventoryUtil
 		{
 			NBTTagCompound stackNBT = compound.getCompoundTag("slot" + i);
 
-            if (stackNBT.hasKey("empty")) {
-                inventory.setInventorySlotContents(i, ItemStack.EMPTY);
-            } else {
-                inventory.setInventorySlotContents(i, new ItemStack(stackNBT));
-            }
-        }
+			if (stackNBT != null)
+			{
+				if (stackNBT.hasKey("empty"))
+				{
+					inventory.setInventorySlotContents(i, ItemStack.EMPTY);
+				}
+				else
+				{
+					inventory.setInventorySlotContents(i, new ItemStack(stackNBT));
+				}
+			}
+		}
 	}
 
 	public static ItemStack getPlayerInventoryItem(Item item, EntityPlayer player)

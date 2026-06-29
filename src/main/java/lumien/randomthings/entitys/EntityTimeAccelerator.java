@@ -95,7 +95,7 @@ public class EntityTimeAccelerator extends Entity implements IEntityAdditionalSp
 		{
 			targetTE = this.world.getTileEntity(target);
 			
-			if (targetTE instanceof ITickable && (!horror || !this.world.isRemote))
+			if (targetTE != null && targetTE instanceof ITickable && (!horror || !this.world.isRemote))
 			{
 				((ITickable) targetTE).update();
 			}

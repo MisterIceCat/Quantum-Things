@@ -72,9 +72,11 @@ public class ItemCraftingRecipe extends ItemBase
 		compound.setTag("matrix", matrix);
 		compound.setTag("result", result);
 
-        craftResult.getStackInSlot(0);
-        compound.setString("display", craftResult.getStackInSlot(0).getDisplayName());
-    }
+		if (craftResult.getStackInSlot(0) != null)
+		{
+			compound.setString("display", craftResult.getStackInSlot(0).getDisplayName());
+		}
+	}
 
 	public static void load(ItemStack openedWith, InventoryCrafting craftMatrix, IInventory craftResult)
 	{

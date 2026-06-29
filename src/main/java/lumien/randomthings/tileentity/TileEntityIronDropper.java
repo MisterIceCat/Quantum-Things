@@ -96,7 +96,7 @@ public class TileEntityIronDropper extends TileEntityBase implements IRedstoneSe
 			{
 				ItemStack result = ItemHandlerHelper.insertItemStacked(tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, facing.getOpposite()), toDrop, false);
 
-				if (result.getCount() == 0)
+				if (result == null || result.getCount() == 0)
 				{
 					itemHandler.extractItem(slot, 1, false);
 				}

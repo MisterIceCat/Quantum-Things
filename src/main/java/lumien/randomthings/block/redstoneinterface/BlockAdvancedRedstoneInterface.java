@@ -53,7 +53,7 @@ public class BlockAdvancedRedstoneInterface extends BlockRedstoneInterface
 		if (!worldIn.isRemote)
 		{
 			ItemStack equipped = playerIn.getHeldItemMainhand();
-			if (equipped.getItem() == ModItems.redstoneTool)
+			if (equipped != null && equipped.getItem() == ModItems.redstoneTool)
 			{
 				return false;
 			}

@@ -57,9 +57,16 @@ public class TileEntityFilteredSuperLubricentPlatform extends TileEntityBase imp
 	{
 		ItemStack filter = inventory.getStackInSlot(0);
 
-        repres = ItemFilterRepresentation.readFromItemStack(filter);
+		if (filter != null)
+		{
+			repres = ItemFilterRepresentation.readFromItemStack(filter);
+		}
+		else
+		{
+			repres = null;
+		}
 
-        if (!reading)
+		if (!reading)
 		{
 			this.syncTE();
 		}

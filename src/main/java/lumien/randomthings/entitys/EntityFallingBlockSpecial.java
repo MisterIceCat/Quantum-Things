@@ -303,7 +303,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 	{
 		Block block = this.fallTile != null ? this.fallTile.getBlock() : Blocks.AIR;
 		ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(block);
-		compound.setString("Block", resourcelocation.toString());
+		compound.setString("Block", resourcelocation == null ? "" : resourcelocation.toString());
 		compound.setByte("Data", (byte) block.getMetaFromState(this.fallTile));
 		compound.setInteger("Time", this.fallTime);
 		compound.setBoolean("DropItem", this.shouldDropItem);
@@ -362,7 +362,7 @@ public class EntityFallingBlockSpecial extends Entity implements IEntityAddition
 			this.tileEntityData = compound.getCompoundTag("TileEntityData");
 		}
 
-		if (block.getDefaultState().getMaterial() == Material.AIR)
+		if (block == null || block.getDefaultState().getMaterial() == Material.AIR)
 		{
 			this.fallTile = Blocks.SAND.getDefaultState();
 		}

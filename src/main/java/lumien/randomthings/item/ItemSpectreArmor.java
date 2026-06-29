@@ -58,7 +58,7 @@ public class ItemSpectreArmor extends ItemArmor {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         int layer = (slot == EntityEquipmentSlot.LEGS) ? 2 : 1;
-        String typeSuffix = "_" + type;
+        String typeSuffix = (type == null) ? "" : "_" + type;
         return String.format("randomthings:textures/models/armor/spectre_layer_%d%s.png", layer,
                 typeSuffix);
     }

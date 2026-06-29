@@ -20,6 +20,7 @@ import lumien.randomthings.handler.ModDimensions;
 import lumien.randomthings.handler.RTEventHandler;
 import lumien.randomthings.handler.compability.bonsaitrees.BonsaiTreesComp;
 import lumien.randomthings.handler.compability.oc.OCComp;
+import lumien.randomthings.handler.compability.tc.TConComp;
 import lumien.randomthings.handler.compability.te.ThermalExpansionComp;
 import lumien.randomthings.handler.magicavoxel.ServerModelLibrary;
 import lumien.randomthings.item.ModItems;
@@ -147,11 +148,13 @@ public class RandomThings implements LoadingCallback
 		{
 			OCComp.init();
 		}
-		
+		if (Loader.isModLoaded("tconstruct")) {
+			TConComp.init(); // TODO
+		}
+
 		FMLInterModComms.sendMessage("Thaumcraft", "harvestClickableCrop", new ItemStack(ModBlocks.lotus, 1, 3));
 
 		// Disable random ticking for BlockSnow to prevent it from melting
-
 		// Listen.
 		// I know it's not my place to do this, but while this is not caused by this mod, spectre
 		// illuminators will trigger this dormant bug, so the least I can do is fix it.
@@ -200,7 +203,7 @@ public class RandomThings implements LoadingCallback
 		{
 			NBTTagCompound compound = t.getModData();
 			TileEntity te = world.getTileEntity(new BlockPos(compound.getInteger("posX"), compound.getInteger("posY"), compound.getInteger("posZ")));
-			if (te instanceof TileEntityEnderAnchor && Features.ENDER_ANCHOR_CHUNKLOADING)
+			if (te != null && te instanceof TileEntityEnderAnchor && Features.ENDER_ANCHOR_CHUNKLOADING)
 			{
 				TileEntityEnderAnchor anchor = (TileEntityEnderAnchor) te;
 				anchor.setTicket(t);

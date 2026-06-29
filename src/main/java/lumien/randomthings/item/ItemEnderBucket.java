@@ -121,7 +121,7 @@ public class ItemEnderBucket extends ItemBase
 			// clicked on a block?
 			RayTraceResult mop = this.rayTrace(world, player, false);
 
-			if (mop.typeOfHit != RayTraceResult.Type.BLOCK)
+			if (mop == null || mop.typeOfHit != RayTraceResult.Type.BLOCK)
 			{
 				return ActionResult.newResult(EnumActionResult.PASS, itemstack);
 			}

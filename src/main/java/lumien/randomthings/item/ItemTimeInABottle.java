@@ -165,8 +165,10 @@ public class ItemTimeInABottle extends ItemBase
 		}
 
 		NBTTagCompound holder = root.getCompoundTag(BOTTLE_LAST_HOLDER);
-        holder.setString(BOTTLE_LAST_HOLDER_UUID, player.getUniqueID().toString());
-        holder.setString(BOTTLE_LAST_HOLDER_NAME, player.getName());
+		if (player.getUniqueID() != null) {
+			holder.setString(BOTTLE_LAST_HOLDER_UUID, player.getUniqueID().toString());
+		}
+		holder.setString(BOTTLE_LAST_HOLDER_NAME, player.getName());
 		root.setTag(BOTTLE_LAST_HOLDER, holder);
 	}
 
@@ -182,7 +184,7 @@ public class ItemTimeInABottle extends ItemBase
 		}
 
 		String uuid = holder.getString(BOTTLE_LAST_HOLDER_UUID);
-		return uuid.isEmpty() ? Optional.empty() : Optional.of(uuid);
+		return uuid == null || uuid.isEmpty() ? Optional.empty() : Optional.of(uuid);
 	}
 
 	public static Optional<String> getLastHolderName(ItemStack stack)

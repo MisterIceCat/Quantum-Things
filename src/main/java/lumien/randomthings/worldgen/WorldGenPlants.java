@@ -48,7 +48,7 @@ public class WorldGenPlants extends WorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target.getY() >= 0)
+				if (target != null && target.getY() >= 0)
 				{
 					Biome biome = world.getBiome(target);
 
@@ -66,7 +66,7 @@ public class WorldGenPlants extends WorldGenerator
 
 				BlockPos target = world.getTopSolidOrLiquidBlock(new BlockPos(x, 40, z));
 
-				if (target.getY() >= 0)
+				if (target != null && target.getY() >= 0)
 				{
 					Biome biome = world.getBiome(target);
 					IBlockState state = world.getBlockState(target);

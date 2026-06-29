@@ -56,7 +56,7 @@ public class FestivalHandler extends WorldSavedData
 		{
 			List<VillageDoorInfo> doorInfos = v.getVillageDoorInfoList();
 
-			if (!doorInfos.isEmpty())
+			if (doorInfos != null && !doorInfos.isEmpty())
 			{
 				Festival f = new Festival();
 

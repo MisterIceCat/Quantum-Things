@@ -43,7 +43,7 @@ public class TileEntityPlayerInterface extends TileEntityBase
 		else
 		{
 			EntityPlayer player = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(playerUUID);
-			return new PlayerInventoryWrapper((ContainerPlayer) player.inventoryContainer, player.inventory);
+			return player != null ? new PlayerInventoryWrapper((ContainerPlayer) player.inventoryContainer, player.inventory) : null;
 		}
 	}
 

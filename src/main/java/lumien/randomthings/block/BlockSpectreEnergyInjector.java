@@ -58,9 +58,12 @@ public class BlockSpectreEnergyInjector extends BlockContainerBase
 			
 			GameProfile profile = player.getGameProfile();
 
-            TileEntitySpectreEnergyInjector injector = (TileEntitySpectreEnergyInjector) worldIn.getTileEntity(pos);
+			if (profile != null)
+			{
+				TileEntitySpectreEnergyInjector injector = (TileEntitySpectreEnergyInjector) worldIn.getTileEntity(pos);
 
-            injector.setOwner(profile.getId());
-        }
+				injector.setOwner(profile.getId());
+			}
+		}
 	}
 }

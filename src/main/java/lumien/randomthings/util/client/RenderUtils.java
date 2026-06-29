@@ -398,7 +398,7 @@ public class RenderUtils
 
 		BlockModelRenderer bmr = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelRenderer();
 
-		if (stateIn != null && modelIn != null)
+		if (bmr != null && stateIn != null && modelIn != null)
 		{
 			try
 			{

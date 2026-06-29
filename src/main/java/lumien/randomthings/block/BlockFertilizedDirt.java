@@ -149,7 +149,7 @@ public class BlockFertilizedDirt extends BlockBase
 			{
 				plantState = worldObj.getBlockState(pos.up());
 				toBoost = plantState.getBlock();
-				if (toBoost != Blocks.AIR && toBoost instanceof IPlantable)
+				if (plantState != null && toBoost != null && toBoost != Blocks.AIR && toBoost instanceof IPlantable)
 				{
 					toBoost.updateTick(worldObj, pos.up(), plantState, rand);
 				}

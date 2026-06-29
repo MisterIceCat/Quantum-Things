@@ -207,14 +207,16 @@ public class ClientProxy extends CommonProxy
 	{
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		ItemStack itemStack = player.getHeldItemMainhand();
-        Item item = itemStack.getItem();
+		if (itemStack != null)
+		{
+			Item item = itemStack.getItem();
 
-        if (item == ModItems.redstoneTool)
-        {
-            drawInterfaceLines(player, partialTicks);
-            drawLinkingCube(itemStack, player, partialTicks);
-        }
-    }
+			if (item == ModItems.redstoneTool)
+			{
+				drawInterfaceLines(player, partialTicks);
+				drawLinkingCube(itemStack, player, partialTicks);
+			}
+		}
 
 	private void drawLinkingCube(ItemStack itemStack, EntityPlayerSP player, float partialTicks)
 	{

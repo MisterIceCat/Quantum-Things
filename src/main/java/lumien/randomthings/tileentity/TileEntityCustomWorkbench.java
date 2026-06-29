@@ -57,7 +57,11 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 		{
 			woodState = woodMaterial.getStateFromMeta(woodMeta);
 
-        }
+			if (woodState == null)
+			{
+				woodState = Blocks.PLANKS.getDefaultState();
+			}
+		}
 	}
 
 	public IBlockState getWoodState()
@@ -86,6 +90,10 @@ public class TileEntityCustomWorkbench extends TileEntityBase
 		{
 			woodState = woodMaterial.getStateFromMeta(woodMeta);
 
-        }
+			if (woodState == null)
+			{
+				woodState = Blocks.PLANKS.getDefaultState();
+			}
+		}
 	}
 }

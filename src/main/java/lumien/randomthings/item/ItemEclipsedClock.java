@@ -66,7 +66,7 @@ public class ItemEclipsedClock extends ItemBase
 		{
 			EntityHanging entityhanging = new EntityEclipsedClock(worldIn, blockpos, facing);
 
-			if (entityhanging.onValidSurface())
+			if (entityhanging != null && entityhanging.onValidSurface())
 			{
 				if (!worldIn.isRemote)
 				{

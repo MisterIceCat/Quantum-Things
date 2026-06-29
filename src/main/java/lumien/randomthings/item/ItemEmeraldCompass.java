@@ -137,12 +137,20 @@ public class ItemEmeraldCompass extends ItemBase
 
 					EntityPlayerMP targetPlayer = FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList().getPlayerByUUID(uuid);
 
-                    BlockPos targetPos = targetPlayer.getPosition();
-                    targetPos = new BlockPos(targetPos.getX(), 0, targetPos.getZ());
+					if (targetPlayer != null)
+					{
+						BlockPos targetPos = targetPlayer.getPosition();
+						targetPos = new BlockPos(targetPos.getX(), 0, targetPos.getZ());
 
-                    compound.setInteger("targetX", targetPos.getX());
-                    compound.setInteger("targetZ", targetPos.getZ());
-                }
+						compound.setInteger("targetX", targetPos.getX());
+						compound.setInteger("targetZ", targetPos.getZ());
+					}
+					else
+					{
+						compound.removeTag("targetX");
+						compound.removeTag("targetZ");
+					}
+				}
 			}
 		}
 	}

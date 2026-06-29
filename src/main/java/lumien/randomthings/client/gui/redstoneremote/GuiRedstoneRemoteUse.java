@@ -43,7 +43,12 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 		remoteStack = player.getHeldItemMainhand();
 		using = EnumHand.MAIN_HAND;
 
-        if (remoteStack.getItem() == ModItems.redstoneRemote)
+		if (remoteStack == null)
+		{
+			remoteStack = player.getHeldItemOffhand();
+			using = EnumHand.OFF_HAND;
+		}
+		if (remoteStack != null && remoteStack.getItem() == ModItems.redstoneRemote)
 		{
 			remoteInventory = new InventoryItem("RedstoneRemote", 18, remoteStack);
 		}
@@ -59,7 +64,7 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 		for (int i = 0; i < slotButtons.size(); i++)
 		{
 			GuiSlotButton slotButton = slotButtons.get(i);
-			if (slotButton == button)
+			if (slotButton != null && slotButton == button)
 			{
 				MessageRedstoneRemote message = new MessageRedstoneRemote(using, slotButton.id);
 				PacketHandler.instance().sendToServer(message);
@@ -80,11 +85,16 @@ public class GuiRedstoneRemoteUse extends GuiContainerBase
 			{
 				ItemStack position = remoteInventory.getStackInSlot(i);
 
-				if (position.getItem() == ModItems.positionFilter)
+				if (position != null && position.getItem() == ModItems.positionFilter)
 				{
 					ItemStack camo = remoteInventory.getStackInSlot(i + 9);
 
-                    camo = camo.copy();
+					if (camo == null)
+					{
+						camo = position;
+					}
+
+					camo = camo.copy();
 
 					String name = null;
 					NBTTagCompound stackTagCompound = position.getTagCompound();

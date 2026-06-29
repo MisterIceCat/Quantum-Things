@@ -66,21 +66,28 @@ public class ItemIDCard extends ItemBase implements IEntityFilterItem
 		ItemStack me = playerIn.getHeldItem(handIn);
 		GameProfile playerProfile = playerIn.getGameProfile();
 
-        UUID uuid = playerProfile.getId();
-        String name = playerProfile.getName();
+		if (playerProfile != null)
+		{
+			UUID uuid = playerProfile.getId();
+			String name = playerProfile.getName();
 
-        if (!me.hasTagCompound())
-        {
-            me.setTagCompound(new NBTTagCompound());
-        }
+			if (!me.hasTagCompound())
+			{
+				me.setTagCompound(new NBTTagCompound());
+			}
 
-        NBTTagCompound compound = me.getTagCompound();
+			NBTTagCompound compound = me.getTagCompound();
 
-        compound.setString("uuid", uuid.toString());
-        compound.setString("name", name != null ? name : "Anonymous");
+			compound.setString("uuid", uuid.toString());
+			compound.setString("name", name != null ? name : "Anonymous");
 
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, me);
-    }
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, me);
+		}
+		else
+		{
+			return super.onItemRightClick(worldIn, playerIn, handIn);
+		}
+	}
 
 	@Override
 	public boolean apply(ItemStack me, Entity entity)

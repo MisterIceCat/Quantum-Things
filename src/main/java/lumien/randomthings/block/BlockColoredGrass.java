@@ -54,7 +54,7 @@ public class BlockColoredGrass extends BlockBase implements IRTBlockColor
 	public ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target, @Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer player)
 	{
 		Item item = Item.getItemFromBlock(this);
-		return new ItemStack(item, 1, ((EnumDyeColor) state.getValue(COLOR)).getMetadata());
+		return item == null ? null : new ItemStack(item, 1, ((EnumDyeColor) state.getValue(COLOR)).getMetadata());
 	}
 
 	@Override

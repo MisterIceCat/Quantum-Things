@@ -38,7 +38,7 @@ public class ItemLavaCharm extends ItemBase implements IBauble
 	@Override
 	public void onUpdate(@Nonnull ItemStack itemstack, @Nonnull World worldIn, @Nonnull Entity entityIn, int itemSlot, boolean isSelected)
 	{
-		if (entityIn instanceof EntityPlayer)
+		if (entityIn != null && entityIn instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entityIn;
 			if (!player.world.isRemote)

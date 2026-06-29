@@ -72,7 +72,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 					return false;
 				}
 				List<PotionEffect> effects = PotionUtils.getEffectsFromStack(is);
-				if (effects.size() == 0)
+				if (effects == null || effects.size() == 0)
 				{
 					return false;
 				}
@@ -233,7 +233,7 @@ public class TileEntityPotionVaporizer extends TileEntityBase implements ITickab
 				{
 					List<PotionEffect> effects = PotionUtils.getEffectsFromStack((newPotion));
 
-					if (!effects.isEmpty() && !effects.get(0).getPotion().isInstant())
+					if (effects != null && !effects.isEmpty() && !effects.get(0).getPotion().isInstant())
 					{
 						currentPotionEffect = new PotionEffect(effects.get(0));
 						durationLeft = currentPotionEffect.getDuration();

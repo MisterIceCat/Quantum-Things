@@ -38,7 +38,13 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		ItemStack itemstack = itemIn.getItem();
 		Item item = itemstack.getItem();
 
-        boolean flag = p_177077_9_.isGui3d();
+		if (item == null)
+		{
+			return 0;
+		}
+		else
+		{
+			boolean flag = p_177077_9_.isGui3d();
         int i = this.getModelCount(itemstack);
         float f = 0.25F;
         float f2 = p_177077_9_.getItemCameraTransforms().getTransform(ItemCameraTransforms.TransformType.GROUND).scale.y;
@@ -64,7 +70,8 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         return i;
-    }
+		}
+	}
 
 	protected int getModelCount(ItemStack stack)
 	{
@@ -99,7 +106,7 @@ public class RenderProjectedItem extends Render<EntityProjectedItem>
 		ItemStack itemstack = entity.getItem();
 		int i;
 
-		if (!itemstack.isEmpty())
+		if (!itemstack.isEmpty() && itemstack.getItem() != null)
 		{
 			i = Item.getIdFromItem(itemstack.getItem()) + itemstack.getMetadata();
 		}

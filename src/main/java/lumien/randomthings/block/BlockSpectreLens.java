@@ -100,10 +100,13 @@ public class BlockSpectreLens extends BlockContainerBase
 			
 			GameProfile profile = player.getGameProfile();
 
-            TileEntitySpectreLens lens = (TileEntitySpectreLens) worldIn.getTileEntity(pos);
+			if (profile != null)
+			{
+				TileEntitySpectreLens lens = (TileEntitySpectreLens) worldIn.getTileEntity(pos);
 
-            lens.setOwner(profile.getId());
-        }
+				lens.setOwner(profile.getId());
+			}
+		}
 	}
 
 	@Override

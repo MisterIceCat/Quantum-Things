@@ -270,7 +270,7 @@ public class AsmHandler
 	{
 		ItemStack tool = manager.player.getHeldItemMainhand();
 
-		if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.magnetic, tool) > 0)
+		if (tool != null && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.magnetic, tool) > 0)
 		{
 			ItemCatcher.startCatching();
 			interactionManager = manager;
@@ -360,10 +360,10 @@ public class AsmHandler
 
 	public static boolean shouldRenderPotionParticles(EntityLivingBase entity)
 	{
-		if (entity instanceof EntityPlayer)
+		if (entity != null && entity instanceof EntityPlayer)
 		{
 			ItemStack helmet = ((EntityPlayer) entity).getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-			if (helmet.getItem() == ModItems.magicHood)
+			if (helmet != null && helmet.getItem() == ModItems.magicHood)
 			{
 				return false;
 			}
@@ -375,10 +375,10 @@ public class AsmHandler
 	@SideOnly(Side.CLIENT)
 	public static boolean canRenderName(EntityLivingBase e)
 	{
-		if (e instanceof EntityPlayer)
+		if (e != null && e instanceof EntityPlayer)
 		{
 			ItemStack helmet = ((EntityPlayer) e).getItemStackFromSlot(EntityEquipmentSlot.HEAD);
-			if (helmet.getItem() == ModItems.magicHood)
+			if (helmet != null && helmet.getItem() == ModItems.magicHood)
 			{
 				return false;
 			}
@@ -608,7 +608,7 @@ public class AsmHandler
 	// Returns whether to cancel normal behaviour
 	public static boolean addCollisionBoxesToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB mask, List list, Entity collidingEntity)
 	{
-		if (collidingEntity instanceof EntityPlayer)
+		if (collidingEntity != null && collidingEntity instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) collidingEntity;
 
@@ -617,7 +617,7 @@ public class AsmHandler
 				if (!player.isSneaking())
 				{
 					ItemStack boots = player.inventory.armorInventory.get(0);
-					if ((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial(state) == Material.WATER || boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial(state) == Material.LAVA)
+					if (boots != null && ((((boots.getItem() == ModItems.waterWalkingBoots || boots.getItem() == ModItems.obsidianWaterWalkingBoots) || boots.getItem() == ModItems.lavaWader) && state.getBlock().getMaterial(state) == Material.WATER) || (boots.getItem() == ModItems.lavaWader && state.getBlock().getMaterial(state) == Material.LAVA)))
 					{
 						AxisAlignedBB bb = new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), (double) pos.getX() + 1, (double) pos.getY() + 1, (double) pos.getZ() + 1);
 						if (mask.intersects(bb))
