@@ -74,7 +74,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements IDynam
      */
     public void refreshSignals()
     {
-        if (world.isRemote || target == null) return;
+        if (world.isRemote || target == null || writer == null) return;
 
         if (!world.isBlockLoaded(target))
         {
@@ -141,7 +141,7 @@ public class TileEntityRedstoneObserver extends TileEntityBase implements IDynam
      */
     private void clearSignals()
     {
-        if (world.isRemote) return;
+        if (world.isRemote || writer == null) return;
 
         for (EnumFacing side : EnumFacing.VALUES)
         {
