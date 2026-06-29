@@ -6,6 +6,7 @@ import it.unimi.dsi.fastutil.longs.LongSet;
 import lumien.randomthings.network.MessageUtil;
 import lumien.randomthings.network.PacketHandler;
 import lumien.randomthings.network.client.MessageSpectreIllumination;
+import lumien.randomthings.util.WorldUtil;
 
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -52,6 +53,7 @@ public class SpectreIlluminationHandler extends WorldSavedData
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
 	{
+		this.illuminatedChunks.clear();
 		NBTTagList list = nbt.getTagList("illuminatedChunks", 4);
 
 		for (int i = 0; i < list.tagCount(); i++)
@@ -83,6 +85,23 @@ public class SpectreIlluminationHandler extends WorldSavedData
 			MessageSpectreIllumination msg = new MessageSpectreIllumination(c.getWorld().provider.getDimension(), cp, true);
 			
 			PacketHandler.instance().sendTo(msg, player);
+		}
+	}
+
+	public void syncToPlayer(EntityPlayerMP player)
+	{
+		World world = player.world;
+		int viewDistance = player.getServer().getPlayerList().getViewDistance();
+		ChunkPos playerChunk = new ChunkPos(player.getPosition());
+
+		for (long cpLong : illuminatedChunks)
+		{
+			ChunkPos cp = WorldUtil.getChunkPosFromLong(cpLong);
+			if (Math.abs(cp.x - playerChunk.x) <= viewDistance && Math.abs(cp.z - playerChunk.z) <= viewDistance)
+			{
+				MessageSpectreIllumination msg = new MessageSpectreIllumination(world.provider.getDimension(), cpLong, true);
+				PacketHandler.instance().sendTo(msg, player);
+			}
 		}
 	}
 

@@ -89,6 +89,14 @@ public class EntitySpectreIlluminator extends Entity
 
 		if (!this.world.isRemote) {
 			BlockPos myPosition = this.getPosition();
+			SpectreIlluminationHandler handler = SpectreIlluminationHandler.get(this.world);
+			boolean chunkIlluminated = handler.isIlluminated(myPosition);
+
+			// Reconcile entity flag with persisted chunk state after world reload
+			if (illuminated && !chunkIlluminated)
+				illuminated = false;
+			else if (!illuminated && chunkIlluminated)
+				illuminated = true;
 
 			if (targetX == -1 || targetZ == -1)
 				setTarget(myPosition);
@@ -139,9 +147,8 @@ public class EntitySpectreIlluminator extends Entity
 			// Check if in position and illuminate
 			if (Math.abs(distX) < threshold && Math.abs(distY) < threshold
 					&& Math.abs(distZ) < threshold) {
-				if (!illuminated
-						&& !SpectreIlluminationHandler.get(this.world).isIlluminated(myPosition)) {
-					SpectreIlluminationHandler.get(this.world).toggleChunk(this.world, myPosition);
+				if (!illuminated && !chunkIlluminated) {
+					handler.toggleChunk(this.world, myPosition);
 					this.illuminated = true;
 				}
 			}

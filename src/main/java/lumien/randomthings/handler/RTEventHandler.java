@@ -195,13 +195,16 @@ public class RTEventHandler {
 		if (Features.DISABLE_SPECTRE_ILLUMINATOR)
 			return;
 
-        SpectreIlluminationClientHandler.loadChunk(event.getChunk());  
+        SpectreIlluminationClientHandler.loadChunk(event.getWorld(), event.getChunk());  
     }
 
     @SubscribeEvent
     public void chunkUnload(ChunkEvent.Unload event) {
         World world = event.getWorld();
-        if (!world.isRemote) {
+        if (world.isRemote) {
+			if (!Features.DISABLE_SPECTRE_ILLUMINATOR)
+				SpectreIlluminationClientHandler.unloadChunk(event.getChunk());
+        } else {
             IDynamicRedstoneManager manager = world.getCapability(IDynamicRedstoneManager.CAPABILITY_DYNAMIC_REDSTONE, null);
             if (manager != null) {
                 manager.invalidateTasks(event.getChunk().getPos());
@@ -420,6 +423,8 @@ public class RTEventHandler {
 		if (event.player.world.isRemote)
 			return;
 		ItemTimeInABottle.syncBottledTimeToClient(event.player);
+		if (!Features.DISABLE_SPECTRE_ILLUMINATOR && event.player instanceof EntityPlayerMP)
+			SpectreIlluminationHandler.get(event.player.world).syncToPlayer((EntityPlayerMP) event.player);
 	}
 
 	@SubscribeEvent(priority = EventPriority.HIGHEST)

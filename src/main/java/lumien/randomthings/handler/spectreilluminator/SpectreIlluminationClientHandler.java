@@ -3,7 +3,6 @@ package lumien.randomthings.handler.spectreilluminator;
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import lumien.randomthings.util.WorldUtil;
-import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
@@ -28,7 +27,16 @@ public class SpectreIlluminationClientHandler
 		return !illuminatedChunks.isEmpty();
 	}
 
-	public static void loadChunk(Chunk chunk)
+	public static void loadChunk(World world, Chunk chunk)
+	{
+		long chunkLong = ChunkPos.asLong(chunk.x, chunk.z);
+		if (illuminatedChunks.contains(chunkLong))
+		{
+			SpectreIlluminationHelper.lightUpdateChunk(world, chunk.getPos());
+		}
+	}
+
+	public static void unloadChunk(Chunk chunk)
 	{
 		illuminatedChunks.remove(ChunkPos.asLong(chunk.x, chunk.z));
 	}
