@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.Biome.SpawnListEntry;
 import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.ChunkPrimer;
@@ -28,6 +29,15 @@ public class SpectreChunkProvider implements IChunkGenerator
 		ChunkPrimer chunkprimer = new ChunkPrimer();
 
 		Chunk chunk = new Chunk(this.worldObj, chunkprimer, x, z);
+		Biome[] biomes = this.worldObj.getBiomeProvider().getBiomes(null, x * 16, z * 16, 16, 16);
+		byte[] biomeArray = chunk.getBiomeArray();
+
+		for (int i = 0; i < biomeArray.length; ++i)
+		{
+			biomeArray[i] = (byte) Biome.getIdForBiome(biomes[i]);
+		}
+
+		chunk.generateSkylightMap();
 		chunk.resetRelightChecks();
 
 		return chunk;
