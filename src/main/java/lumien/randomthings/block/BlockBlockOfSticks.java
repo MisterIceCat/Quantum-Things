@@ -122,7 +122,7 @@ public class BlockBlockOfSticks extends BlockBase
 			}
 			else
 			{
-				worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 0.6f, 1.2f);
+				worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_BREAK, SoundCategory.BLOCKS, 0.6f, 2.0f);
 				worldIn.playEvent(2001, pos, Block.getStateId(state));
 			}
 		}
